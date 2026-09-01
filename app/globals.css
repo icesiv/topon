@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-navy: #0B2240;
+    --brand-navy-dark: #061324;
+    --brand-navy-light: #133560;
+    --brand-gold: #C5A85C;
+    --brand-gold-light: #DFCA89;
+    --brand-gold-dark: #9E8138;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #C5A85C;
+    color: #0B2240;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #B89035 0%, #C5A85C 50%, #8C6D1F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gold-light-gradient {
+    background: linear-gradient(135deg, #F5E6BE 0%, #C5A85C 50%, #9E8138 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .border-gold-glow {
+    border-color: rgba(197, 168, 92, 0.4);
+    box-shadow: 0 4px 20px rgba(197, 168, 92, 0.15);
+  }
+
+  .light-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px -2px rgba(11, 34, 64, 0.05);
+  }
+
+  .light-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .light-card-hover:hover {
+    transform: translateY(-4px);
+    border-color: #C5A85C;
+    box-shadow: 0 16px 32px -4px rgba(11, 34, 64, 0.12), 0 0 12px rgba(197, 168, 92, 0.2);
+  }
+
+  .dark-segment {
+    background: linear-gradient(180deg, #0B2240 0%, #061324 100%);
+    color: #F8FAFC;
+  }
+
+  .dark-card {
+    background: rgba(11, 34, 64, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(197, 168, 92, 0.25);
+  }
+}
+
+/* Shimmer and float animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* Fluid Page Transition Animations */
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageProgress {
+  0% {
+    width: 0%;
+    opacity: 1;
+  }
+  50% {
+    width: 70%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-page-enter {
+  animation: pageEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-page-progress {
+  animation: pageProgress 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
