@@ -5,24 +5,92 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
-  Phone,
   Mail,
-  Clock,
   ChevronDown,
   Menu,
   X,
-  FileDown,
-  Send,
   Building2,
   Ship,
   Truck,
   Fish,
-  Sparkles,
-  ShieldCheck,
-  Globe2,
   Facebook,
   Linkedin,
 } from "lucide-react";
+
+interface DivisionItem {
+  name: string;
+  desc: string;
+  href: string;
+  icon: typeof Building2;
+}
+
+const DIVISIONS: DivisionItem[] = [
+  {
+    name: "Top On-Tech",
+    desc: "General Import, Export, Industrial Machinery & Chemical Trading",
+    href: "/trading-topontech",
+    icon: Building2,
+  },
+  {
+    name: "Top Express Limited",
+    desc: "Same-Day Courier, B2B Linehaul Fleet & Parcel Logistics",
+    href: "/express-topexpress",
+    icon: Truck,
+  },
+  {
+    name: "Daily Shipping & Logistics",
+    desc: "Ocean Freight Forwarding, Port C&F & Customs Clearance",
+    href: "/logistics-dailyshipping",
+    icon: Ship,
+  },
+  {
+    name: "Top On-Agro Farm",
+    desc: "Commercial Fisheries, Aquaculture & Cold Chain Fish Supply",
+    href: "/agro-toponagro",
+    icon: Fish,
+  },
+];
+
+const ABOUT_LINKS = [
+  {
+    title: "Our Journey & Story",
+    sub: "Roots and vision of excellence",
+    href: "/about#overview",
+  },
+  {
+    title: "Message from Entrepreneur",
+    sub: "Md. Abdullah Al Mamun",
+    href: "/about#leadership",
+  },
+  {
+    title: "Mission, Vision & Values",
+    sub: "Core operating tenets",
+    href: "/about#values",
+  },
+  {
+    title: "Milestones & Accreditations",
+    sub: "Industry certifications",
+    href: "/about#milestones",
+  },
+];
+
+const SERVICE_LINKS = [
+  {
+    title: "Trading: Import & Export",
+    sub: "Industrial materials & consumer goods",
+    href: "/services#trading",
+  },
+  {
+    title: "Customs Clearing & Forwarding (C&F)",
+    sub: "Complete port handling & duty advisory",
+    href: "/services#customs",
+  },
+  {
+    title: "Freight Forwarding (Ocean & Air)",
+    sub: "Global carrier networks & container tracking",
+    href: "/services#freight",
+  },
+];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +108,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close mobile menu and dropdowns on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
@@ -49,10 +117,15 @@ export default function Header() {
   }, [pathname]);
 
   const isActive = (path: string) => pathname === path;
+  const isCompanyActive =
+    pathname.includes("topontech") ||
+    pathname.includes("dailyshipping") ||
+    pathname.includes("topexpress") ||
+    pathname.includes("toponagro");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Top Bar */}
+      {/* Top Utility Bar */}
       <div className="bg-[#040D1A] border-b border-brand-gold/15 text-xs text-slate-300 py-1.5 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center space-x-6">
@@ -107,10 +180,11 @@ export default function Header() {
 
       {/* Main Navigation Bar */}
       <nav
-        className={`transition-all duration-300 ${isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-slate-900/5 border-b border-brand-gold/30 py-2.5"
-          : "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3.5"
-          }`}
+        className={`transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-lg shadow-slate-900/5 border-b border-brand-gold/30 py-2.5"
+            : "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3.5"
+        }`}
         aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -130,10 +204,11 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-1 font-medium text-sm">
             <Link
               href="/home"
-              className={`px-3.5 py-2 rounded-md transition-colors ${isActive("/home")
-                ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                }`}
+              className={`px-3.5 py-2 rounded-md transition-colors ${
+                isActive("/home")
+                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+              }`}
             >
               Home
             </Link>
@@ -146,47 +221,32 @@ export default function Header() {
             >
               <Link
                 href="/about"
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${pathname.startsWith("/about")
-                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                  }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
+                  pathname.startsWith("/about")
+                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                }`}
                 aria-expanded={aboutDropdownOpen}
               >
                 <span>About Us</span>
-                <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                <ChevronDown className="w-4 h-4 transition-transform duration-200" />
               </Link>
 
               {aboutDropdownOpen && (
-                <div className="absolute top-full left-0 w-64 pt-2 shadow-2xl z-50">
+                <div className="absolute top-full left-0 w-64 pt-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white border border-slate-200 rounded-xl p-2 shadow-2xl shadow-slate-900/10 backdrop-blur-xl">
-                    <Link
-                      href="/about#overview"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Our Journey & Story</div>
-                      <span className="text-slate-500 text-[11px]">Roots and vision of excellence</span>
-                    </Link>
-                    <Link
-                      href="/about#leadership"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Message from Entrepreneur</div>
-                      <span className="text-slate-500 text-[11px]">Md. Abdullah Al Mamun</span>
-                    </Link>
-                    <Link
-                      href="/about#values"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Mission, Vision & Values</div>
-                      <span className="text-slate-500 text-[11px]">Core operating tenets</span>
-                    </Link>
-                    <Link
-                      href="/about#milestones"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Milestones & Accreditations</div>
-                      <span className="text-slate-500 text-[11px]">Industry certifications</span>
-                    </Link>
+                    {ABOUT_LINKS.map((item, idx) => (
+                      <Link
+                        key={idx}
+                        href={item.href}
+                        className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
+                      >
+                        <div className="font-semibold text-sm text-[#0B2240]">
+                          {item.title}
+                        </div>
+                        <span className="text-slate-500 text-[11px]">{item.sub}</span>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}
@@ -199,10 +259,11 @@ export default function Header() {
               onMouseLeave={() => setCompanyDropdownOpen(false)}
             >
               <button
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${pathname.includes("topontech") || pathname.includes("dailyshipping") || pathname.includes("topexpress") || pathname.includes("toponagro")
-                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                  }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
+                  isCompanyActive
+                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                }`}
                 aria-expanded={companyDropdownOpen}
               >
                 <span>Company</span>
@@ -210,75 +271,30 @@ export default function Header() {
               </button>
 
               {companyDropdownOpen && (
-                <div className="absolute top-full left-0 w-84 sm:w-96 pt-2 shadow-2xl z-50">
+                <div className="absolute top-full left-0 w-84 sm:w-96 pt-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white border border-slate-200 rounded-2xl p-3 shadow-2xl shadow-slate-900/10 backdrop-blur-xl space-y-1.5">
-                    <Link
-                      href="/trading-topontech"
-                      className="flex items-start space-x-3 p-2.5 rounded-xl hover:bg-brand-gold/15 transition-colors group"
-                    >
-                      <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold group-hover:scale-105 transition-transform flex-shrink-0">
-                        <Building2 className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark">
-                          Top On-Tech
-                        </div>
-                        <p className="text-[11px] text-slate-500">
-                          General Import, Export, Industrial Machinery & Chemical Trading
-                        </p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/express-topexpress"
-                      className="flex items-start space-x-3 p-2.5 rounded-xl hover:bg-brand-gold/15 transition-colors group"
-                    >
-                      <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold group-hover:scale-105 transition-transform flex-shrink-0">
-                        <Truck className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark">
-                          Top Express Limited
-                        </div>
-                        <p className="text-[11px] text-slate-500">
-                          Same-Day Courier, B2B Linehaul Fleet & Parcel Logistics
-                        </p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/logistics-dailyshipping"
-                      className="flex items-start space-x-3 p-2.5 rounded-lg hover:bg-brand-gold/15 transition-colors group"
-                    >
-                      <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold group-hover:scale-105 transition-transform flex-shrink-0">
-                        <Ship className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark">
-                          Daily Shipping & Logistics
-                        </div>
-                        <p className="text-[11px] text-slate-500">
-                          Ocean Freight Forwarding, Port C&F & Customs Clearance
-                        </p>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/agro-toponagro"
-                      className="flex items-start space-x-3 p-2.5 rounded-lg hover:bg-brand-gold/15 transition-colors group"
-                    >
-                      <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold group-hover:scale-105 transition-transform flex-shrink-0">
-                        <Fish className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark">
-                          Top On-Agro Farm
-                        </div>
-                        <p className="text-[11px] text-slate-500">
-                          Commercial Fisheries, Aquaculture & Cold Chain Fish Supply
-                        </p>
-                      </div>
-                    </Link>
+                    {DIVISIONS.map((div, idx) => {
+                      const Icon = div.icon;
+                      return (
+                        <Link
+                          key={idx}
+                          href={div.href}
+                          className="flex items-start space-x-3 p-2.5 rounded-xl hover:bg-brand-gold/15 transition-colors group"
+                        >
+                          <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold group-hover:scale-105 transition-transform flex-shrink-0">
+                            <Icon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark">
+                              {div.name}
+                            </div>
+                            <p className="text-[11px] text-slate-500 leading-snug">
+                              {div.desc}
+                            </p>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -292,10 +308,11 @@ export default function Header() {
             >
               <Link
                 href="/services"
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${pathname === "/services"
-                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                  }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
+                  pathname === "/services"
+                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                }`}
                 aria-expanded={servicesDropdownOpen}
               >
                 <span>Services</span>
@@ -303,29 +320,20 @@ export default function Header() {
               </Link>
 
               {servicesDropdownOpen && (
-                <div className="absolute top-full left-0 w-72 pt-2 shadow-2xl z-50">
+                <div className="absolute top-full left-0 w-72 pt-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                   <div className="bg-white border border-slate-200 rounded-xl p-2 shadow-2xl shadow-slate-900/10 backdrop-blur-xl">
-                    <Link
-                      href="/services#trading"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Trading: Import & Export</div>
-                      <span className="text-slate-500 text-[11px]">Industrial materials & consumer goods</span>
-                    </Link>
-                    <Link
-                      href="/services#customs"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Customs Clearing & Forwarding (C&F)</div>
-                      <span className="text-slate-500 text-[11px]">Complete port handling & duty advisory</span>
-                    </Link>
-                    <Link
-                      href="/services#freight"
-                      className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
-                    >
-                      <div className="font-semibold text-sm text-[#0B2240]">Freight Forwarding (Ocean & Air)</div>
-                      <span className="text-slate-500 text-[11px]">Global carrier networks & container tracking</span>
-                    </Link>
+                    {SERVICE_LINKS.map((serv, idx) => (
+                      <Link
+                        key={idx}
+                        href={serv.href}
+                        className="block px-3 py-2 text-xs rounded-lg text-slate-700 hover:bg-brand-gold/15 hover:text-[#0B2240] transition-colors"
+                      >
+                        <div className="font-semibold text-sm text-[#0B2240]">
+                          {serv.title}
+                        </div>
+                        <span className="text-slate-500 text-[11px]">{serv.sub}</span>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}
@@ -333,10 +341,11 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className={`px-3.5 py-2 rounded-md transition-colors ${isActive("/contact")
-                ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                }`}
+              className={`px-3.5 py-2 rounded-md transition-colors ${
+                isActive("/contact")
+                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+              }`}
             >
               Contact
             </Link>
@@ -376,30 +385,15 @@ export default function Header() {
               >
                 About Us
               </Link>
-              <Link
-                href="/trading-topontech"
-                className="block px-3 py-2 rounded-md text-base font-medium text-[#0B2240] font-semibold hover:bg-slate-100"
-              >
-                • Top On-Tech (Trading & Sourcing)
-              </Link>
-              <Link
-                href="/express-topexpress"
-                className="block px-3 py-2 rounded-md text-base font-medium text-[#0B2240] font-semibold hover:bg-slate-100"
-              >
-                • Top Express Limited (Courier & Fleet)
-              </Link>
-              <Link
-                href="/logistics-dailyshipping"
-                className="block px-3 py-2 rounded-md text-base font-medium text-[#0B2240] font-semibold hover:bg-slate-100"
-              >
-                • Daily Shipping & Logistics (Freight & C&F)
-              </Link>
-              <Link
-                href="/agro-toponagro"
-                className="block px-3 py-2 rounded-md text-base font-medium text-[#0B2240] font-semibold hover:bg-slate-100"
-              >
-                • Top On-Agro Farm (Fisheries & Aquaculture)
-              </Link>
+              {DIVISIONS.map((div, idx) => (
+                <Link
+                  key={idx}
+                  href={div.href}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-[#0B2240] hover:bg-slate-100"
+                >
+                  • {div.name}
+                </Link>
+              ))}
               <Link
                 href="/services"
                 className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-[#0B2240] hover:bg-slate-100"
