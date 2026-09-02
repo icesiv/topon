@@ -130,11 +130,11 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <a
-              href="mailto:info@topongroup.com"
+              href="mailto:info@toponbd.com"
               className="flex items-center space-x-1.5 hover:text-brand-gold transition-colors duration-200"
             >
               <Mail className="w-3.5 h-3.5 text-brand-gold" />
-              <span>info@topongroup.com</span>
+              <span>info@toponbd.com</span>
             </a>
           </div>
 

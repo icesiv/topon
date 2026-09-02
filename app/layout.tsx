@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "Ocean Freight FCL LCL",
     "Industrial Spares & Chemicals",
   ],
-  metadataBase: new URL("https://www.topongroup.com"),
+  metadataBase: new URL("https://www.toponbd.com"),
   authors: [{ name: "Top On Group Corporate Affairs" }],
   creator: "Top On Group",
   publisher: "Top On Group",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Top On Group | Trusted Sourcing & Logistics Partner",
     description:
       "Empowering global trade through dependable general trading and compliant freight forwarding. Led by supply chain veteran Md. Abdullah Al Mamun.",
-    url: "https://www.topongroup.com",
+    url: "https://www.toponbd.com",
     siteName: "Top On Group",
     images: [
       {

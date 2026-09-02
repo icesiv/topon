@@ -4,10 +4,11 @@ export default function JSONLD() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://www.topongroup.com/#organization",
+        "@id": "https://www.toponbd.com/#organization",
         "name": "Top On Group",
-        "url": "https://www.topongroup.com",
-        "logo": "https://www.topongroup.com/logo.png",
+        "url": "https://www.toponbd.com",
+        "logo": "https://www.toponbd.com/logo.png",
+        "email": "info@toponbd.com",
         "description": "Premier international conglomerate in Bangladesh delivering excellence in general trading, global sourcing, and multimodal freight forwarding.",
         "slogan": "On Time. Every Time.",
         "foundingLocation": {
@@ -33,11 +34,11 @@ export default function JSONLD() {
         "subOrganization": [
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.topongroup.com/#top-on-tech",
+            "@id": "https://www.toponbd.com/#top-on-tech",
             "name": "Top On-Tech",
             "description": "Diversified import, export and trading house sourcing industrial machinery, spares, chemicals, textiles, and electronics.",
-            "url": "https://www.topongroup.com/trading-topontech",
-            "parentOrganization": { "@id": "https://www.topongroup.com/#organization" },
+            "url": "https://www.toponbd.com/trading-topontech",
+            "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Industrial Machinery & Spares",
               "Chemical Supply & Procurement",
@@ -49,11 +50,11 @@ export default function JSONLD() {
           },
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.topongroup.com/#daily-shipping",
+            "@id": "https://www.toponbd.com/#daily-shipping",
             "name": "Daily Shipping & Logistics",
             "description": "Technology-driven freight forwarding and C&F operations built on 20,000+ containers of operational experience.",
-            "url": "https://www.topongroup.com/logistics-dailyshipping",
-            "parentOrganization": { "@id": "https://www.topongroup.com/#organization" },
+            "url": "https://www.toponbd.com/logistics-dailyshipping",
+            "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "International Ocean Freight (FCL/LCL)",
               "Air Cargo Freight",
@@ -64,11 +65,11 @@ export default function JSONLD() {
           },
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.topongroup.com/#top-express",
+            "@id": "https://www.toponbd.com/#top-express",
             "name": "Top Express Limited",
             "description": "Express transit and nationwide courier logistics fleet connecting key commercial hubs.",
-            "url": "https://www.topongroup.com/express-topexpress",
-            "parentOrganization": { "@id": "https://www.topongroup.com/#organization" },
+            "url": "https://www.toponbd.com/express-topexpress",
+            "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Express Courier Services",
               "B2B Linehaul Transit",
@@ -77,11 +78,11 @@ export default function JSONLD() {
           },
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.topongroup.com/#top-on-agro",
+            "@id": "https://www.toponbd.com/#top-on-agro",
             "name": "Top On-Agro Farm",
             "description": "Sustainable commercial fisheries, high-density aquaculture, certified hatchery breeding, and cold-chain fish supply.",
-            "url": "https://www.topongroup.com/agro-toponagro",
-            "parentOrganization": { "@id": "https://www.topongroup.com/#organization" },
+            "url": "https://www.toponbd.com/agro-toponagro",
+            "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Commercial Aquaculture & Fish Farming",
               "Certified Hatchery & Fingerling Breeding",

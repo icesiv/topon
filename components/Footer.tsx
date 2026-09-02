@@ -79,8 +79,8 @@ export default function Footer() {
             </div>
             <div className="flex items-center space-x-2 text-slate-300">
               <Mail className="w-4 h-4 text-brand-gold flex-shrink-0" />
-              <a href="mailto:info@topongroup.com" className="hover:text-brand-gold">
-                info@topongroup.com / contact@topongroup.com
+              <a href="mailto:info@toponbd.com" className="hover:text-brand-gold">
+                info@toponbd.com
               </a>
             </div>
           </div>

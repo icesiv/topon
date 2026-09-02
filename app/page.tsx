@@ -151,6 +151,16 @@ export default function ComingSoonPage() {
           and sustainable agro-fisheries.
         </p>
 
+        {/* Official Email Contact Pill */}
+        <div className="mt-8 flex items-center justify-center">
+          <a
+            href="mailto:info@toponbd.com"
+            className="inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-brand-gold/40 hover:border-brand-gold hover:bg-white/10 text-slate-200 hover:text-white text-xs sm:text-sm font-medium transition-all backdrop-blur-md shadow-lg group"
+          >
+            <Mail className="w-4 h-4 text-brand-gold group-hover:scale-110 transition-transform" />
+            <span>Corporate Inquiries: <strong className="text-brand-gold">info@toponbd.com</strong></span>
+          </a>
+        </div>
 
         {/* Business Wings Strip */}
         <div className="mt-12 pt-10 border-t border-white/10">
@@ -190,8 +200,16 @@ export default function ComingSoonPage() {
           &copy; {new Date().getFullYear()} <strong className="text-white font-semibold">TOP ON GROUP</strong>. All rights reserved.
         </div>
 
-        <div className="flex items-center space-x-6 text-slate-400 text-xs">
-          <span className="text-brand-gold font-medium">On Time. Every Time.</span>
+        <div className="flex items-center space-x-4 sm:space-x-6 text-slate-400 text-xs flex-wrap justify-center">
+          <a
+            href="mailto:info@toponbd.com"
+            className="hover:text-brand-gold transition-colors flex items-center space-x-1.5 text-slate-300"
+          >
+            <Mail className="w-3.5 h-3.5 text-brand-gold" />
+            <span>info@toponbd.com</span>
+          </a>
+          <span>•</span>
+          <span className="text-brand-gold font-medium">toponbd.com</span>
           <span>•</span>
           <span>Corporate HQ: Dhaka, Bangladesh</span>
         </div>

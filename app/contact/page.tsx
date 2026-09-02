@@ -69,12 +69,8 @@ export default function ContactPage() {
                   <Mail className="w-4 h-4 text-brand-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 block">Corporate Communications</strong>
-                    <a href="mailto:info@topongroup.com" className="text-brand-navy hover:text-brand-gold font-semibold">
-                      info@topongroup.com
-                    </a>
-                    {" / "}
-                    <a href="mailto:contact@topongroup.com" className="text-brand-navy hover:text-brand-gold font-semibold">
-                      contact@topongroup.com
+                    <a href="mailto:info@toponbd.com" className="text-brand-navy hover:text-brand-gold font-semibold">
+                      info@toponbd.com
                     </a>
                   </div>
                 </div>

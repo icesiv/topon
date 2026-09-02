@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://www.topongroup.com/sitemap.xml",
+    sitemap: "https://www.toponbd.com/sitemap.xml",
   };
 }
