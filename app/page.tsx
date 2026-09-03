@@ -10,77 +10,30 @@ import {
   Truck,
   Fish,
   Mail,
-  Phone,
-  ArrowRight,
   Home,
-  CheckCircle2,
-  Clock,
-  Globe2,
-  ShieldCheck,
-  Send,
+  ArrowRight,
 } from "lucide-react";
+import ParticleCanvas from "@/components/ParticleCanvas";
 
 export default function ComingSoonPage() {
-  // Countdown Timer State
-  const [timeLeft, setTimeLeft] = useState({
-    days: 34,
-    hours: 18,
-    minutes: 42,
-    seconds: 15,
-  });
-
-  // Newsletter State
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    // Launch target date: 35 days in the future
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 35);
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetDate.getTime() - now;
-
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubmitted(true);
-      setEmail("");
-    }
-  };
-
   const divisions = [
     {
       name: "Top On-Tech",
-      desc: "General Trading, Industrial Machinery & Chemical Sourcing",
+      desc: "Import, Export, and Trading Enterprise",
       icon: Building2,
       href: "/trading-topontech",
     },
     {
-      name: "Daily Shipping & Logistics",
-      desc: "Ocean & Air Freight Forwarding, Port C&F Customs Brokerage",
-      icon: Ship,
-      href: "/logistics-dailyshipping",
-    },
-    {
       name: "Top Express Limited",
-      desc: "Same-Day Courier, B2B Linehaul Fleet & Parcel Logistics",
+      desc: "Customs Clearing and Forwarding (C&F) Company",
       icon: Truck,
       href: "/express-topexpress",
+    },
+    {
+      name: "Daily Shipping & Logistics",
+      desc: "Freight Forwarding and International Trade Support",
+      icon: Ship,
+      href: "/logistics-dailyshipping",
     },
     {
       name: "Top On-Agro Farm",
@@ -91,38 +44,26 @@ export default function ComingSoonPage() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#040C18] text-white flex flex-col justify-between overflow-x-hidden selection:bg-brand-gold selection:text-brand-navy">
-      {/* Background Decorative Lighting & Ambient Grids */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `radial-gradient(rgba(197, 168, 92, 0.4) 1px, transparent 1px), radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-            backgroundPosition: "0 0, 20px 20px",
-          }}
-        />
+    <div className="relative min-h-screen bg-gradient-to-b from-slate-50 via-slate-100/60 to-white text-slate-900 flex flex-col justify-between overflow-x-hidden selection:bg-brand-gold selection:text-brand-navy">
+      {/* Animated Interactive Particle Canvas */}
+      <ParticleCanvas />
 
-        {/* Ambient Glow Orbs */}
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-[#0B2240]/80 rounded-full blur-[140px]" />
-        <div className="absolute -bottom-40 left-1/3 w-[32rem] h-[32rem] bg-brand-gold/10 rounded-full blur-[160px]" />
-      </div>
-
+      {/* Decorative Light Radial Gradients & Glow Orbs (Just like Home Hero) */}
+      <div className="absolute top-0 left-1/4 w-[28rem] h-[28rem] bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-10 w-[32rem] h-[32rem] bg-slate-200/50 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#C5A85C_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.12] pointer-events-none" />
 
       {/* Main Centerpiece */}
       <main className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 text-center my-auto">
         {/* Pill Tag */}
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs sm:text-sm font-semibold mb-6 backdrop-blur-md shadow-gold">
-          <Sparkles className="w-4 h-4 text-brand-gold animate-pulse" />
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-[#0B2240] text-xs sm:text-sm font-semibold mb-6 backdrop-blur-md shadow-xs">
+          <Sparkles className="w-4 h-4 text-brand-goldDark animate-pulse" />
           <span>Something Exceptional Is Coming Soon</span>
         </div>
 
-
-        {/* Centered Big Logo with White Background */}
+        {/* Centered Big Logo with White Card Container */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center justify-center px-6 py-4 sm:px-10 sm:py-5 bg-white rounded-2xl shadow-2xl shadow-black/60 border border-brand-gold/40 hover:border-brand-gold transition-all">
+          <div className="inline-flex items-center justify-center px-6 py-4 sm:px-10 sm:py-5 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl shadow-slate-900/5 border border-slate-200 hover:border-brand-gold/60 transition-all">
             <Image
               src="/logo-text.png"
               alt="Top On Group"
@@ -134,18 +75,16 @@ export default function ComingSoonPage() {
           </div>
         </div>
 
-
-
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-serif leading-[1.15] max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0B2240] font-serif leading-[1.15] max-w-4xl mx-auto">
           We Are Crafting The Next Generation of{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-goldLight via-brand-gold to-brand-goldDark">
+          <span className="text-gold-gradient block sm:inline mt-1 sm:mt-0">
             Global Trade & Logistics
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-sans font-light leading-relaxed">
+        <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-sans font-normal leading-relaxed">
           Top On Group is upgrading its central digital platform. Delivering premier solutions in
           international general trading, customs clearance (C&F), ocean & air freight forwarding,
           and sustainable agro-fisheries.
@@ -155,36 +94,36 @@ export default function ComingSoonPage() {
         <div className="mt-8 flex items-center justify-center">
           <a
             href="mailto:info@toponbd.com"
-            className="inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-brand-gold/40 hover:border-brand-gold hover:bg-white/10 text-slate-200 hover:text-white text-xs sm:text-sm font-medium transition-all backdrop-blur-md shadow-lg group"
+            className="inline-flex items-center space-x-2.5 px-5 py-2.5 rounded-full bg-white hover:bg-slate-50 border border-slate-300 hover:border-brand-gold text-slate-700 hover:text-brand-navy text-xs sm:text-sm font-medium transition-all shadow-xs backdrop-blur-sm group"
           >
-            <Mail className="w-4 h-4 text-brand-gold group-hover:scale-110 transition-transform" />
-            <span>Corporate Inquiries: <strong className="text-brand-gold">info@toponbd.com</strong></span>
+            <Mail className="w-4 h-4 text-brand-goldDark group-hover:scale-110 transition-transform" />
+            <span>Corporate Inquiries: <strong className="text-[#0B2240]">info@toponbd.com</strong></span>
           </a>
         </div>
 
         {/* Business Wings Strip */}
-        <div className="mt-12 pt-10 border-t border-white/10">
-          <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-5">
+        <div className="mt-12 pt-10 border-t border-slate-200">
+          <p className="text-xs uppercase tracking-widest text-slate-500 font-semibold mb-5">
             Operating Divisions of Top On Group
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-left">
             {divisions.map((div, i) => {
               const Icon = div.icon;
               return (
                 <Link
                   key={i}
                   href={div.href}
-                  className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 hover:border-brand-gold/40 hover:bg-white/[0.06] transition-all group backdrop-blur-sm"
+                  className="p-4 rounded-xl bg-white/90 border border-slate-200 hover:border-brand-gold/60 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group backdrop-blur-sm shadow-xs"
                 >
-                  <div className="flex items-center space-x-3 mb-1.5">
-                    <div className="p-2 rounded-lg bg-[#0B2240] text-brand-gold border border-brand-gold/20 group-hover:scale-105 transition-transform">
+                  <div className="flex items-center space-x-3 mb-2">
+                    <div className="p-2 rounded-lg bg-slate-50 text-brand-navy border border-slate-200 group-hover:bg-brand-gold group-hover:text-brand-navy group-hover:border-brand-gold transition-colors">
                       <Icon className="w-4 h-4" />
                     </div>
-                    <h2 className="font-semibold text-xs sm:text-sm text-white group-hover:text-brand-gold transition-colors">
+                    <h2 className="font-semibold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-goldDark transition-colors">
                       {div.name}
                     </h2>
                   </div>
-                  <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed pl-1">
+                  <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed pl-1">
                     {div.desc}
                   </p>
                 </Link>
@@ -195,21 +134,21 @@ export default function ComingSoonPage() {
       </main>
 
       {/* Footer Bar */}
-      <footer className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+      <footer className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
         <div>
-          &copy; {new Date().getFullYear()} <strong className="text-white font-semibold">TOP ON GROUP</strong>. All rights reserved.
+          &copy; {new Date().getFullYear()} <strong className="text-[#0B2240] font-semibold">TOP ON GROUP</strong>. All rights reserved.
         </div>
 
-        <div className="flex items-center space-x-4 sm:space-x-6 text-slate-400 text-xs flex-wrap justify-center">
+        <div className="flex items-center space-x-4 sm:space-x-6 text-slate-500 text-xs flex-wrap justify-center">
           <a
             href="mailto:info@toponbd.com"
-            className="hover:text-brand-gold transition-colors flex items-center space-x-1.5 text-slate-300"
+            className="hover:text-brand-navy transition-colors flex items-center space-x-1.5 text-slate-600"
           >
-            <Mail className="w-3.5 h-3.5 text-brand-gold" />
+            <Mail className="w-3.5 h-3.5 text-brand-goldDark" />
             <span>info@toponbd.com</span>
           </a>
           <span>•</span>
-          <span className="text-brand-gold font-medium">toponbd.com</span>
+          <span className="text-[#0B2240] font-medium">toponbd.com</span>
           <span>•</span>
           <span>Corporate HQ: Dhaka, Bangladesh</span>
         </div>
@@ -222,7 +161,7 @@ export default function ComingSoonPage() {
           id="coming-soon-home-btn"
           aria-label="Go to Home page"
           title="Go to Home"
-          className="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 text-slate-400 hover:text-white text-xs opacity-25 hover:opacity-100 transition-all duration-300 backdrop-blur-sm shadow-sm"
+          className="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-slate-900/5 hover:bg-slate-900/10 border border-slate-300 text-slate-600 hover:text-[#0B2240] text-xs opacity-35 hover:opacity-100 transition-all duration-300 backdrop-blur-sm shadow-xs"
         >
           <Home className="w-3.5 h-3.5" />
           <span className="text-[11px] font-normal tracking-wide">Home</span>

@@ -14,7 +14,7 @@ export default function LayoutWrapper({
   const isComingSoon = pathname === "/";
 
   if (isComingSoon) {
-    return <main className="min-h-screen w-full bg-[#040C18] text-white overflow-x-hidden">{children}</main>;
+    return <main className="min-h-screen w-full overflow-x-hidden">{children}</main>;
   }
 
   return (
