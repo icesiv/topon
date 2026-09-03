@@ -33,15 +33,15 @@ const businesses: BusinessPanel[] = [
     id: "topontech",
     number: "01",
     name: "Top On-Tech",
-    category: "General Trading & Global Sourcing",
-    tagline: "Industrial Machinery, Chemical Sourcing & Precision Spares",
+    category: "Multi-Sector Import, Export & Trading",
+    tagline: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets.",
     fullTagline:
-      "Direct factory procurement of high-precision CNC machinery, industrial chemicals, and production inputs with OEM warranties for Bangladesh's core industries.",
+      "Top On-Tech is a multi-sector import, export, and trading enterprise that connects global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
     href: "/trading-topontech",
-    image: "/images/trading_sourcing.jpg",
+    image: "/images/topontech_hero.jpg",
     icon: Building2,
-    badge: "General Trading",
-    highlights: ["OEM Machinery", "Industrial Chemicals", "Turnkey Sourcing"],
+    badge: "Import, Export & Trading",
+    highlights: ["Global Suppliers", "B2B Sourcing", "Delivery Coordination"],
   },
   {
     id: "topexpress",
@@ -52,7 +52,7 @@ const businesses: BusinessPanel[] = [
     fullTagline:
       "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
     href: "/express-topexpress",
-    image: "/images/customs_cnf.jpg",
+    image: "/images/topexpress_hero.jpg",
     icon: FileCheck2,
     badge: "Licensed C&F",
     highlights: ["Chittagong Port C&F", "HS Code Advisory", "Zero Demurrage"],
@@ -66,7 +66,7 @@ const businesses: BusinessPanel[] = [
     fullTagline:
       "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
     href: "/logistics-dailyshipping",
-    image: "/images/hero_port.jpg",
+    image: "/images/dailyshipping_hero.jpg",
     icon: Ship,
     badge: "20k+ Containers",
     highlights: ["Ocean FCL / LCL", "HSIA Air Cargo", "Global Feeder Links"],
@@ -80,7 +80,7 @@ const businesses: BusinessPanel[] = [
     fullTagline:
       "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
     href: "/agro-toponagro",
-    image: "/images/agro_farm.jpg",
+    image: "/images/toponagro_hero.jpg",
     icon: Fish,
     badge: "Fisheries & Hatchery",
     highlights: ["Biofloc Aquaculture", "Certified Hatchery", "Cold Chain Supply"],
@@ -88,12 +88,13 @@ const businesses: BusinessPanel[] = [
 ];
 
 export default function HeroSection() {
-  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const [activeIdx, setActiveIdx] = useState<number | null>(0);
 
   return (
     <section
       className="relative w-full h-[calc(100vh-6rem)] min-h-[640px] max-h-[960px] bg-[#040C18] overflow-hidden select-none"
       aria-label="Top On Group Business Divisions Hero"
+      onMouseLeave={() => setActiveIdx(0)}
     >
 
       {/* 4 Interactive Expanding Vertical Panels */}
@@ -108,9 +109,7 @@ export default function HeroSection() {
               key={biz.id}
               href={biz.href}
               onMouseEnter={() => setActiveIdx(idx)}
-              onMouseLeave={() => setActiveIdx(null)}
               onFocus={() => setActiveIdx(idx)}
-              onBlur={() => setActiveIdx(null)}
               onTouchStart={() => setActiveIdx(idx)}
               className={`group relative flex flex-col justify-between overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/15 last:border-b-0 last:border-r-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isExpanded
                 ? "flex-[2.8] lg:flex-[3.2] shadow-2xl z-20"
@@ -126,8 +125,9 @@ export default function HeroSection() {
                   src={biz.image}
                   alt={biz.name}
                   fill
-                  priority={idx < 2}
-                  sizes="(max-width: 1024px) 100vw, 35vw"
+                  priority
+                  quality={95}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                   className={`object-cover transition-all duration-700 ease-out ${
                     isExpanded
                       ? "scale-105 brightness-110 contrast-105 saturate-115"
