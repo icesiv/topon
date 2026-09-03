@@ -83,12 +83,6 @@ export default function ComingSoonPage() {
           </span>
         </h1>
 
-        {/* Subtitle */}
-        <p className="mt-6 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-sans font-normal leading-relaxed">
-          Top On Group is upgrading its central digital platform. Delivering premier solutions in
-          international general trading, customs clearance (C&F), ocean & air freight forwarding,
-          and sustainable agro-fisheries.
-        </p>
 
         {/* Official Email Contact Pill */}
         <div className="mt-8 flex items-center justify-center">

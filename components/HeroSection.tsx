@@ -1,205 +1,220 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  FileDown,
   Sparkles,
   Building2,
   Ship,
   Truck,
   Fish,
-  ChevronRight,
-  Globe2,
-  ShieldCheck,
+  FileCheck2,
+  ExternalLink,
 } from "lucide-react";
-import ParticleCanvas from "./ParticleCanvas";
 
-interface HeroSectionProps {
-  tagline?: string;
-  titlePrefix?: string;
-  titleHighlight?: string;
-  description?: React.ReactNode;
+interface BusinessPanel {
+  id: string;
+  number: string;
+  name: string;
+  category: string;
+  tagline: string;
+  fullTagline: string;
+  href: string;
+  image: string;
+  icon: typeof Building2;
+  badge: string;
+  highlights: string[];
 }
 
-const subsidiaries = [
+const businesses: BusinessPanel[] = [
   {
+    id: "topontech",
+    number: "01",
     name: "Top On-Tech",
     category: "General Trading & Global Sourcing",
-    tagline: "Industrial Machinery, Chemicals & RMG Raw Materials",
+    tagline: "Industrial Machinery, Chemical Sourcing & Precision Spares",
+    fullTagline:
+      "Direct factory procurement of high-precision CNC machinery, industrial chemicals, and production inputs with OEM warranties for Bangladesh's core industries.",
     href: "/trading-topontech",
     image: "/images/trading_sourcing.jpg",
     icon: Building2,
-    badge: "Est. 2024",
-    accent: "border-blue-500/30 text-blue-700",
+    badge: "General Trading",
+    highlights: ["OEM Machinery", "Industrial Chemicals", "Turnkey Sourcing"],
   },
   {
+    id: "topexpress",
+    number: "02",
     name: "Top Express Limited",
-    category: "Express Transit & Fleet Logistics",
-    tagline: "Same-Day Courier, B2B Linehaul Fleet & Nationwide Fleet",
+    category: "Customs Clearing & Forwarding (C&F)",
+    tagline: "Licensed C&F Brokerage, Port Clearance & NBR Tariff Advisory",
+    fullTagline:
+      "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
     href: "/express-topexpress",
-    image: "/images/air_cargo.jpg",
-    icon: Truck,
-    badge: "Rapid Fleet",
-    accent: "border-emerald-500/30 text-emerald-700",
+    image: "/images/customs_cnf.jpg",
+    icon: FileCheck2,
+    badge: "Licensed C&F",
+    highlights: ["Chittagong Port C&F", "HS Code Advisory", "Zero Demurrage"],
   },
   {
+    id: "dailyshipping",
+    number: "03",
     name: "Daily Shipping & Logistics",
-    category: "Maritime Freight & C&F Operations",
-    tagline: "Ocean FCL/LCL, Chittagong Port Clearance & Customs",
+    category: "International Freight Forwarding",
+    tagline: "Ocean FCL/LCL, Expedited Air Cargo & Multimodal Logistics",
+    fullTagline:
+      "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
     href: "/logistics-dailyshipping",
     image: "/images/hero_port.jpg",
     icon: Ship,
     badge: "20k+ Containers",
-    accent: "border-sky-500/30 text-sky-700",
+    highlights: ["Ocean FCL / LCL", "HSIA Air Cargo", "Global Feeder Links"],
   },
   {
+    id: "toponagro",
+    number: "04",
     name: "Top On-Agro Farm",
-    category: "Commercial Aquaculture & Fisheries",
-    tagline: "Sustainable Commercial Fish Farming, Hatcheries & Cold Chain Supply",
+    category: "Commercial Fisheries & Aquaculture",
+    tagline: "Sustainable Fish Farming, Hatcheries & Nationwide Cold Chain",
+    fullTagline:
+      "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
     href: "/agro-toponagro",
     image: "/images/agro_farm.jpg",
     icon: Fish,
     badge: "Fisheries & Hatchery",
-    accent: "border-cyan-500/30 text-cyan-700",
+    highlights: ["Biofloc Aquaculture", "Certified Hatchery", "Cold Chain Supply"],
   },
 ];
 
-export default function HeroSection({
-  tagline = "On Time. Every Time.",
-  titlePrefix = "Connecting Products, Markets, &",
-  titleHighlight = "Global Opportunities",
-  description,
-}: HeroSectionProps) {
+export default function HeroSection() {
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+
   return (
-    <section className="relative min-h-[calc(100vh-6rem)] flex items-center justify-center bg-gradient-to-b from-slate-50 via-slate-100/60 to-white py-12 lg:py-16 overflow-hidden border-b border-slate-200">
-      {/* Animated Interactive Particle Canvas */}
-      <ParticleCanvas />
+    <section
+      className="relative w-full h-[calc(100vh-6rem)] min-h-[640px] max-h-[960px] bg-[#040C18] overflow-hidden select-none"
+      aria-label="Top On Group Business Divisions Hero"
+    >
 
-      {/* Decorative Light Radial Gradients & Glow Orbs */}
-      <div className="absolute top-0 left-1/4 w-[28rem] h-[28rem] bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-10 w-[32rem] h-[32rem] bg-slate-200/50 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(#C5A85C_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.12] pointer-events-none" />
+      {/* 4 Interactive Expanding Vertical Panels */}
+      <div className="w-full h-full flex flex-col lg:flex-row">
+        {businesses.map((biz, idx) => {
+          const Icon = biz.icon;
+          const isExpanded = activeIdx === idx;
+          const isAnyExpanded = activeIdx !== null;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-center">
+          return (
+            <Link
+              key={biz.id}
+              href={biz.href}
+              onMouseEnter={() => setActiveIdx(idx)}
+              onMouseLeave={() => setActiveIdx(null)}
+              onFocus={() => setActiveIdx(idx)}
+              onBlur={() => setActiveIdx(null)}
+              onTouchStart={() => setActiveIdx(idx)}
+              className={`group relative flex flex-col justify-between overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/15 last:border-b-0 last:border-r-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isExpanded
+                ? "flex-[2.8] lg:flex-[3.2] shadow-2xl z-20"
+                : isAnyExpanded
+                  ? "flex-[0.7] lg:flex-[0.7] opacity-80"
+                  : "flex-1 opacity-100"
+                }`}
+              style={{ willChange: "flex-grow, flex-basis" }}
+            >
+              {/* Background Thumbnail Image with Smooth Ken Burns Zoom & Hover Highlight */}
+              <div className="absolute inset-0 z-0 overflow-hidden">
+                <Image
+                  src={biz.image}
+                  alt={biz.name}
+                  fill
+                  priority={idx < 2}
+                  sizes="(max-width: 1024px) 100vw, 35vw"
+                  className={`object-cover transition-all duration-700 ease-out ${
+                    isExpanded
+                      ? "scale-105 brightness-110 contrast-105 saturate-115"
+                      : isAnyExpanded
+                      ? "scale-100 brightness-[0.5] contrast-90 saturate-75"
+                      : "scale-100 brightness-[0.8] contrast-100 group-hover:brightness-105"
+                  }`}
+                />
 
-          {/* LEFT COLUMN: Dark Logo Focus, Text Logo, Headlines, Tagline & CTAs */}
-          <div className="lg:col-span-6 space-y-6 text-left">
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold font-serif tracking-tight text-[#0B2240] leading-[1.15]">
-              {titlePrefix}{" "}
-              <span className="text-gold-gradient block mt-1">
-                {titleHighlight}
-              </span>
-            </h1>
+                {/* Dynamic Gradient Overlay: Clear & highlighted on active, dimmed on inactive */}
+                <div
+                  className={`absolute inset-0 transition-all duration-500 ${
+                    isExpanded
+                      ? "bg-gradient-to-t from-[#040C18] via-[#040C18]/45 to-transparent opacity-95"
+                      : isAnyExpanded
+                      ? "bg-[#040C18]/65"
+                      : "bg-gradient-to-t from-[#040C18] via-[#040C18]/60 to-black/35 opacity-85"
+                  }`}
+                />
 
-            {/* Group Summary Description */}
-            <p className="text-slate-600 text-sm sm:text-base max-w-xl leading-relaxed">
-              {description || (
-                <>
-                  Top On Group is Bangladesh&apos;s premier multi-sector conglomerate steering four specialized business divisions: international sourcing (<strong className="text-[#0B2240]">Top On-Tech</strong>), express courier &amp; linehaul logistics (<strong className="text-[#0B2240]">Top Express Limited</strong>), licensed port &amp; ocean freight (<strong className="text-[#0B2240]">Daily Shipping &amp; Logistics</strong>), and commercial aquaculture &amp; fisheries (<strong className="text-[#0B2240]">Top On-Agro Farm</strong>).
-                </>
-              )}
-            </p>
+                {/* Golden Inset Glow Highlight on Active */}
+                <div
+                  className={`absolute inset-0 border-2 transition-all duration-500 pointer-events-none ${
+                    isExpanded
+                      ? "border-brand-gold/60 shadow-[inset_0_0_50px_rgba(197,168,92,0.15)]"
+                      : "border-transparent"
+                  }`}
+                />
+              </div>
 
-            {/* Action CTAs */}
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
-                href="/services"
-                className="px-6 sm:px-7 py-3.5 rounded-xl bg-brand-gold text-brand-navy hover:bg-brand-goldLight font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-gold flex items-center space-x-2 group hover:-translate-y-0.5"
-              >
-                <span>Explore Services</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {/* Bottom Content: Name, Tagline & Click to Open */}
+              <div className="relative z-10 p-5 sm:p-7 lg:p-8 space-y-3 mt-auto">
+                {/* Business Name */}
+                <h2
+                  className={`font-serif font-bold tracking-tight text-white transition-all duration-300 leading-tight ${
+                    isExpanded
+                      ? "text-2xl sm:text-3xl lg:text-4xl text-brand-goldLight drop-shadow-lg"
+                      : "text-xl sm:text-2xl lg:text-2xl xl:text-3xl group-hover:text-brand-goldLight"
+                  }`}
+                >
+                  {biz.name}
+                </h2>
 
-              <Link
-                href="/contact#quote"
-                className="px-6 sm:px-7 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-[#0B2240] border border-slate-300 text-xs font-bold uppercase tracking-wider transition-all shadow-xs hover:border-brand-gold hover:-translate-y-0.5"
-              >
-                Request RFQ
-              </Link>
+                {/* Short Tagline */}
+                <p
+                  className={`text-slate-200 transition-all duration-500 font-sans leading-relaxed ${
+                    isExpanded
+                      ? "text-xs sm:text-sm lg:text-base opacity-100 max-h-28"
+                      : "text-xs sm:text-sm opacity-90 line-clamp-2 max-h-12"
+                  }`}
+                >
+                  {isExpanded ? biz.fullTagline : biz.tagline}
+                </p>
 
-              <a
-                href="/toponprofile.pdf"
-                download
-                className="px-4 sm:px-5 py-3.5 rounded-xl border border-slate-300 bg-white/70 hover:bg-white text-slate-700 hover:text-brand-navy hover:border-brand-gold text-xs font-semibold transition-all flex items-center space-x-2 shadow-xs"
-              >
-                <FileDown className="w-4 h-4 text-brand-goldDark" />
-                <span>Profile PDF</span>
-              </a>
-            </div>
+                {/* Expanded Highlights Chips (Revealed on hover) */}
+                <div
+                  className={`hidden sm:flex flex-wrap items-center gap-2 pt-1 transition-all duration-500 ${
+                    isExpanded
+                      ? "opacity-100 max-h-16 translate-y-0"
+                      : "opacity-0 max-h-0 pointer-events-none translate-y-2 overflow-hidden"
+                  }`}
+                >
+                  {biz.highlights.map((h, hIdx) => (
+                    <span
+                      key={hIdx}
+                      className="inline-flex items-center text-[10px] font-medium px-2.5 py-1 rounded-lg bg-white/10 border border-white/20 text-slate-200 backdrop-blur-sm"
+                    >
+                      ✓ {h}
+                    </span>
+                  ))}
+                </div>
 
+                {/* Click to Open Prompt Placed at Bottom */}
+                <div className="pt-3 border-t border-white/15 flex items-center justify-between">
+                  <div className="inline-flex items-center space-x-2 text-xs font-semibold text-brand-gold group-hover:text-brand-goldLight transition-colors">
+                    <span className="tracking-wide">Click to Open</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                  </div>
 
-          </div>
-
-          {/* RIGHT COLUMN: 4 Company Image Buttons Showcase */}
-          <div className="lg:col-span-6 space-y-4">
-
-            {/* Enterprise Division Showcase Container */}
-            <div className="relative rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl shadow-slate-900/5 p-5 sm:p-6">
-
-              {/* Header Label inside Right Panel */}
-              <div className="flex items-center justify-center pb-3.5 border-b border-slate-100">
-                <div className="flex items-center justify-center">
-                  <Image
-                    src="/logo-text.png"
-                    alt="Top On Logo"
-                    width={300}
-                    height={80}
-                    className="object-contain mx-auto"
-                  />
+                  <span className="text-[11px] font-mono text-slate-400 group-hover:text-slate-200">
+                    {biz.number}
+                  </span>
                 </div>
               </div>
-
-              {/* 4 Interactive Company Buttons with Full Thumbnails */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-3.5">
-                {subsidiaries.map((company, idx) => {
-                  const Icon = company.icon;
-                  return (
-                    <Link
-                      key={idx}
-                      href={company.href}
-                      className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 hover:border-brand-gold hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block h-36 sm:h-40 w-full"
-                    >
-                      {/* Company Image Banner */}
-                      <Image
-                        src={company.image}
-                        alt={company.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 300px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2240] via-[#0B2240]/40 to-black/20" />
-
-                      {/* Top Badges / Icon */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                        <div className="w-8 h-8 rounded-xl bg-white/90 backdrop-blur-md text-[#0B2240] flex items-center justify-center shadow-md group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                      </div>
-
-                      {/* Prominent Title & Action at Bottom */}
-                      <div className="absolute bottom-0 inset-x-0 p-3 sm:p-3.5 bg-gradient-to-t from-[#0B2240] via-[#0B2240]/80 to-transparent">
-                        <div className="flex items-center justify-between">
-                          <h3 className="font-serif font-bold text-base sm:text-lg text-white tracking-wide drop-shadow-md group-hover:text-brand-goldLight transition-colors">
-                            {company.name}
-                          </h3>
-                          <div className="w-7 h-7 rounded-full bg-white/10 group-hover:bg-brand-gold text-brand-gold group-hover:text-brand-navy flex items-center justify-center transition-all duration-300 shrink-0 ml-2">
-                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-              </div>
-
-            </div>
-
-          </div>
-        </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

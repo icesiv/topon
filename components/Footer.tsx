@@ -69,13 +69,13 @@ export default function Footer() {
           </Link>
 
           <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
-            Top On Group is a progressive conglomerate empowering global trade through dependable general trading (Top On-Tech) and elite freight forwarding logistics (Daily Shipping & Logistics).
+            Top On Group is a premier multi-sector conglomerate in Bangladesh empowering international trade through import/export trading (<strong className="text-slate-200">Top On-Tech</strong>), licensed customs clearing &amp; forwarding (<strong className="text-slate-200">Top Express Limited</strong>), international freight forwarding (<strong className="text-slate-200">Daily Shipping &amp; Logistics</strong>), and commercial fisheries &amp; aquaculture (<strong className="text-slate-200">Top On-Agro Farm</strong>).
           </p>
 
           <div className="pt-2 text-xs text-slate-400 space-y-1.5">
             <div className="flex items-center space-x-2 text-slate-300">
               <MapPin className="w-4 h-4 text-brand-gold flex-shrink-0" />
-              <span>Corporate HQ: Dhaka, Bangladesh | Port Hubs: Chittagong & Mongla</span>
+              <span>Corporate HQ: Dhaka, Bangladesh | Port Hubs: Chittagong &amp; Mongla</span>
             </div>
             <div className="flex items-center space-x-2 text-slate-300">
               <Mail className="w-4 h-4 text-brand-gold flex-shrink-0" />
@@ -100,7 +100,7 @@ export default function Footer() {
                 <Building2 className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
                 <span>Top On-Tech</span>
               </Link>
-              <span className="text-[11px] text-slate-500 block pl-5">Import, Export &amp; General Trading</span>
+              <span className="text-[11px] text-slate-500 block pl-5">Import, Export &amp; Trading Enterprise</span>
             </li>
             <li>
               <Link
@@ -110,7 +110,7 @@ export default function Footer() {
                 <Truck className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
                 <span>Top Express Limited</span>
               </Link>
-              <span className="text-[11px] text-slate-500 block pl-5">Courier, Parcel &amp; Fleet Logistics</span>
+              <span className="text-[11px] text-slate-500 block pl-5">Customs Clearing and Forwarding (C&amp;F)</span>
             </li>
             <li>
               <Link
@@ -120,7 +120,7 @@ export default function Footer() {
                 <Ship className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
                 <span>Daily Shipping &amp; Logistics</span>
               </Link>
-              <span className="text-[11px] text-slate-500 block pl-5">Freight Forwarding &amp; C&amp;F Operations</span>
+              <span className="text-[11px] text-slate-500 block pl-5">Freight Forwarding &amp; Shipping Support</span>
             </li>
             <li>
               <Link
@@ -143,32 +143,32 @@ export default function Footer() {
           <ul className="space-y-2 text-xs text-slate-300">
             <li>
               <Link href="/services#trading" className="hover:text-brand-gold transition-colors">
-                Industrial Machinery & Spares
+                Industrial Machinery &amp; Equipment
               </Link>
             </li>
             <li>
               <Link href="/services#trading" className="hover:text-brand-gold transition-colors">
-                Chemical & Raw Material Supply
-              </Link>
-            </li>
-            <li>
-              <Link href="/services#freight" className="hover:text-brand-gold transition-colors">
-                Ocean Freight Forwarding (FCL/LCL)
-              </Link>
-            </li>
-            <li>
-              <Link href="/services#freight" className="hover:text-brand-gold transition-colors">
-                Air Freight Expedited Handling
+                Chemical &amp; Raw Material Sourcing
               </Link>
             </li>
             <li>
               <Link href="/services#customs" className="hover:text-brand-gold transition-colors">
-                Customs Clearance & Brokerage (C&F)
+                Customs Clearing &amp; Port C&amp;F Brokerage
               </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-brand-gold transition-colors">
-                Global Sourcing & Trade Advisory
+              <Link href="/services#freight" className="hover:text-brand-gold transition-colors">
+                Ocean &amp; Air Freight Forwarding
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#agro" className="hover:text-brand-gold transition-colors">
+                Commercial Fisheries &amp; Aquaculture
+              </Link>
+            </li>
+            <li>
+              <Link href="/services#agro" className="hover:text-brand-gold transition-colors">
+                Cold Chain Storage &amp; Bulk Supply
               </Link>
             </li>
           </ul>
@@ -181,18 +181,23 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2 text-xs text-slate-300">
             <li>
-              <Link href="/about#leadership" className="hover:text-brand-gold transition-colors">
-                Leadership & Founder Profile
+              <Link href="/about/journey" className="hover:text-brand-gold transition-colors">
+                Our Journey &amp; Corporate Story
               </Link>
             </li>
             <li>
-              <Link href="/about#values" className="hover:text-brand-gold transition-colors">
-                Mission, Vision & Core Values
+              <Link href="/about/message" className="hover:text-brand-gold transition-colors">
+                Message from Entrepreneur
               </Link>
             </li>
             <li>
-              <Link href="/about#milestones" className="hover:text-brand-gold transition-colors">
-                Milestones & Accreditations
+              <Link href="/about/values" className="hover:text-brand-gold transition-colors">
+                Mission, Vision &amp; Values
+              </Link>
+            </li>
+            <li>
+              <Link href="/about/milestones" className="hover:text-brand-gold transition-colors">
+                Milestones &amp; Accreditations
               </Link>
             </li>
             <li>
@@ -203,7 +208,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/contact" className="hover:text-brand-gold transition-colors">
-                Contact & Port Desks
+                Contact &amp; Port Desks
               </Link>
             </li>
           </ul>
@@ -218,14 +223,14 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} <strong className="text-white">TOP ON GROUP</strong>. All rights reserved. Registered in Bangladesh.
             </p>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Operating divisions: Top On-Tech & Daily Shipping & Logistics.
+              Operating divisions: Top On-Tech, Top Express Limited, Daily Shipping &amp; Logistics, and Top On-Agro Farm.
             </p>
           </div>
 
           <div className="flex items-center space-x-6 text-slate-400">
             <span className="text-brand-gold font-medium">On Time. Every Time.</span>
             <span>•</span>
-            <Link href="/contact" className="hover:text-slate-300">Privacy & Terms</Link>
+            <Link href="/contact" className="hover:text-slate-300">Privacy &amp; Terms</Link>
             <span>•</span>
             <Link href="/contact" className="hover:text-slate-300">Trade Compliance</Link>
           </div>

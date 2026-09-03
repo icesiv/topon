@@ -27,25 +27,25 @@ interface DivisionItem {
 const DIVISIONS: DivisionItem[] = [
   {
     name: "Top On-Tech",
-    desc: "General Import, Export, Industrial Machinery & Chemical Trading",
+    desc: "Import, Export & Industrial Trading Enterprise",
     href: "/trading-topontech",
     icon: Building2,
   },
   {
     name: "Top Express Limited",
-    desc: "Same-Day Courier, B2B Linehaul Fleet & Parcel Logistics",
+    desc: "Customs Clearing and Forwarding (C&F) Company",
     href: "/express-topexpress",
     icon: Truck,
   },
   {
     name: "Daily Shipping & Logistics",
-    desc: "Ocean Freight Forwarding, Port C&F & Customs Clearance",
+    desc: "International Freight Forwarding & Ocean Carriage",
     href: "/logistics-dailyshipping",
     icon: Ship,
   },
   {
     name: "Top On-Agro Farm",
-    desc: "Commercial Fisheries, Aquaculture & Cold Chain Fish Supply",
+    desc: "Commercial Fisheries, Aquaculture & Sustainable Cold Chain",
     href: "/agro-toponagro",
     icon: Fish,
   },
@@ -55,40 +55,45 @@ const ABOUT_LINKS = [
   {
     title: "Our Journey & Story",
     sub: "Roots and vision of excellence",
-    href: "/about#overview",
+    href: "/about/journey",
   },
   {
     title: "Message from Entrepreneur",
     sub: "Md. Abdullah Al Mamun",
-    href: "/about#leadership",
+    href: "/about/message",
   },
   {
     title: "Mission, Vision & Values",
     sub: "Core operating tenets",
-    href: "/about#values",
+    href: "/about/values",
   },
   {
     title: "Milestones & Accreditations",
-    sub: "Industry certifications",
-    href: "/about#milestones",
+    sub: "Industry certifications & roadmap",
+    href: "/about/milestones",
   },
 ];
 
 const SERVICE_LINKS = [
   {
-    title: "Trading: Import & Export",
-    sub: "Industrial materials & consumer goods",
+    title: "Import, Export & Trading",
+    sub: "Industrial machinery, chemicals & raw materials",
     href: "/services#trading",
   },
   {
     title: "Customs Clearing & Forwarding (C&F)",
-    sub: "Complete port handling & duty advisory",
+    sub: "Licensed port clearance & duty advisory",
     href: "/services#customs",
   },
   {
     title: "Freight Forwarding (Ocean & Air)",
-    sub: "Global carrier networks & container tracking",
+    sub: "Global shipping lines & air cargo logistics",
     href: "/services#freight",
+  },
+  {
+    title: "Commercial Fisheries & Aquaculture",
+    sub: "Scientific fish farming & nationwide cold chain",
+    href: "/services#agro",
   },
 ];
 

@@ -21,25 +21,16 @@ export default function HomePage() {
       <HeroSection />
 
       {/* 2. METRIC COUNTER BAR */}
-      {/* <MetricCounter /> */}
+      <MetricCounter />
 
-      {/* 3. CORPORATE STRATEGY & INTEGRATED PLATFORM */}
-      {/* <CorporateStrategy /> */}
+      {/* 3. BUSINESS DIVISIONS (Top On-Tech vs Daily Shipping) */}
+      <DivisionTabs />
 
-      {/* 4. BUSINESS DIVISIONS (Top On-Tech vs Daily Shipping) */}
-      {/* <DivisionTabs /> */}
+      {/* 4. LEADERSHIP SPOTLIGHT */}
+      <LeadershipSpotlight />
 
-      {/* 5. AIR CARGO & MULTIMODAL LOGISTICS */}
-      {/* <AirCargoSection /> */}
-
-      {/* 6. CORPORATE CORE VALUES */}
-      {/* <CoreValues /> */}
-
-      {/* 7. LEADERSHIP SPOTLIGHT */}
-      {/* <LeadershipSpotlight /> */}
-
-      {/* 8. CONVERSION & QUOTE INQUIRY */}
-      {/* <HomeQuoteSection /> */}
+      {/* 5. CONVERSION & QUOTE INQUIRY */}
+      <HomeQuoteSection />
     </div>
   );
 }
