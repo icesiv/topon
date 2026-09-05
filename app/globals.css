@@ -124,3 +124,41 @@
   animation: pageProgress 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Continuous Marquee Slider Animations */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 38s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 42s linear infinite;
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover,
+.group-slider:hover .animate-marquee-left,
+.group-slider:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+

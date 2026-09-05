@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import JSONLD from "@/components/JSONLD";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
+const headingFont = Lora({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
 
 export const viewport: Viewport = {
   themeColor: "#0B2240",
@@ -99,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="en" className={`${inter.variable} ${headingFont.variable} scroll-smooth`}>
       <body className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-gold selection:text-brand-navy flex flex-col justify-between">
         <JSONLD />
         <LayoutWrapper>{children}</LayoutWrapper>

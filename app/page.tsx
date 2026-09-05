@@ -3,6 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import MetricCounter from "@/components/MetricCounter";
 import DivisionTabs from "@/components/DivisionTabs";
 import LeadershipSpotlight from "@/components/LeadershipSpotlight";
+import SustainabilitySection from "@/components/SustainabilitySection";
+import BusinessPartnersSection from "@/components/BusinessPartnersSection";
 import HomeQuoteSection from "@/components/HomeQuoteSection";
 
 export const metadata: Metadata = {
@@ -26,7 +28,13 @@ export default function HomePage() {
       {/* 4. LEADERSHIP SPOTLIGHT */}
       <LeadershipSpotlight />
 
-      {/* 5. CONVERSION & QUOTE INQUIRY */}
+      {/* 5. SUSTAINABILITY & ESG COMMITMENT */}
+      <SustainabilitySection />
+
+      {/* 6. BUSINESS PARTNERS & STRATEGIC CLIENTS */}
+      <BusinessPartnersSection />
+
+      {/* 7. CONVERSION & QUOTE INQUIRY */}
       <HomeQuoteSection />
     </div>
   );

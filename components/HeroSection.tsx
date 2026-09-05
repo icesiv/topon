@@ -1,94 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
-  ArrowRight,
-  Sparkles,
-  Building2,
-  Ship,
-  Truck,
-  Fish,
-  FileCheck2,
-  ExternalLink,
-} from "lucide-react";
-
-interface BusinessPanel {
-  id: string;
-  number: string;
-  name: string;
-  category: string;
-  tagline: string;
-  fullTagline: string;
-  href: string;
-  image: string;
-  icon: typeof Building2;
-  badge: string;
-  highlights: string[];
-}
-
-const businesses: BusinessPanel[] = [
-  {
-    id: "topontech",
-    number: "01",
-    name: "Top On-Tech",
-    category: "Multi-Sector Import, Export & Trading",
-    tagline: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets.",
-    fullTagline:
-      "Top On-Tech is a multi-sector import, export, and trading enterprise that connects global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
-    href: "/trading-topontech",
-    image: "/images/topontech_hero.jpg",
-    icon: Building2,
-    badge: "Import, Export & Trading",
-    highlights: ["Global Suppliers", "B2B Sourcing", "Delivery Coordination"],
-  },
-  {
-    id: "topexpress",
-    number: "02",
-    name: "Top Express Limited",
-    category: "Customs Clearing & Forwarding (C&F)",
-    tagline: "Licensed C&F Brokerage, Port Clearance & NBR Tariff Advisory",
-    fullTagline:
-      "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
-    href: "/express-topexpress",
-    image: "/images/topexpress_hero.jpg",
-    icon: FileCheck2,
-    badge: "Licensed C&F",
-    highlights: ["Chittagong Port C&F", "HS Code Advisory", "Zero Demurrage"],
-  },
-  {
-    id: "dailyshipping",
-    number: "03",
-    name: "Daily Shipping & Logistics",
-    category: "International Freight Forwarding",
-    tagline: "Ocean FCL/LCL, Expedited Air Cargo & Multimodal Logistics",
-    fullTagline:
-      "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
-    href: "/logistics-dailyshipping",
-    image: "/images/dailyshipping_hero.jpg",
-    icon: Ship,
-    badge: "20k+ Containers",
-    highlights: ["Ocean FCL / LCL", "HSIA Air Cargo", "Global Feeder Links"],
-  },
-  {
-    id: "toponagro",
-    number: "04",
-    name: "Top On-Agro Farm",
-    category: "Commercial Fisheries & Aquaculture",
-    tagline: "Sustainable Fish Farming, Hatcheries & Nationwide Cold Chain",
-    fullTagline:
-      "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
-    href: "/agro-toponagro",
-    image: "/images/toponagro_hero.jpg",
-    icon: Fish,
-    badge: "Fisheries & Hatchery",
-    highlights: ["Biofloc Aquaculture", "Certified Hatchery", "Cold Chain Supply"],
-  },
-];
+  DEFAULT_BUSINESS_PANELS,
+  resolveBusinessPanels,
+  subscribeHeroBusinesses,
+  BusinessPanel,
+} from "@/lib/heroBusinesses";
 
 export default function HeroSection() {
   const [activeIdx, setActiveIdx] = useState<number | null>(0);
+  const [businesses, setBusinesses] = useState<BusinessPanel[]>(() =>
+    resolveBusinessPanels(DEFAULT_BUSINESS_PANELS)
+  );
+
+  useEffect(() => {
+    const unsub = subscribeHeroBusinesses((data) => {
+      setBusinesses(resolveBusinessPanels(data));
+    });
+
+    return () => {
+      if (unsub) unsub();
+    };
+  }, []);
 
   return (
     <section
@@ -96,8 +33,7 @@ export default function HeroSection() {
       aria-label="Top On Group Business Divisions Hero"
       onMouseLeave={() => setActiveIdx(0)}
     >
-
-      {/* 4 Interactive Expanding Vertical Panels */}
+      {/* Interactive Expanding Vertical Panels */}
       <div className="w-full h-full flex flex-col lg:flex-row">
         {businesses.map((biz, idx) => {
           const Icon = biz.icon;
@@ -106,26 +42,27 @@ export default function HeroSection() {
 
           return (
             <Link
-              key={biz.id}
+              key={biz.id || idx}
               href={biz.href}
               onMouseEnter={() => setActiveIdx(idx)}
               onFocus={() => setActiveIdx(idx)}
               onTouchStart={() => setActiveIdx(idx)}
-              className={`group relative flex flex-col justify-between overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/15 last:border-b-0 last:border-r-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${isExpanded
-                ? "flex-[2.8] lg:flex-[3.2] shadow-2xl z-20"
-                : isAnyExpanded
+              className={`group relative flex flex-col justify-between overflow-hidden cursor-pointer border-b lg:border-b-0 lg:border-r border-white/15 last:border-b-0 last:border-r-0 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                isExpanded
+                  ? "flex-[2.8] lg:flex-[3.2] shadow-2xl z-20"
+                  : isAnyExpanded
                   ? "flex-[0.7] lg:flex-[0.7] opacity-80"
                   : "flex-1 opacity-100"
-                }`}
+              }`}
               style={{ willChange: "flex-grow, flex-basis" }}
             >
               {/* Background Thumbnail Image with Smooth Ken Burns Zoom & Hover Highlight */}
               <div className="absolute inset-0 z-0 overflow-hidden">
                 <Image
-                  src={biz.image}
+                  src={biz.image || "/images/topontech_hero.jpg"}
                   alt={biz.name}
                   fill
-                  priority
+                  priority={idx < 2}
                   quality={95}
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className={`object-cover transition-all duration-700 ease-out ${
@@ -168,7 +105,7 @@ export default function HeroSection() {
                       : "text-xl sm:text-2xl lg:text-2xl xl:text-3xl group-hover:text-brand-goldLight"
                   }`}
                 >
-                  {biz.name}
+                  {isExpanded ? biz.name : biz.name_short}
                 </h2>
 
                 {/* Short Tagline */}
@@ -181,24 +118,6 @@ export default function HeroSection() {
                 >
                   {isExpanded ? biz.fullTagline : biz.tagline}
                 </p>
-
-                {/* Expanded Highlights Chips (Revealed on hover) */}
-                <div
-                  className={`hidden sm:flex flex-wrap items-center gap-2 pt-1 transition-all duration-500 ${
-                    isExpanded
-                      ? "opacity-100 max-h-16 translate-y-0"
-                      : "opacity-0 max-h-0 pointer-events-none translate-y-2 overflow-hidden"
-                  }`}
-                >
-                  {biz.highlights.map((h, hIdx) => (
-                    <span
-                      key={hIdx}
-                      className="inline-flex items-center text-[10px] font-medium px-2.5 py-1 rounded-lg bg-white/10 border border-white/20 text-slate-200 backdrop-blur-sm"
-                    >
-                      ✓ {h}
-                    </span>
-                  ))}
-                </div>
 
                 {/* Click to Open Prompt Placed at Bottom */}
                 <div className="pt-3 border-t border-white/15 flex items-center justify-between">

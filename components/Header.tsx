@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Mail,
+  Phone,
   ChevronDown,
   Menu,
   X,
@@ -133,12 +134,42 @@ export default function Header() {
       {/* Top Utility Bar */}
       <div className="bg-[#040D1A] border-b border-brand-gold/15 text-xs text-slate-300 py-1.5 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-5">
+            <div className="flex items-center space-x-4">
+              <a
+                href="tel:+8801711775280"
+                className="flex items-center space-x-1.5 hover:text-brand-gold transition-colors duration-200"
+                title="Call Dhaka Office"
+              >
+                <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>
+                  <span className="text-slate-400 font-medium">Dhaka:</span>{" "}
+                  <span className="font-semibold text-slate-200">01711-775280</span>
+                </span>
+              </a>
+
+              <span className="text-white/20">|</span>
+
+              <a
+                href="tel:+8801711775281"
+                className="flex items-center space-x-1.5 hover:text-brand-gold transition-colors duration-200"
+                title="Call Chittagong Office"
+              >
+                <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>
+                  <span className="text-slate-400 font-medium">Ctg:</span>{" "}
+                  <span className="font-semibold text-slate-200">01711-775281</span>
+                </span>
+              </a>
+            </div>
+
+            <span className="text-white/20">|</span>
+
             <a
               href="mailto:info@toponbd.com"
               className="flex items-center space-x-1.5 hover:text-brand-gold transition-colors duration-200"
             >
-              <Mail className="w-3.5 h-3.5 text-brand-gold" />
+              <Mail className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
               <span>info@toponbd.com</span>
             </a>
           </div>
@@ -185,11 +216,10 @@ export default function Header() {
 
       {/* Main Navigation Bar */}
       <nav
-        className={`transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg shadow-slate-900/5 border-b border-brand-gold/30 py-2.5"
-            : "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3.5"
-        }`}
+        className={`transition-all duration-300 ${isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-slate-900/5 border-b border-brand-gold/30 py-2.5"
+          : "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 py-3.5"
+          }`}
         aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -209,11 +239,10 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-1 font-medium text-sm">
             <Link
               href="/"
-              className={`px-3.5 py-2 rounded-md transition-colors ${
-                isActive("/") || isActive("/home")
-                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-              }`}
+              className={`px-3.5 py-2 rounded-md transition-colors ${isActive("/") || isActive("/home")
+                ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                }`}
             >
               Home
             </Link>
@@ -226,11 +255,10 @@ export default function Header() {
             >
               <Link
                 href="/about"
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
-                  pathname.startsWith("/about")
-                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${pathname.startsWith("/about")
+                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                  }`}
                 aria-expanded={aboutDropdownOpen}
               >
                 <span>About Us</span>
@@ -264,11 +292,10 @@ export default function Header() {
               onMouseLeave={() => setCompanyDropdownOpen(false)}
             >
               <button
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
-                  isCompanyActive
-                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${isCompanyActive
+                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                  }`}
                 aria-expanded={companyDropdownOpen}
               >
                 <span>Company</span>
@@ -313,11 +340,10 @@ export default function Header() {
             >
               <Link
                 href="/services"
-                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${
-                  pathname === "/services"
-                    ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                    : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-                }`}
+                className={`flex items-center space-x-1 px-3.5 py-2 rounded-md transition-colors ${pathname === "/services"
+                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                  }`}
                 aria-expanded={servicesDropdownOpen}
               >
                 <span>Services</span>
@@ -346,11 +372,10 @@ export default function Header() {
 
             <Link
               href="/contact"
-              className={`px-3.5 py-2 rounded-md transition-colors ${
-                isActive("/contact")
-                  ? "text-[#0B2240] bg-brand-gold/20 font-bold"
-                  : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
-              }`}
+              className={`px-3.5 py-2 rounded-md transition-colors ${isActive("/contact")
+                ? "text-[#0B2240] bg-brand-gold/20 font-bold"
+                : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
+                }`}
             >
               Contact
             </Link>
@@ -411,6 +436,32 @@ export default function Header() {
               >
                 Contact
               </Link>
+            </div>
+
+            {/* Mobile Contact Quick Links */}
+            <div className="pt-3 border-t border-slate-200/80 space-y-2 text-xs">
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href="tel:+8801711775280"
+                  className="flex items-center space-x-1.5 p-2 rounded-lg bg-slate-50 hover:bg-brand-gold/15 text-slate-700 hover:text-[#0B2240] transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                  <div className="truncate">
+                    <span className="text-[10px] text-slate-500 block">Dhaka Desk</span>
+                    <span className="font-semibold text-slate-800">01711-775280</span>
+                  </div>
+                </a>
+                <a
+                  href="tel:+8801711775281"
+                  className="flex items-center space-x-1.5 p-2 rounded-lg bg-slate-50 hover:bg-brand-gold/15 text-slate-700 hover:text-[#0B2240] transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                  <div className="truncate">
+                    <span className="text-[10px] text-slate-500 block">Ctg Desk</span>
+                    <span className="font-semibold text-slate-800">01711-775281</span>
+                  </div>
+                </a>
+              </div>
             </div>
 
             <div className="pt-2 flex items-center justify-center space-x-3 text-slate-600">

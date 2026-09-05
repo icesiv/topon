@@ -21,7 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
+        serif: ["var(--font-heading)", "serif"],
       },
       boxShadow: {
         gold: "0 4px 20px -2px rgba(197, 168, 92, 0.25)",

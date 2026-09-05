@@ -19,7 +19,7 @@ To ensure the highest search engine visibility, follow these architectural patte
 3. **Structured JSON-LD Schema**: Embed a JSON-LD structured data script on the homepage using `Organization` and `LocalBusiness` schemas to help Google understand the business hierarchy, services, and leadership.
 4. **Image Optimization**: Use Next.js `<Image />` tags with explicit `alt` attributes, widths, heights, and priority loading for Above-The-Fold hero images.
 5. **Dynamic Sitemap & Robots**: Provide code templates for dynamic sitemap generation (`app/sitemap.ts`) and custom search engine rules (`app/robots.ts`).
-6. **Core Web Vitals Optimization**: Use Google Fonts optimized via `next/font/google` (e.g., Inter/Playfair Display) to prevent cumulative layout shifts (CLS).
+6. **Core Web Vitals Optimization**: Use Google Fonts optimized via `next/font/google` (e.g., Inter/Lora) to prevent cumulative layout shifts (CLS).
 7. **Heading Hierarchy**: Ensure exactly one `<h1>` per page, followed by properly nested `<h2>`, `<h3>`, etc. Do not skip heading levels.
 
 ---
@@ -73,11 +73,11 @@ Generate code for the following Next.js components and structures:
 #### Component 1: Main SEO Metadata & Layout Setup (`app/layout.tsx`)
 ```tsx
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-heading" });
 
 export const metadata: Metadata = {
   title: "Top On Group | International Trading & Freight Forwarding Logistics",
@@ -112,7 +112,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="en" className={`${inter.variable} ${lora.variable} scroll-smooth`}>
       <body className="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-slate-900">
         {children}
       </body>
