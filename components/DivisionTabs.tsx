@@ -61,7 +61,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
       "Engineers and technical procurement officers verifying OEM machinery specs and chemical grades.",
     icon: Building2,
     pageHref: "/trading-topontech",
-    quoteHref: "/home#quote",
+    quoteHref: "/#quote",
     features: [
       {
         title: "Industrial Machinery & Spares",
@@ -99,7 +99,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
       "Authorized customs brokers conducting physical inspections and bill-of-entry verification.",
     icon: FileCheck2,
     pageHref: "/express-topexpress",
-    quoteHref: "/home#quote",
+    quoteHref: "/#quote",
     features: [
       {
         title: "Licensed Port C&F Brokerage",
@@ -137,7 +137,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
       "Direct vessel container slot coordination linking Bangladesh to Southeast Asia, Europe, and the Americas.",
     icon: Ship,
     pageHref: "/logistics-dailyshipping",
-    quoteHref: "/home#quote",
+    quoteHref: "/#quote",
     features: [
       {
         title: "Ocean Freight (FCL / LCL)",
@@ -175,7 +175,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
       "High-density aerated aquaculture ponds maintaining stringent bio-security and antibiotic-free standards.",
     icon: Fish,
     pageHref: "/agro-toponagro",
-    quoteHref: "/home#quote",
+    quoteHref: "/#quote",
     features: [
       {
         title: "High-Density Biofloc Aquaculture",

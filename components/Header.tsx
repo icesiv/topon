@@ -194,7 +194,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo & Brand */}
-          <Link href="/home" className="flex items-center group">
+          <Link href="/" className="flex items-center group">
             <Image
               src="/logo-text.png"
               alt="Top On Group"
@@ -208,9 +208,9 @@ export default function Header() {
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center space-x-1 font-medium text-sm">
             <Link
-              href="/home"
+              href="/"
               className={`px-3.5 py-2 rounded-md transition-colors ${
-                isActive("/home")
+                isActive("/") || isActive("/home")
                   ? "text-[#0B2240] bg-brand-gold/20 font-bold"
                   : "text-slate-700 hover:text-[#0B2240] hover:bg-slate-100"
               }`}
@@ -379,7 +379,7 @@ export default function Header() {
           <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 mt-2 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="space-y-1">
               <Link
-                href="/home"
+                href="/"
                 className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-[#0B2240] hover:bg-slate-100"
               >
                 Home

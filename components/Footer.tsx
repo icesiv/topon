@@ -48,7 +48,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 text-sm">
         {/* Col 1: Brand Info */}
         <div className="lg:col-span-2 space-y-4">
-          <Link href="/home" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <div className="relative w-10 h-10 overflow-hidden rounded-lg bg-slate-900 p-1 border border-brand-gold/30">
               <Image
                 src="/logo.png"
