@@ -8,7 +8,6 @@ import {
   FileCheck2,
   Fish,
   ArrowRight,
-  FileDown,
   CheckCircle2,
   Globe2,
   Award,
@@ -103,14 +102,13 @@ export default function JourneyStoryPage() {
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
-              <a
-                href="/topon-profile.pdf"
-                download
+              <Link
+                href="/about/values"
                 className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-[#0B2240] text-brand-gold hover:bg-[#133560] font-bold text-xs uppercase tracking-wider shadow-md transition-all"
               >
-                <FileDown className="w-4 h-4" />
-                <span>Download Corporate Profile</span>
-              </a>
+                <span>Mission &amp; Values</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <Link
                 href="/about/message"
                 className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl border border-slate-300 text-slate-800 hover:border-brand-gold hover:text-brand-navy font-bold text-xs uppercase tracking-wider transition-all"

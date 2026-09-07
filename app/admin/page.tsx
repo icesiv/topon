@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AdminDashboard from "@/components/AdminDashboard";
+import { AuthProvider } from "@/lib/auth-context";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | Top On Group",
@@ -12,5 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
-  return <AdminDashboard />;
+  return (
+    <AuthProvider>
+      <AdminDashboard />
+    </AuthProvider>
+  );
 }

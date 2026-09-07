@@ -16,6 +16,10 @@ import {
   Fish,
   Facebook,
   Linkedin,
+  FileDown,
+  Download,
+  FileText,
+  Sparkles,
 } from "lucide-react";
 
 interface DivisionItem {
@@ -53,6 +57,11 @@ const DIVISIONS: DivisionItem[] = [
 ];
 
 const ABOUT_LINKS = [
+  {
+    title: "Top On Group",
+    sub: "Quality. Service. Nation.",
+    href: "/about",
+  },
   {
     title: "Our Journey & Story",
     sub: "Roots and vision of excellence",
@@ -98,12 +107,52 @@ const SERVICE_LINKS = [
   },
 ];
 
+const COMPANY_PROFILES = [
+  {
+    name: "Top Express Limited (TEL)",
+    desc: "Customs Clearing & Forwarding (C&F) Profile",
+    pdfUrl: "/profiles/TEL-profile.pdf",
+    filename: "TEL-profile.pdf",
+    icon: Truck,
+    badge: "C&F Agency",
+    size: "4.9 MB",
+  },
+  {
+    name: "Top On-Tech",
+    desc: "Import, Export, Trading & Sourcing Profile",
+    pdfUrl: "/profiles/TopOnTech-profile.pdf",
+    filename: "TopOnTech-profile.pdf",
+    icon: Building2,
+    badge: "Trading House",
+    size: "738 KB",
+  },
+  {
+    name: "Daily Shipping & Logistics (DSL)",
+    desc: "International Freight Forwarding Profile",
+    pdfUrl: "/profiles/DSL-profile.pdf",
+    filename: "DSL-profile.pdf",
+    icon: Ship,
+    badge: "Freight & Shipping",
+    size: "933 KB",
+  },
+  {
+    name: "Top On-Agro Farm",
+    desc: "Commercial Fisheries & Agriculture Profile",
+    pdfUrl: "/profiles/TopOnAgro-profile.pdf",
+    filename: "TopOnAgro-profile.pdf",
+    icon: Fish,
+    badge: "Agro & Fisheries",
+    size: "1.0 MB",
+  },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [profilesDropdownOpen, setProfilesDropdownOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -120,6 +169,7 @@ export default function Header() {
     setAboutDropdownOpen(false);
     setCompanyDropdownOpen(false);
     setServicesDropdownOpen(false);
+    setProfilesDropdownOpen(false);
   }, [pathname]);
 
   const isActive = (path: string) => pathname === path;
@@ -370,6 +420,7 @@ export default function Header() {
               )}
             </div>
 
+
             <Link
               href="/contact"
               className={`px-3.5 py-2 rounded-md transition-colors ${isActive("/contact")
@@ -379,6 +430,84 @@ export default function Header() {
             >
               Contact
             </Link>
+
+            {/* Distinctive Highlighted Nav Item: Company Profile */}
+            <div
+              className="relative"
+              onMouseEnter={() => setProfilesDropdownOpen(true)}
+              onMouseLeave={() => setProfilesDropdownOpen(false)}
+            >
+              <button
+                className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full border transition-all duration-300 group ${profilesDropdownOpen
+                  ? "bg-brand-gold text-brand-navy border-brand-gold font-bold shadow-gold"
+                  : "bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-brand-gold/20 hover:from-brand-gold/30 hover:to-brand-gold/20 text-[#0B2240] border-brand-gold/50 hover:border-brand-gold font-bold shadow-sm"
+                  }`}
+                aria-expanded={profilesDropdownOpen}
+              >
+                <FileDown className="w-3.5 h-3.5 text-brand-goldDark group-hover:text-brand-navy transition-colors" />
+                <span className="text-xs tracking-tight font-bold">Company Profile</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${profilesDropdownOpen ? "rotate-180 text-brand-navy" : "text-brand-goldDark"
+                    }`}
+                />
+              </button>
+
+              {profilesDropdownOpen && (
+                <div className="absolute top-full right-0 w-80 sm:w-96 max-w-[calc(100vw-2rem)] pt-2 shadow-2xl z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="bg-white border border-brand-gold/35 rounded-2xl p-3 shadow-2xl shadow-slate-900/15 backdrop-blur-xl space-y-2">
+                    <div className="flex items-center justify-between px-2 pb-1.5 border-b border-slate-100">
+                      <div className="flex items-center space-x-1.5">
+                        <Sparkles className="w-3 h-3 text-brand-gold" />
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0B2240]">
+                          Official Company Profiles
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-mono text-brand-goldDark font-bold bg-brand-gold/15 px-2 py-0.5 rounded-full">
+                        4 PDF Downloads
+                      </span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      {COMPANY_PROFILES.map((profile, idx) => {
+                        const Icon = profile.icon;
+                        return (
+                          <a
+                            key={idx}
+                            href={profile.pdfUrl}
+                            download={profile.filename}
+                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-brand-gold/15 border border-slate-100 hover:border-brand-gold/40 transition-all group"
+                          >
+                            <div className="flex items-center space-x-3">
+                              <div className="p-2 rounded-xl bg-[#0B2240] text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors flex-shrink-0">
+                                <Icon className="w-4 h-4" />
+                              </div>
+                              <div>
+                                <div className="font-bold text-xs sm:text-sm text-[#0B2240] group-hover:text-brand-navy flex items-center space-x-1.5">
+                                  <span>{profile.name}</span>
+                                </div>
+                                <p className="text-[11px] text-slate-500 line-clamp-1">
+                                  {profile.desc}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center space-x-1.5 text-right flex-shrink-0 ml-2">
+                              <span className="text-[10px] font-mono text-slate-400 group-hover:text-brand-navy font-semibold">
+                                {profile.size}
+                              </span>
+                              <div className="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-brand-gold text-slate-600 group-hover:text-brand-navy flex items-center justify-center transition-colors shadow-sm">
+                                <Download className="w-3.5 h-3.5" />
+                              </div>
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -436,6 +565,41 @@ export default function Header() {
               >
                 Contact
               </Link>
+
+              {/* Mobile Company Profile PDFs */}
+              <div className="pt-2 pb-1 border-t border-slate-200">
+                <div className="px-3 py-1.5 text-xs font-bold text-[#0B2240] uppercase tracking-wider flex items-center justify-between">
+                  <span className="flex items-center space-x-1.5">
+                    <FileDown className="w-3.5 h-3.5 text-brand-goldDark" />
+                    <span>Company Profiles (PDF)</span>
+                  </span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-brand-gold/20 text-brand-goldDark font-bold">
+                    4 Downloads
+                  </span>
+                </div>
+                <div className="space-y-1 mt-1">
+                  {COMPANY_PROFILES.map((profile, idx) => {
+                    const Icon = profile.icon;
+                    return (
+                      <a
+                        key={idx}
+                        href={profile.pdfUrl}
+                        download={profile.filename}
+                        className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-slate-50 hover:bg-brand-gold/15 text-xs text-[#0B2240] font-medium transition-colors"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <Icon className="w-3.5 h-3.5 text-brand-goldDark flex-shrink-0" />
+                          <span className="font-semibold">{profile.name}</span>
+                        </div>
+                        <span className="text-[10px] font-mono text-slate-500 flex items-center space-x-1">
+                          <span>{profile.size}</span>
+                          <Download className="w-3 h-3 text-brand-goldDark ml-1" />
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {/* Mobile Contact Quick Links */}

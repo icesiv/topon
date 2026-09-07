@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc, onSnapshot, Unsubscribe } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
+import { setCache, getCached, clearCache } from "./firebase-service";
 
 export interface AdminUser {
   id: string;
@@ -9,6 +10,8 @@ export interface AdminUser {
   status: "Active" | "Pending" | "Suspended";
   createdAt: string;
   lastLogin?: string;
+  updatedAt?: string;
+  isDeleted?: boolean;
 }
 
 export const DEFAULT_ADMIN_USERS: AdminUser[] = [
@@ -43,8 +46,14 @@ export const DEFAULT_ADMIN_USERS: AdminUser[] = [
 
 const SETTINGS_COLLECTION = "settings";
 const ADMIN_USERS_DOC = "adminUsers";
+const CACHE_KEY = `${SETTINGS_COLLECTION}:${ADMIN_USERS_DOC}`;
 
-export async function fetchAdminUsers(): Promise<AdminUser[]> {
+export async function fetchAdminUsers(useCache: boolean = true): Promise<AdminUser[]> {
+  if (useCache) {
+    const cached = getCached<AdminUser[]>(CACHE_KEY);
+    if (cached) return cached;
+  }
+
   if (!isFirebaseConfigured() || !db) {
     return DEFAULT_ADMIN_USERS;
   }
@@ -53,7 +62,9 @@ export async function fetchAdminUsers(): Promise<AdminUser[]> {
     const docRef = doc(db, SETTINGS_COLLECTION, ADMIN_USERS_DOC);
     const snap = await getDoc(docRef);
     if (snap.exists() && Array.isArray(snap.data()?.users) && snap.data()?.users.length > 0) {
-      return snap.data().users as AdminUser[];
+      const activeUsers = (snap.data().users as AdminUser[]).filter((u) => !u.isDeleted);
+      setCache(CACHE_KEY, activeUsers, 120000);
+      return activeUsers;
     }
   } catch (err) {
     console.error("Error fetching admin users:", err);
@@ -76,7 +87,9 @@ export function subscribeAdminUsers(
       docRef,
       (snap) => {
         if (snap.exists() && Array.isArray(snap.data()?.users) && snap.data()?.users.length > 0) {
-          onUpdate(snap.data().users as AdminUser[]);
+          const activeUsers = (snap.data().users as AdminUser[]).filter((u) => !u.isDeleted);
+          setCache(CACHE_KEY, activeUsers, 120000);
+          onUpdate(activeUsers);
         } else {
           onUpdate(DEFAULT_ADMIN_USERS);
         }
@@ -94,7 +107,8 @@ export function subscribeAdminUsers(
 }
 
 export async function saveAdminUsers(
-  users: AdminUser[]
+  users: AdminUser[],
+  userEmail?: string
 ): Promise<{ success: boolean; error?: string }> {
   if (!isFirebaseConfigured() || !db) {
     return {
@@ -105,7 +119,16 @@ export async function saveAdminUsers(
 
   try {
     const docRef = doc(db, SETTINGS_COLLECTION, ADMIN_USERS_DOC);
-    await setDoc(docRef, { users, updatedAt: new Date().toISOString() }, { merge: true });
+    await setDoc(
+      docRef,
+      {
+        users,
+        updatedAt: new Date().toISOString(),
+        updatedBy: userEmail || "admin",
+      },
+      { merge: true }
+    );
+    clearCache(SETTINGS_COLLECTION);
     return { success: true };
   } catch (err: any) {
     console.error("Error saving admin users:", err);

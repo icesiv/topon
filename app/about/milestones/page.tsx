@@ -13,8 +13,8 @@ import {
   CheckCircle2,
   Scale,
   Plane,
-  FileDown,
   Globe2,
+  ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -380,14 +380,13 @@ export default function MilestonesAccreditationsPage() {
             >
               Get in Touch
             </Link>
-            <a
-              href="/topon-profile.pdf"
-              download
+            <Link
+              href="/about/journey"
               className="px-6 py-3 rounded-xl border border-white/30 text-white hover:text-brand-gold hover:border-brand-gold/60 font-bold text-xs uppercase tracking-wider transition-colors flex items-center space-x-2"
             >
-              <FileDown className="w-4 h-4" />
-              <span>Download Profile</span>
-            </a>
+              <span>Our Corporate Story</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

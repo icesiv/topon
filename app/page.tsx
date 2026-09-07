@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
-import MetricCounter from "@/components/MetricCounter";
+import AboutSection from "@/components/AboutSection";
 import DivisionTabs from "@/components/DivisionTabs";
 import LeadershipSpotlight from "@/components/LeadershipSpotlight";
 import SustainabilitySection from "@/components/SustainabilitySection";
@@ -19,20 +19,20 @@ export default function HomePage() {
       {/* 1. HERO SEGMENT */}
       <HeroSection />
 
-      {/* 2. METRIC COUNTER BAR */}
-      <MetricCounter />
+      {/* 2. ABOUT SECTION */}
+      <AboutSection />
 
-      {/* 3. BUSINESS DIVISIONS (Top On-Tech, Top Express, Daily Shipping, Top On-Agro) */}
+      {/* 3. BUSINESS PARTNERS & STRATEGIC CLIENTS */}
+      <BusinessPartnersSection />
+
+      {/* 4. BUSINESS DIVISIONS (Top On-Tech, Top Express, Daily Shipping, Top On-Agro) */}
       <DivisionTabs />
 
-      {/* 4. LEADERSHIP SPOTLIGHT */}
+      {/* 5. LEADERSHIP SPOTLIGHT */}
       <LeadershipSpotlight />
 
-      {/* 5. SUSTAINABILITY & ESG COMMITMENT */}
+      {/* 6. SUSTAINABILITY & ESG COMMITMENT */}
       <SustainabilitySection />
-
-      {/* 6. BUSINESS PARTNERS & STRATEGIC CLIENTS */}
-      <BusinessPartnersSection />
 
       {/* 7. CONVERSION & QUOTE INQUIRY */}
       <HomeQuoteSection />

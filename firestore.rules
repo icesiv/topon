@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Helper Functions ---
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.role == 'admin' ||
+        (request.auth.token.email != null && request.auth.token.email.matches('.*@toponbd\\.com$'))
+      );
+    }
+
+    function isPublished(docData) {
+      return (
+        (!('status' in docData) || docData.status == 'published') &&
+        (!('isDeleted' in docData) || docData.isDeleted == false)
+      );
+    }
+
+    function hasValidMetadata() {
+      return (
+        request.resource.data.updatedAt is string &&
+        (!('status' in request.resource.data) || request.resource.data.status in ['draft', 'published', 'archived']) &&
+        (!('isDeleted' in request.resource.data) || request.resource.data.isDeleted is bool)
+      );
+    }
+
+    // --- Settings & Global Configurations ---
+    // (generalInfo, partners, heroBusinesses, navigation, seo)
+    match /settings/{settingId} {
+      // Public can read settings unless explicitly marked as deleted
+      allow read: if (!('isDeleted' in resource.data) || resource.data.isDeleted == false);
+      // Only authenticated admins can write settings
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Products Catalogue ---
+    match /products/{productId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Services Catalogue ---
+    match /services/{serviceId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Media Registry ---
+    match /media/{mediaId} {
+      allow read: if true; // Media download URLs are public
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- User Profiles & Permissions ---
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+
+    // --- Modular Page Content & Sections ---
+    match /siteContent/{page}/sections/{sectionId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Audit & System Logs (Protected) ---
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated() || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Default deny all other unspecified collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

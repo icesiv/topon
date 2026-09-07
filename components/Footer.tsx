@@ -10,7 +10,6 @@ import {
   Truck,
   Fish,
   ArrowRight,
-  ExternalLink,
 } from "lucide-react";
 
 export default function Footer() {
@@ -199,12 +198,6 @@ export default function Footer() {
               <Link href="/about/milestones" className="hover:text-brand-gold transition-colors">
                 Milestones &amp; Accreditations
               </Link>
-            </li>
-            <li>
-              <a href="/topon-profile.pdf" download className="hover:text-brand-gold transition-colors flex items-center space-x-1">
-                <span>Company Profile (PDF)</span>
-                <ExternalLink className="w-3 h-3 text-brand-gold" />
-              </a>
             </li>
             <li>
               <Link href="/contact" className="hover:text-brand-gold transition-colors">

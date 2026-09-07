@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { doc, getDoc, setDoc, onSnapshot, Unsubscribe } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./firebase";
+import { setCache, getCached, clearCache } from "./firebase-service";
 
 export const ICON_MAP: Record<string, LucideIcon> = {
   Building2,
@@ -44,6 +45,9 @@ export interface BusinessPanelData {
   href: string;
   image: string;
   iconName: string;
+  order?: number;
+  status?: "draft" | "published";
+  isDeleted?: boolean;
 }
 
 export interface BusinessPanel extends Omit<BusinessPanelData, "iconName"> {
@@ -65,6 +69,8 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     href: "/trading-topontech",
     image: "/images/topontech_hero.jpg",
     iconName: "Building2",
+    order: 0,
+    status: "published",
   },
   {
     id: "topexpress",
@@ -78,6 +84,8 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     href: "/express-topexpress",
     image: "/images/topexpress_hero.jpg",
     iconName: "FileCheck2",
+    order: 1,
+    status: "published",
   },
   {
     id: "dailyshipping",
@@ -91,6 +99,8 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     href: "/logistics-dailyshipping",
     image: "/images/dailyshipping_hero.jpg",
     iconName: "Ship",
+    order: 2,
+    status: "published",
   },
   {
     id: "toponagro",
@@ -104,6 +114,8 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     href: "/agro-toponagro",
     image: "/images/toponagro_hero.jpg",
     iconName: "Fish",
+    order: 3,
+    status: "published",
   },
 ];
 
@@ -121,8 +133,14 @@ export function resolveBusinessPanels(dataList: BusinessPanelData[]): BusinessPa
 
 const SETTINGS_COLLECTION = "settings";
 const HERO_DOC_ID = "heroBusinesses";
+const CACHE_KEY = `${SETTINGS_COLLECTION}:${HERO_DOC_ID}`;
 
-export async function fetchHeroBusinesses(): Promise<BusinessPanelData[]> {
+export async function fetchHeroBusinesses(useCache: boolean = true): Promise<BusinessPanelData[]> {
+  if (useCache) {
+    const cached = getCached<BusinessPanelData[]>(CACHE_KEY);
+    if (cached) return cached;
+  }
+
   if (!isFirebaseConfigured() || !db) {
     return DEFAULT_BUSINESS_PANELS;
   }
@@ -131,7 +149,9 @@ export async function fetchHeroBusinesses(): Promise<BusinessPanelData[]> {
     const docRef = doc(db, SETTINGS_COLLECTION, HERO_DOC_ID);
     const snap = await getDoc(docRef);
     if (snap.exists() && Array.isArray(snap.data()?.panels) && snap.data()?.panels.length > 0) {
-      return snap.data().panels as BusinessPanelData[];
+      const activePanels = (snap.data().panels as BusinessPanelData[]).filter((p) => !p.isDeleted);
+      setCache(CACHE_KEY, activePanels, 120000);
+      return activePanels;
     }
   } catch (err) {
     console.error("Error fetching hero businesses from Firestore:", err);
@@ -154,7 +174,9 @@ export function subscribeHeroBusinesses(
       docRef,
       (snap) => {
         if (snap.exists() && Array.isArray(snap.data()?.panels) && snap.data()?.panels.length > 0) {
-          onUpdate(snap.data().panels as BusinessPanelData[]);
+          const activePanels = (snap.data().panels as BusinessPanelData[]).filter((p) => !p.isDeleted);
+          setCache(CACHE_KEY, activePanels, 120000);
+          onUpdate(activePanels);
         } else {
           onUpdate(DEFAULT_BUSINESS_PANELS);
         }
@@ -172,7 +194,8 @@ export function subscribeHeroBusinesses(
 }
 
 export async function saveHeroBusinesses(
-  panels: BusinessPanelData[]
+  panels: BusinessPanelData[],
+  userEmail?: string
 ): Promise<{ success: boolean; error?: string }> {
   if (!isFirebaseConfigured() || !db) {
     return {
@@ -189,9 +212,13 @@ export async function saveHeroBusinesses(
       {
         panels,
         updatedAt: new Date().toISOString(),
+        updatedBy: userEmail || "admin",
+        status: "published",
+        isDeleted: false,
       },
       { merge: true }
     );
+    clearCache(SETTINGS_COLLECTION);
     return { success: true };
   } catch (err: any) {
     console.error("Error saving hero businesses:", err);

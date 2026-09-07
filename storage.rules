@@ -1,0 +1,66 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.role == 'admin' ||
+        (request.auth.token.email != null && request.auth.token.email.matches('.*@toponbd\\.com$'))
+      );
+    }
+
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*') &&
+             request.resource.size < 5 * 1024 * 1024; // 5MB max for images
+    }
+
+    function isValidDocument() {
+      return request.resource.contentType == 'application/pdf' &&
+             request.resource.size < 10 * 1024 * 1024; // 10MB max for PDFs
+    }
+
+    function isValidVideo() {
+      return request.resource.contentType.matches('video/.*') &&
+             request.resource.size < 25 * 1024 * 1024; // 25MB max for Videos
+    }
+
+    // Media assets directory
+    match /media/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (isValidImage() || isValidDocument() || isValidVideo());
+      allow delete: if isAdmin();
+    }
+
+    // Partner logos
+    match /partners/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidImage();
+      allow delete: if isAdmin();
+    }
+
+    // Hero backgrounds & banners
+    match /hero/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidImage();
+      allow delete: if isAdmin();
+    }
+
+    // Products & Services assets
+    match /products/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (isValidImage() || isValidDocument());
+      allow delete: if isAdmin();
+    }
+
+    match /services/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (isValidImage() || isValidDocument());
+      allow delete: if isAdmin();
+    }
+  }
+}

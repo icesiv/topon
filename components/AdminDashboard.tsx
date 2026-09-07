@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -30,6 +31,8 @@ import {
   subscribeAdminUsers,
 } from "@/lib/adminUsers";
 import { isFirebaseConfigured, firebaseConfig } from "@/lib/firebase";
+import { uploadOptimizedMedia } from "@/lib/image-optimizer";
+import { useAuth } from "@/lib/auth-context";
 import {
   LayoutDashboard,
   Layers,
@@ -60,9 +63,17 @@ import {
   X,
   Handshake,
   Sparkles,
+  Upload,
+  RefreshCw,
+  FileCheck,
+  LogOut,
+  Key,
+  Lock,
+  UserCheck,
+  ShieldCheck,
 } from "lucide-react";
 
-type AdminTab = "panels" | "partners" | "general" | "users" | "system";
+type AdminTab = "panels" | "partners" | "general" | "users" | "security" | "system";
 
 const PRESET_HERO_IMAGES = [
   "/images/topontech_hero.jpg",
@@ -105,6 +116,9 @@ const PRESET_PARTNER_LOGOS = [
 ];
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const { user, isAuthenticated, loading: authLoading, logout, changePassword } = useAuth();
+
   const [activeTab, setActiveTab] = useState<AdminTab>("panels");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -134,6 +148,17 @@ export default function AdminDashboard() {
     status: "Active",
   });
 
+  // Password Management State
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [currentPasswordInput, setCurrentPasswordInput] = useState("");
+  const [newPasswordInput, setNewPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+  const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [passwordStatus, setPasswordStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   // Global UI & Feedback State
   const [isSaving, setIsSaving] = useState(false);
   const [configured, setConfigured] = useState(false);
@@ -141,6 +166,17 @@ export default function AdminDashboard() {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [compressionFeedback, setCompressionFeedback] = useState<string | null>(null);
+  const [isPurging, setIsPurging] = useState(false);
+  const [purgeResult, setPurgeResult] = useState<string | null>(null);
+
+  // Session guard: Redirect logged out users to /admin/login
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push("/admin/login");
+    }
+  }, [authLoading, isAuthenticated, router]);
 
   useEffect(() => {
     setConfigured(isFirebaseConfigured());
@@ -253,6 +289,150 @@ export default function AdminDashboard() {
       });
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  // Upload optimized hero image via client-side canvas WebP converter
+  const handleUploadHeroImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    setCompressionFeedback("Compressing image to WebP format...");
+    try {
+      const uploadRes = await uploadOptimizedMedia(file, "hero", {
+        maxWidth: 1920,
+        maxHeight: 1080,
+        quality: 0.82,
+        format: "image/webp",
+      });
+
+      if (uploadRes.success && uploadRes.result) {
+        updatePanelField("image", uploadRes.result.downloadUrl);
+        const originalKB = (file.size / 1024).toFixed(0);
+        const compressedKB = (uploadRes.result.sizeBytes / 1024).toFixed(0);
+        setCompressionFeedback(`Optimized: ${originalKB}KB → ${compressedKB}KB WebP (${uploadRes.result.width}x${uploadRes.result.height})`);
+      } else {
+        setCompressionFeedback(`Upload failed: ${uploadRes.error}`);
+      }
+    } catch (err: any) {
+      setCompressionFeedback(`Error: ${err?.message || "Upload error"}`);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  // Upload optimized partner logo
+  const handleUploadPartnerLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingImage(true);
+    setCompressionFeedback("Optimizing logo...");
+    try {
+      const uploadRes = await uploadOptimizedMedia(file, "partners", {
+        maxWidth: 600,
+        maxHeight: 300,
+        quality: 0.85,
+        format: "image/webp",
+      });
+
+      if (uploadRes.success && uploadRes.result) {
+        setNewPartner((prev) => ({ ...prev, image: uploadRes.result!.downloadUrl }));
+        const originalKB = (file.size / 1024).toFixed(0);
+        const compressedKB = (uploadRes.result.sizeBytes / 1024).toFixed(0);
+        setCompressionFeedback(`Logo WebP: ${originalKB}KB → ${compressedKB}KB`);
+      } else {
+        setCompressionFeedback(`Upload failed: ${uploadRes.error}`);
+      }
+    } catch (err: any) {
+      setCompressionFeedback(`Error: ${err?.message || "Upload error"}`);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  // Run soft-delete purge
+  const handlePurgeSoftDeleted = async () => {
+    if (!confirm("Purge soft-deleted documents older than 30 days from database?")) return;
+    setIsPurging(true);
+    setPurgeResult(null);
+    try {
+      const res = await fetch("/api/admin/purge-deleted", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ retentionDays: 30 }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPurgeResult(`Successfully purged ${data.totalPurged} deleted record(s).`);
+      } else {
+        setPurgeResult(`Purge warning: ${data.error || "Could not complete purge"}`);
+      }
+    } catch (err: any) {
+      setPurgeResult(`Purge failed: ${err?.message}`);
+    } finally {
+      setIsPurging(false);
+    }
+  };
+
+  // Logout Handler
+  const handleLogout = async () => {
+    if (confirm("Are you sure you want to log out of the admin panel?")) {
+      await logout();
+      router.push("/admin/login");
+    }
+  };
+
+  // Password Change Handler
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPasswordInput.length < 6) {
+      setPasswordStatus({
+        type: "error",
+        message: "New password must be at least 6 characters long.",
+      });
+      return;
+    }
+
+    if (newPasswordInput !== confirmPasswordInput) {
+      setPasswordStatus({
+        type: "error",
+        message: "New passwords do not match. Please re-type carefully.",
+      });
+      return;
+    }
+
+    setIsChangingPassword(true);
+    setPasswordStatus({ type: null, message: "" });
+
+    try {
+      const res = await changePassword(currentPasswordInput, newPasswordInput);
+      if (res.success) {
+        setPasswordStatus({
+          type: "success",
+          message: "Password updated successfully!",
+        });
+        setCurrentPasswordInput("");
+        setNewPasswordInput("");
+        setConfirmPasswordInput("");
+        setTimeout(() => {
+          setIsPasswordModalOpen(false);
+          setPasswordStatus({ type: null, message: "" });
+        }, 1500);
+      } else {
+        setPasswordStatus({
+          type: "error",
+          message: res.error || "Failed to change password.",
+        });
+      }
+    } catch (err: any) {
+      setPasswordStatus({
+        type: "error",
+        message: err?.message || "An error occurred while updating password.",
+      });
+    } finally {
+      setIsChangingPassword(false);
     }
   };
 
@@ -400,6 +580,19 @@ export default function AdminDashboard() {
   const SelectedIcon = currentPanel
     ? ICON_MAP[currentPanel.iconName] || ICON_MAP.Building2
     : ICON_MAP.Building2;
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#020813] flex flex-col items-center justify-center text-white space-y-4">
+        <div className="w-10 h-10 border-3 border-brand-gold border-t-transparent rounded-full animate-spin" />
+        <span className="text-xs font-mono text-brand-gold tracking-wider">Verifying Admin Session...</span>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-[#040C18] text-slate-100 flex flex-col lg:flex-row antialiased">
@@ -572,10 +765,63 @@ export default function AdminDashboard() {
               <Database className="w-4 h-4" />
               <span>Firebase Status</span>
             </button>
+
+            {/* Tab: Security & Password */}
+            <button
+              onClick={() => {
+                setActiveTab("security");
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                activeTab === "security"
+                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                  : "text-slate-300 hover:bg-white/5 hover:text-white"
+              }`}
+            >
+              <Key className="w-4 h-4" />
+              <span>Security &amp; Password</span>
+            </button>
           </nav>
 
-          {/* Sidebar Footer: Quick Links & Status */}
+          {/* Sidebar Footer: User Card & Quick Links */}
           <div className="p-4 border-t border-white/10 space-y-3">
+            {/* Active User Card */}
+            <div className="p-3 rounded-2xl bg-[#040C18] border border-white/10 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2 truncate">
+                  <div className="w-7 h-7 rounded-lg bg-brand-gold/20 border border-brand-gold/40 flex items-center justify-center text-brand-gold font-bold text-xs">
+                    {user?.email ? user.email.charAt(0).toUpperCase() : "A"}
+                  </div>
+                  <div className="truncate">
+                    <div className="text-xs font-bold text-white truncate">
+                      {user?.displayName || "Admin User"}
+                    </div>
+                    <div className="text-[10px] font-mono text-brand-gold truncate">
+                      {user?.email || "admin@toponbd.com"}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-1 flex items-center space-x-1.5 border-t border-white/5">
+                <button
+                  onClick={() => setIsPasswordModalOpen(true)}
+                  className="flex-1 py-1.5 px-2 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-semibold text-slate-300 hover:text-white flex items-center justify-center space-x-1 transition-colors"
+                >
+                  <Key className="w-3 h-3 text-brand-gold" />
+                  <span>Password</span>
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="py-1.5 px-2.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 hover:text-red-200 text-[10px] font-semibold flex items-center justify-center space-x-1 transition-colors"
+                  title="Log out"
+                >
+                  <LogOut className="w-3 h-3" />
+                  <span>Exit</span>
+                </button>
+              </div>
+            </div>
+
             <Link
               href="/"
               target="_blank"
@@ -609,6 +855,7 @@ export default function AdminDashboard() {
                 {activeTab === "general" && "General Company & Contact Information"}
                 {activeTab === "users" && "Admin Team & Role Management"}
                 {activeTab === "system" && "Firebase Configuration & Status"}
+                {activeTab === "security" && "Admin Account & Security Settings"}
               </span>
             </h2>
             <p className="text-xs text-slate-400">
@@ -617,11 +864,12 @@ export default function AdminDashboard() {
               {activeTab === "general" && "Manage phone numbers, emails, addresses and social links"}
               {activeTab === "users" && "Manage authorized admin users and permissions"}
               {activeTab === "system" && "Verify Firestore project connections and sync health"}
+              {activeTab === "security" && "Manage administrative password and secure credentials"}
             </p>
           </div>
 
-          {/* Primary Action Button */}
-          <div>
+          {/* Header Action & User Controls */}
+          <div className="flex items-center space-x-3">
             {activeTab === "panels" && (
               <button
                 onClick={handleSavePanels}
@@ -674,6 +922,24 @@ export default function AdminDashboard() {
                 <span>Add Admin User</span>
               </button>
             )}
+
+            {/* Quick Header User Actions */}
+            <div className="hidden sm:flex items-center space-x-2 pl-2 border-l border-white/10">
+              <button
+                onClick={() => setIsPasswordModalOpen(true)}
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
+                title="Change Password"
+              >
+                <Key className="w-4 h-4 text-brand-gold" />
+              </button>
+              <button
+                onClick={handleLogout}
+                className="p-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 hover:text-red-200 transition-colors"
+                title="Log Out of Admin Panel"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </header>
 
@@ -917,15 +1183,36 @@ export default function AdminDashboard() {
                       />
                     </div>
 
-                    {/* Background Image */}
+                    {/* Background Image & Storage Uploader */}
                     <div className="space-y-3">
-                      <label className="text-xs font-semibold text-slate-300 block">
-                        Hero Background Image
-                      </label>
+                      <div className="flex items-center justify-between">
+                        <label className="text-xs font-semibold text-slate-300 block">
+                          Hero Background Image
+                        </label>
+                        <label className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-brand-gold/15 hover:bg-brand-gold/25 text-brand-gold text-[11px] font-bold cursor-pointer transition-colors border border-brand-gold/30">
+                          <Upload className="w-3 h-3" />
+                          <span>{uploadingImage ? "Compressing..." : "Upload & Convert to WebP"}</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleUploadHeroImage}
+                            disabled={uploadingImage}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+
+                      {compressionFeedback && (
+                        <div className="text-[11px] font-mono p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">
+                          {compressionFeedback}
+                        </div>
+                      )}
+
                       <input
                         type="text"
                         value={currentPanel.image}
                         onChange={(e) => updatePanelField("image", e.target.value)}
+                        placeholder="https://... or /images/..."
                         className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white text-sm font-mono focus:border-brand-gold focus:outline-none"
                       />
 
@@ -1215,13 +1502,26 @@ export default function AdminDashboard() {
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="font-semibold text-slate-300 block">Logo Image Path or URL</label>
+                        <div className="flex items-center justify-between">
+                          <label className="font-semibold text-slate-300 block">Logo Image Path or URL</label>
+                          <label className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-lg bg-brand-gold/15 hover:bg-brand-gold/25 text-brand-gold text-[10px] font-bold cursor-pointer transition-colors border border-brand-gold/30">
+                            <Upload className="w-2.5 h-2.5" />
+                            <span>{uploadingImage ? "Optimizing..." : "Upload Logo (WebP)"}</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleUploadPartnerLogo}
+                              disabled={uploadingImage}
+                              className="hidden"
+                            />
+                          </label>
+                        </div>
                         <input
                           type="text"
                           required
                           value={newPartner.image}
                           onChange={(e) => setNewPartner({ ...newPartner, image: e.target.value })}
-                          placeholder="/images/partners/walton.png"
+                          placeholder="/images/partners/walton.png or https://..."
                           className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono text-xs"
                         />
                       </div>
@@ -1630,13 +1930,256 @@ export default function AdminDashboard() {
                 <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 flex items-center space-x-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                   <span>
-                    Firebase SDK is initialized and configured with real-time listeners active across all client sessions.
+                    Firebase SDK is initialized with IndexedDB Persistent Local Cache and active Real-time Synchronization across clients.
                   </span>
+                </div>
+
+                {/* Soft Delete Purge & Data Maintenance */}
+                <div className="p-5 rounded-2xl bg-[#040C18] border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-bold text-white flex items-center space-x-2">
+                        <RefreshCw className={`w-4 h-4 text-brand-gold ${isPurging ? "animate-spin" : ""}`} />
+                        <span>Database Maintenance &amp; Soft-Delete Purge</span>
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        Permanently purge records marked as isDeleted: true older than 30 days.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={handlePurgeSoftDeleted}
+                      disabled={isPurging}
+                      className="px-4 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/25 border border-red-500/30 text-red-300 text-xs font-bold transition-all disabled:opacity-50"
+                    >
+                      {isPurging ? "Purging..." : "Run 30-Day Purge"}
+                    </button>
+                  </div>
+
+                  {purgeResult && (
+                    <div className="text-xs font-mono p-2.5 rounded-xl bg-white/5 border border-white/10 text-brand-gold">
+                      {purgeResult}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 6: SECURITY & PASSWORD MANAGEMENT */}
+          {activeTab === "security" && (
+            <div className="space-y-6">
+              <div className="bg-[#071930] p-6 sm:p-8 rounded-3xl border border-white/10 shadow-xl space-y-6">
+                <div className="border-b border-white/10 pb-4">
+                  <h3 className="text-lg font-bold text-white flex items-center space-x-2">
+                    <ShieldCheck className="w-5 h-5 text-brand-gold" />
+                    <span>Administrator Account &amp; Password</span>
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    Manage your credentials, active session parameters, and access security.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-2xl bg-[#040C18] border border-white/10 space-y-1">
+                    <span className="text-[11px] text-slate-400 uppercase font-mono">
+                      Logged-in Email
+                    </span>
+                    <div className="font-mono text-sm text-white font-bold">
+                      {user?.email || "admin@toponbd.com"}
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-[#040C18] border border-white/10 space-y-1">
+                    <span className="text-[11px] text-slate-400 uppercase font-mono">
+                      Access Role
+                    </span>
+                    <div className="font-mono text-sm text-brand-gold font-bold">
+                      {user?.role || "Super Admin"}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Change Password Card */}
+                <div className="p-6 rounded-2xl bg-[#040C18] border border-brand-gold/20 space-y-4">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h4 className="text-sm font-bold text-white flex items-center space-x-2">
+                      <Key className="w-4 h-4 text-brand-gold" />
+                      <span>Update Password</span>
+                    </h4>
+                    <span className="text-[11px] text-slate-400">Minimum 6 characters</span>
+                  </div>
+
+                  {passwordStatus.message && (
+                    <div
+                      className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${
+                        passwordStatus.type === "success"
+                          ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
+                          : "bg-red-500/15 border border-red-500/30 text-red-200"
+                      }`}
+                    >
+                      {passwordStatus.type === "success" ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                      ) : (
+                        <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
+                      )}
+                      <span>{passwordStatus.message}</span>
+                    </div>
+                  )}
+
+                  <form onSubmit={handlePasswordChange} className="space-y-4 max-w-md text-xs sm:text-sm">
+                    <div className="space-y-1.5">
+                      <label className="font-semibold text-slate-300 block">Current Password</label>
+                      <input
+                        type="password"
+                        required
+                        value={currentPasswordInput}
+                        onChange={(e) => setCurrentPasswordInput(e.target.value)}
+                        placeholder="••••••••••••"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#071930] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-semibold text-slate-300 block">New Password</label>
+                      <input
+                        type="password"
+                        required
+                        value={newPasswordInput}
+                        onChange={(e) => setNewPasswordInput(e.target.value)}
+                        placeholder="••••••••••••"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#071930] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="font-semibold text-slate-300 block">Confirm New Password</label>
+                      <input
+                        type="password"
+                        required
+                        value={confirmPasswordInput}
+                        onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                        placeholder="••••••••••••"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#071930] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                      />
+                    </div>
+
+                    <div className="pt-2 flex items-center space-x-3">
+                      <button
+                        type="submit"
+                        disabled={isChangingPassword}
+                        className="px-5 py-2.5 rounded-xl bg-brand-gold hover:bg-brand-goldLight text-brand-navy font-bold text-xs shadow-gold transition-all disabled:opacity-50"
+                      >
+                        {isChangingPassword ? "Updating..." : "Update Password"}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="px-4 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 text-xs font-semibold transition-colors flex items-center space-x-1.5"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        <span>Log Out</span>
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           )}
         </main>
+
+        {/* Global Password Change Modal (callable from anywhere) */}
+        {isPasswordModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-[#071930] border border-brand-gold/40 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-200">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <h4 className="text-base font-bold text-white flex items-center space-x-2">
+                  <Key className="w-5 h-5 text-brand-gold" />
+                  <span>Change Password</span>
+                </h4>
+                <button
+                  onClick={() => setIsPasswordModalOpen(false)}
+                  className="text-slate-400 hover:text-white"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {passwordStatus.message && (
+                <div
+                  className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${
+                    passwordStatus.type === "success"
+                      ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
+                      : "bg-red-500/15 border border-red-500/30 text-red-200"
+                  }`}
+                >
+                  {passwordStatus.type === "success" ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  ) : (
+                    <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
+                  )}
+                  <span>{passwordStatus.message}</span>
+                </div>
+              )}
+
+              <form onSubmit={handlePasswordChange} className="space-y-4 text-xs sm:text-sm">
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-slate-300 block">Current Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={currentPasswordInput}
+                    onChange={(e) => setCurrentPasswordInput(e.target.value)}
+                    placeholder="••••••••••••"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-slate-300 block">New Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={newPasswordInput}
+                    onChange={(e) => setNewPasswordInput(e.target.value)}
+                    placeholder="••••••••••••"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="font-semibold text-slate-300 block">Confirm New Password</label>
+                  <input
+                    type="password"
+                    required
+                    value={confirmPasswordInput}
+                    onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                    placeholder="••••••••••••"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono"
+                  />
+                </div>
+
+                <div className="pt-2 flex items-center justify-end space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsPasswordModalOpen(false)}
+                    className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isChangingPassword}
+                    className="px-5 py-2 rounded-xl bg-brand-gold hover:bg-brand-goldLight text-brand-navy font-bold text-xs shadow-gold transition-all disabled:opacity-50"
+                  >
+                    {isChangingPassword ? "Updating..." : "Save Password"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
