@@ -47,6 +47,7 @@ const FOUR_BUSINESSES = [
     role: "Customs Clearing and Forwarding (C&F) Agency",
     desc: "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
     icon: FileCheck2,
+    logo: "/images/logo/tel.png",
     href: "/express-topexpress",
     heritage: "Evolved from Shahabuddin Enterprise (Est. 1990)",
   },
@@ -55,6 +56,7 @@ const FOUR_BUSINESSES = [
     role: "Import, Export, Trading & Supply",
     desc: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
     icon: Building2,
+    logo: "/images/logo/topon-tech.png",
     href: "/trading-topontech",
     heritage: "Cross-Border Industrial Sourcing",
   },
@@ -63,6 +65,7 @@ const FOUR_BUSINESSES = [
     role: "Freight Forwarding Agency & Logistics",
     desc: "International freight forwarding, multi-carrier ocean container bookings (FCL/LCL), priority air cargo charters, and integrated multimodal transport.",
     icon: Ship,
+    logo: "/images/logo/dsl.png",
     href: "/logistics-dailyshipping",
     heritage: "Global Trade Lane Connectivity",
   },
@@ -71,6 +74,7 @@ const FOUR_BUSINESSES = [
     role: "Agriculture & Fisheries",
     desc: "Sustainable aquaculture, high-density biofloc pond farming, certified pathogen-free hatcheries, and temperature-controlled nationwide cold chain distribution.",
     icon: Fish,
+    logo: "/images/logo/topon-agro.png",
     href: "/agro-toponagro",
     heritage: "Sustainable Food Security",
   },
@@ -134,39 +138,18 @@ export default function AboutPage() {
               At the heart of our business is a simple commitment: <strong className="text-[#0B2240]">to understand our clients, deliver with integrity, and build relationships that last.</strong>
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-4 items-center">
-              <Link
-                href="/services"
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-[#0B2240] text-brand-gold hover:bg-[#133560] font-bold text-xs uppercase tracking-wider shadow-md transition-all duration-200"
-              >
-                <span>Explore Our Businesses</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-
-              <Link
-                href="/contact"
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0B2240] font-bold text-xs uppercase tracking-wider border border-slate-300 transition-all duration-200"
-              >
-                <span>Partner with Us</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
           </div>
 
           <div className="lg:col-span-5 space-y-6">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 h-80 sm:h-[420px] w-full">
+            <div className="relative rounded-3xl overflow-hidden  h-80 sm:h-[420px] w-full">
               <Image
-                src="/images/boardroom_team.jpg"
+                src="/images/logo/topon-group.png"
                 alt="Top On Group corporate headquarters and executive leadership"
                 fill
                 sizes="(max-width: 768px) 100vw, 600px"
-                className="object-cover"
+                className="object-contain"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B2240]/90 via-[#0B2240]/20 to-transparent flex flex-col justify-end p-6 text-white">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-brand-gold">Central Governance</span>
-                <h4 className="text-lg font-bold font-serif text-white">Top On Group Executive Board</h4>
-                <p className="text-xs text-slate-300 mt-1">Guiding 4 complementary business divisions with integrity and strategic foresight.</p>
-              </div>
+
             </div>
           </div>
         </div>
@@ -189,26 +172,27 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {FOUR_BUSINESSES.map((biz) => {
-            const IconComp = biz.icon;
             return (
               <div
                 key={biz.name}
                 className="bg-white rounded-3xl p-8 border border-slate-200 hover:border-brand-gold/40 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between space-y-6 group"
               >
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-14 h-14 rounded-2xl bg-[#0B2240] text-brand-gold flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                      <IconComp className="w-7 h-7" />
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="relative h-28 w-48 sm:h-32 sm:w-56 bg-slate-50/80 border border-slate-200/80 rounded-2xl p-2.5 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-brand-gold/40 group-hover:bg-white transition-all">
+                      <Image
+                        src={biz.logo}
+                        alt={`${biz.name} Logo`}
+                        fill
+                        sizes="(max-width: 768px) 300px, 400px"
+                        className="object-contain p-1 group-hover:scale-105 transition-transform"
+                      />
                     </div>
-                    <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
-                      {biz.heritage}
-                    </span>
+
                   </div>
 
                   <div className="space-y-1">
-                    <h3 className="text-xl sm:text-2xl font-bold font-serif text-[#0B2240] group-hover:text-brand-goldDark transition-colors">
-                      {biz.name}
-                    </h3>
+
                     <p className="text-xs font-semibold uppercase tracking-wider text-brand-goldDark">
                       {biz.role}
                     </p>
@@ -288,50 +272,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Core Values Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-[#0B2240] text-base font-serif">Integrity</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Transparent transactions, ethical governance, and accountability in every client partnership.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-[#0B2240] text-base font-serif">Operational Excellence</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Zero-demurrage clearance and clockwork freight handling across international shipping lanes.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
-              <HeartHandshake className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-[#0B2240] text-base font-serif">Lasting Relationships</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Long-term commitment to our clients, partners, employees, and community.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-[#0B2240] text-base font-serif">AI &amp; Innovation</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Modern digital tools, AI-assisted tracking, and intelligent automation for resilient supply chains.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

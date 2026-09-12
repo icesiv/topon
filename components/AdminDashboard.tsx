@@ -618,9 +618,8 @@ export default function AdminDashboard() {
 
       {/* Sidebar Navigation */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-[#071930] border-r border-brand-gold/20 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-[#071930] border-r border-brand-gold/20 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="flex flex-col h-full">
           {/* Brand Header */}
@@ -661,20 +660,18 @@ export default function AdminDashboard() {
                 setActiveTab("panels");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "panels"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "panels"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <div className="flex items-center space-x-2.5">
                 <Layers className="w-4 h-4" />
                 <span>Business Panels</span>
               </div>
               <span
-                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                  activeTab === "panels" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
-                }`}
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "panels" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
               >
                 {panels.length}
               </span>
@@ -686,20 +683,18 @@ export default function AdminDashboard() {
                 setActiveTab("partners");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "partners"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "partners"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <div className="flex items-center space-x-2.5">
                 <Handshake className="w-4 h-4" />
                 <span>Business Partners</span>
               </div>
               <span
-                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                  activeTab === "partners" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
-                }`}
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "partners" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
               >
                 {partners.length}
               </span>
@@ -711,11 +706,10 @@ export default function AdminDashboard() {
                 setActiveTab("general");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "general"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "general"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <Building2 className="w-4 h-4" />
               <span>General Info</span>
@@ -727,20 +721,18 @@ export default function AdminDashboard() {
                 setActiveTab("users");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "users"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "users"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <div className="flex items-center space-x-2.5">
                 <Users className="w-4 h-4" />
                 <span>Admin Users</span>
               </div>
               <span
-                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                  activeTab === "users" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
-                }`}
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "users" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
               >
                 {users.length}
               </span>
@@ -756,11 +748,10 @@ export default function AdminDashboard() {
                 setActiveTab("system");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "system"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "system"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <Database className="w-4 h-4" />
               <span>Firebase Status</span>
@@ -772,11 +763,10 @@ export default function AdminDashboard() {
                 setActiveTab("security");
                 setSidebarOpen(false);
               }}
-              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                activeTab === "security"
-                  ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
-                  : "text-slate-300 hover:bg-white/5 hover:text-white"
-              }`}
+              className={`w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "security"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
             >
               <Key className="w-4 h-4" />
               <span>Security &amp; Password</span>
@@ -948,11 +938,10 @@ export default function AdminDashboard() {
           {/* Status Message / Toast */}
           {saveStatus.type && (
             <div
-              className={`p-4 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-xl animate-in fade-in duration-200 ${
-                saveStatus.type === "success"
-                  ? "bg-emerald-500/20 border border-emerald-500/50 text-emerald-200"
-                  : "bg-red-500/20 border border-red-500/50 text-red-200"
-              }`}
+              className={`p-4 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-xl animate-in fade-in duration-200 ${saveStatus.type === "success"
+                ? "bg-emerald-500/20 border border-emerald-500/50 text-emerald-200"
+                : "bg-red-500/20 border border-red-500/50 text-red-200"
+                }`}
             >
               <div className="flex items-center space-x-2.5">
                 {saveStatus.type === "success" ? (
@@ -1021,11 +1010,10 @@ export default function AdminDashboard() {
                       <button
                         key={p.id || idx}
                         onClick={() => setSelectedPanelIdx(idx)}
-                        className={`p-3 rounded-2xl text-left transition-all duration-200 border flex flex-col justify-between ${
-                          isSelected
-                            ? "bg-brand-gold/15 border-brand-gold text-white shadow-lg ring-1 ring-brand-gold"
-                            : "bg-[#040C18]/80 border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
-                        }`}
+                        className={`p-3 rounded-2xl text-left transition-all duration-200 border flex flex-col justify-between ${isSelected
+                          ? "bg-brand-gold/15 border-brand-gold text-white shadow-lg ring-1 ring-brand-gold"
+                          : "bg-[#040C18]/80 border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
+                          }`}
                       >
                         <div className="flex items-center justify-between text-xs mb-1.5">
                           <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-brand-gold font-bold">
@@ -1223,11 +1211,10 @@ export default function AdminDashboard() {
                             key={img}
                             type="button"
                             onClick={() => updatePanelField("image", img)}
-                            className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${
-                              currentPanel.image === img
-                                ? "bg-brand-gold text-brand-navy font-bold border-brand-gold"
-                                : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                            }`}
+                            className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${currentPanel.image === img
+                              ? "bg-brand-gold text-brand-navy font-bold border-brand-gold"
+                              : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                              }`}
                           >
                             {img.replace("/images/", "").replace(".jpg", "")}
                           </button>
@@ -1249,11 +1236,10 @@ export default function AdminDashboard() {
                               key={iconKey}
                               type="button"
                               onClick={() => updatePanelField("iconName", iconKey)}
-                              className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition-all ${
-                                isIconSelected
-                                  ? "bg-brand-gold/20 border-brand-gold text-brand-gold shadow-md"
-                                  : "bg-[#040C18] border-white/10 text-slate-400 hover:text-slate-200"
-                              }`}
+                              className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition-all ${isIconSelected
+                                ? "bg-brand-gold/20 border-brand-gold text-brand-gold shadow-md"
+                                : "bg-[#040C18] border-white/10 text-slate-400 hover:text-slate-200"
+                                }`}
                             >
                               <IconComp className="w-5 h-5" />
                               <span className="text-[10px] truncate max-w-full">{iconKey}</span>
@@ -1275,22 +1261,20 @@ export default function AdminDashboard() {
                         <button
                           type="button"
                           onClick={() => setPreviewExpanded(false)}
-                          className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
-                            !previewExpanded
-                              ? "bg-brand-gold text-brand-navy"
-                              : "text-slate-400 hover:text-slate-200"
-                          }`}
+                          className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${!previewExpanded
+                            ? "bg-brand-gold text-brand-navy"
+                            : "text-slate-400 hover:text-slate-200"
+                            }`}
                         >
                           Collapsed
                         </button>
                         <button
                           type="button"
                           onClick={() => setPreviewExpanded(true)}
-                          className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
-                            previewExpanded
-                              ? "bg-brand-gold text-brand-navy"
-                              : "text-slate-400 hover:text-slate-200"
-                          }`}
+                          className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${previewExpanded
+                            ? "bg-brand-gold text-brand-navy"
+                            : "text-slate-400 hover:text-slate-200"
+                            }`}
                         >
                           Expanded
                         </button>
@@ -1299,11 +1283,10 @@ export default function AdminDashboard() {
 
                     {/* Preview Box */}
                     <div
-                      className={`relative rounded-3xl overflow-hidden border transition-all duration-500 min-h-[480px] flex flex-col justify-between shadow-2xl ${
-                        previewExpanded
-                          ? "border-brand-gold/60 ring-2 ring-brand-gold/20"
-                          : "border-white/15 opacity-90"
-                      }`}
+                      className={`relative rounded-3xl overflow-hidden border transition-all duration-500 min-h-[480px] flex flex-col justify-between shadow-2xl ${previewExpanded
+                        ? "border-brand-gold/60 ring-2 ring-brand-gold/20"
+                        : "border-white/15 opacity-90"
+                        }`}
                     >
                       <div className="absolute inset-0 z-0">
                         <Image
@@ -1311,18 +1294,16 @@ export default function AdminDashboard() {
                           alt={currentPanel.name}
                           fill
                           sizes="(max-width: 768px) 100vw, 400px"
-                          className={`object-cover transition-all duration-500 ${
-                            previewExpanded
-                              ? "scale-105 brightness-110"
-                              : "scale-100 brightness-[0.7]"
-                          }`}
+                          className={`object-cover transition-all duration-500 ${previewExpanded
+                            ? "scale-105 brightness-110"
+                            : "scale-100 brightness-[0.7]"
+                            }`}
                         />
                         <div
-                          className={`absolute inset-0 transition-all duration-500 ${
-                            previewExpanded
-                              ? "bg-gradient-to-t from-[#040C18] via-[#040C18]/50 to-transparent"
-                              : "bg-gradient-to-t from-[#040C18] via-[#040C18]/70 to-black/40"
-                          }`}
+                          className={`absolute inset-0 transition-all duration-500 ${previewExpanded
+                            ? "bg-gradient-to-t from-[#040C18] via-[#040C18]/50 to-transparent"
+                            : "bg-gradient-to-t from-[#040C18] via-[#040C18]/70 to-black/40"
+                            }`}
                         />
                       </div>
 
@@ -1535,11 +1516,10 @@ export default function AdminDashboard() {
                               key={logo}
                               type="button"
                               onClick={() => setNewPartner({ ...newPartner, image: logo })}
-                              className={`p-1.5 rounded-lg border text-left truncate text-[10px] ${
-                                newPartner.image === logo
-                                  ? "bg-brand-gold text-brand-navy font-bold border-brand-gold"
-                                  : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                              }`}
+                              className={`p-1.5 rounded-lg border text-left truncate text-[10px] ${newPartner.image === logo
+                                ? "bg-brand-gold text-brand-navy font-bold border-brand-gold"
+                                : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
+                                }`}
                             >
                               {logo.replace("/images/partners/", "")}
                             </button>
@@ -1700,7 +1680,7 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setGeneralInfo({ ...generalInfo, facebookUrl: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none font-mono text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono text-xs"
                   />
                 </div>
 
@@ -1715,7 +1695,7 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setGeneralInfo({ ...generalInfo, linkedinUrl: e.target.value })
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none font-mono text-xs"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white focus:border-brand-gold focus:outline-none font-mono text-xs"
                   />
                 </div>
               </div>
@@ -2012,11 +1992,10 @@ export default function AdminDashboard() {
 
                   {passwordStatus.message && (
                     <div
-                      className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${
-                        passwordStatus.type === "success"
-                          ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
-                          : "bg-red-500/15 border border-red-500/30 text-red-200"
-                      }`}
+                      className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${passwordStatus.type === "success"
+                        ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
+                        : "bg-red-500/15 border border-red-500/30 text-red-200"
+                        }`}
                     >
                       {passwordStatus.type === "success" ? (
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
@@ -2108,11 +2087,10 @@ export default function AdminDashboard() {
 
               {passwordStatus.message && (
                 <div
-                  className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${
-                    passwordStatus.type === "success"
-                      ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
-                      : "bg-red-500/15 border border-red-500/30 text-red-200"
-                  }`}
+                  className={`p-3 rounded-xl text-xs flex items-center space-x-2 ${passwordStatus.type === "success"
+                    ? "bg-emerald-500/15 border border-emerald-500/30 text-emerald-200"
+                    : "bg-red-500/15 border border-red-500/30 text-red-200"
+                    }`}
                 >
                   {passwordStatus.type === "success" ? (
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />

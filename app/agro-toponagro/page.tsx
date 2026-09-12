@@ -15,7 +15,6 @@ import {
   Truck,
   Scale,
 } from "lucide-react";
-import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Top On-Agro Farm | Commercial Fisheries & Sustainable Aquaculture",
@@ -198,11 +197,6 @@ export default function TopOnAgroPage() {
             );
           })}
         </div>
-      </section>
-
-      {/* 4. Fisheries Inquiries */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <QuoteForm />
       </section>
     </div>
   );

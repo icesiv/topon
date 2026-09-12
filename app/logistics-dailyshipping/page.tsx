@@ -15,7 +15,6 @@ import {
   Plane,
   Sparkles,
 } from "lucide-react";
-import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Daily Shipping & Logistics | Freight Forwarding & C&F Operations",
@@ -221,9 +220,6 @@ export default function DailyShippingPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <QuoteForm defaultDivision="dailyshipping" />
-          </div>
         </div>
       </section>
     </div>

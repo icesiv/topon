@@ -14,7 +14,6 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
-import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Top On-Tech | Import, Export & General Trading Division",
@@ -213,9 +212,6 @@ export default function TopOnTechPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <QuoteForm defaultDivision="topontech" />
-          </div>
         </div>
       </section>
     </div>

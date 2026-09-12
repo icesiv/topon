@@ -1,5 +1,4 @@
 import { ShieldCheck, CheckCircle2, Clock, Mail, MapPin, Sparkles } from "lucide-react";
-import QuoteForm from "@/components/QuoteForm";
 
 interface HomeQuoteSectionProps {
   id?: string;
@@ -97,10 +96,6 @@ export default function HomeQuoteSection({
           </div>
         </div>
 
-        {/* Right Column: Interactive Quote Form Card */}
-        <div className="lg:col-span-7">
-          <QuoteForm defaultDivision={defaultDivision} />
-        </div>
       </div>
     </section>
   );

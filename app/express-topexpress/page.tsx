@@ -14,7 +14,6 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Top Express Limited | Express Courier & Domestic Logistics Division",
@@ -218,10 +217,6 @@ export default function TopExpressPage() {
         </div>
       </section>
 
-      {/* 5. Inquire Form */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <QuoteForm />
-      </section>
     </div>
   );
 }

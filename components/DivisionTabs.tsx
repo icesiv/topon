@@ -31,6 +31,7 @@ interface DivisionInfo {
   name: string;
   role: string;
   badge: string;
+  logo: string;
   headline: string;
   description: string;
   image: string;
@@ -52,6 +53,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     name: "Top On-Tech",
     role: "Import, Export, and Trading Enterprise",
     badge: "Import • Export • Global Sourcing",
+    logo: "/images/logo/topon-tech.png",
     headline: "Engineered Sourcing & Heavy Industrial Procurement",
     description:
       "Top On-Tech operates as an international general trading house connecting global manufacturers with Bangladesh's core industrial sectors. We specialize in precision machinery procurement, industrial chemicals, RMG production inputs, and turnkey commercial supply.",
@@ -90,6 +92,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     name: "Top Express Limited",
     role: "Customs Clearing and Forwarding (C&F) Company",
     badge: "Licensed C&F • Port Clearance",
+    logo: "/images/logo/tel.png",
     headline: "Fast-Track NBR Clearance & Zero-Demurrage Execution",
     description:
       "Top Express Limited is a fully licensed Customs Clearing and Forwarding (C&F) company operating across Chittagong Port, Mongla, Benapole, and Dhaka Airport (HSIA). We safeguard your cargo against demurrage through regulatory mastery, precise HS code classifications, and real-time electronic assessment.",
@@ -128,6 +131,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     name: "Daily Shipping & Logistics",
     role: "Freight Forwarding Company",
     badge: "Ocean • Air • Multimodal Transit",
+    logo: "/images/logo/dsl.png",
     headline: "Clockwork Freight Forwarding Across Global Sea & Air Lanes",
     description:
       "Daily Shipping & Logistics is an agile international freight forwarding company leveraging executive mastery over 20,000+ containers handled. We coordinate ocean container carriage (FCL/LCL), priority air charters via Dhaka Cargo Village, and nationwide inland intermodal haulage.",
@@ -166,6 +170,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     name: "Top On-Agro Farm",
     role: "Commercial Fisheries, Aquaculture",
     badge: "Commercial Aquaculture • Cold Chain",
+    logo: "/images/logo/topon-agro.png",
     headline: "Modern High-Density Fisheries & Nationwide Cold Chain",
     description:
       "Top On-Agro Farm pioneers commercial sustainable aquaculture, scientifically managed broodstock hatcheries, and temperature-controlled cold chain distribution. We supply premium-grade fresh fish directly to metropolitan wholesale markets with uncompromising purity.",
@@ -223,51 +228,52 @@ export default function DivisionTabs() {
           </p>
         </div>
 
-        {/* 4 Responsive Tab Switcher Buttons */}
+        {/* 4 Responsive Tab Switcher Buttons with Division Logos */}
         <div className="mb-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 p-2 rounded-3xl bg-white border border-slate-200 shadow-md">
             {(
               [
-                { id: "tech", label: "Top On-Tech", sub: "Import, Export & Trading", icon: Building2 },
-                { id: "express", label: "Top Express Ltd.", sub: "Customs C&F Company", icon: FileCheck2 },
-                { id: "shipping", label: "Daily Shipping", sub: "Freight Forwarding", icon: Ship },
-                { id: "agro", label: "Top On-Agro", sub: "Fisheries & Aquaculture", icon: Fish },
+                { id: "tech", label: "Top On-Tech", sub: "Import, Export & Trading", logo: "/images/logo/topon-tech.png" },
+                { id: "express", label: "Top Express Ltd.", sub: "Customs C&F Company", logo: "/images/logo/tel.png" },
+                { id: "shipping", label: "Daily Shipping", sub: "Freight Forwarding", logo: "/images/logo/dsl.png" },
+                { id: "agro", label: "Top On-Agro", sub: "Fisheries & Aquaculture", logo: "/images/logo/topon-agro.png" },
               ] as const
             ).map((tab) => {
-              const TabIcon = tab.icon;
               const isActive = activeTab === tab.id;
 
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-3 p-3.5 sm:p-4 rounded-2xl text-left transition-all duration-300 ${
-                    isActive
-                      ? "bg-[#0B2240] text-white shadow-lg shadow-navy/20 scale-[1.02]"
-                      : "text-slate-700 hover:bg-slate-50 hover:text-[#0B2240]"
-                  }`}
+                  className={`flex items-center space-x-3 p-3 sm:p-3.5 rounded-2xl text-left transition-all duration-300 ${isActive
+                    ? "bg-[#0B2240] text-white shadow-lg shadow-navy/20 scale-[1.02]"
+                    : "text-slate-700 hover:bg-slate-50 hover:text-[#0B2240]"
+                    }`}
                 >
                   <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                      isActive
-                        ? "bg-brand-gold text-brand-navy shadow-gold"
-                        : "bg-slate-100 text-slate-600"
-                    }`}
+                    className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shrink-0 p-1.5 transition-all relative overflow-hidden ${isActive
+                      ? "bg-white shadow-md ring-2 ring-brand-gold/60"
+                      : "bg-slate-100 border border-slate-200"
+                      }`}
                   >
-                    <TabIcon className="w-5 h-5" />
+                    <Image
+                      src={tab.logo}
+                      alt={tab.label}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <div className="min-w-0">
                     <div
-                      className={`text-xs sm:text-sm font-bold font-serif truncate ${
-                        isActive ? "text-brand-goldLight" : "text-slate-900"
-                      }`}
+                      className={`text-xs sm:text-sm font-bold font-serif truncate ${isActive ? "text-brand-goldLight" : "text-slate-900"
+                        }`}
                     >
                       {tab.label}
                     </div>
                     <div
-                      className={`text-[11px] truncate font-medium ${
-                        isActive ? "text-slate-300" : "text-slate-500"
-                      }`}
+                      className={`text-[11px] truncate font-medium ${isActive ? "text-slate-300" : "text-slate-500"
+                        }`}
                     >
                       {tab.sub}
                     </div>
@@ -282,39 +288,23 @@ export default function DivisionTabs() {
         <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl relative overflow-hidden transition-all duration-500">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Visual Image Banner with Real Perspective */}
-            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 group">
+            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden  group">
               <div className="relative h-72 sm:h-96 w-full">
                 <Image
-                  key={current.image}
-                  src={current.image}
-                  alt={current.imageCaption}
+                  key={current.logo}
+                  src={current.logo}
+                  alt={current.name}
                   fill
+                  quality={100}
+                  priority
                   sizes="(max-width: 1024px) 100vw, 500px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-contain group-hover:scale-105 transition-transform duration-700"
                 />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#040C18]/95 via-[#0B2240]/40 to-transparent flex items-end p-6">
-                <div className="text-white space-y-1">
-                  <span className="text-xs font-bold text-brand-gold uppercase tracking-wider block">
-                    {current.imageCaption}
-                  </span>
-                  <p className="text-xs text-slate-200 font-medium leading-relaxed">
-                    {current.imageSubcaption}
-                  </p>
-                </div>
               </div>
             </div>
 
             {/* Details & Capabilities */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md bg-[#0B2240] text-brand-gold text-xs font-bold uppercase tracking-wider">
-                  <CurrentIcon className="w-3.5 h-3.5" />
-                  <span>{current.badge}</span>
-                </div>
-                <span className="text-slate-500 text-xs font-semibold">{current.role}</span>
-              </div>
-
               <h3 className="text-2xl sm:text-3xl font-bold font-serif text-[#0B2240] leading-snug">
                 {current.name}:{" "}
                 <span className="text-gold-gradient">{current.headline}</span>
@@ -345,23 +335,6 @@ export default function DivisionTabs() {
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Action Links */}
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Link
-                  href={current.pageHref}
-                  className="px-6 py-3 rounded-xl bg-[#0B2240] text-brand-gold hover:bg-[#133560] font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center space-x-2 group"
-                >
-                  <span>Explore {current.name}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  href={current.quoteHref}
-                  className="px-6 py-3 rounded-xl border border-slate-300 text-slate-800 hover:border-brand-gold hover:text-brand-navy font-semibold text-xs transition-colors"
-                >
-                  Request Corporate Quotation
-                </Link>
               </div>
             </div>
           </div>
