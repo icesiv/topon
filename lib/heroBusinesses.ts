@@ -34,6 +34,14 @@ export const ICON_MAP: Record<string, LucideIcon> = {
 
 export const AVAILABLE_ICONS = Object.keys(ICON_MAP);
 
+export const DEFAULT_BUSINESS_LOGOS: Record<string, string> = {
+  topontech: "/images/logo/topon-tech.png",
+  topexpress: "/images/logo/tel.png",
+  dailyshipping: "/images/logo/dsl.png",
+  toponagro: "/images/logo/topon-agro.png",
+  toponsolution: "/images/logo/topon-solution.png",
+};
+
 export interface BusinessPanelData {
   id: string;
   number: string;
@@ -45,6 +53,7 @@ export interface BusinessPanelData {
   href: string;
   image: string;
   iconName: string;
+  logo?: string;
   order?: number;
   status?: "draft" | "published";
   isDeleted?: boolean;
@@ -53,6 +62,7 @@ export interface BusinessPanelData {
 export interface BusinessPanel extends Omit<BusinessPanelData, "iconName"> {
   icon: LucideIcon;
   iconName: string;
+  logo: string;
 }
 
 export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
@@ -66,9 +76,10 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
       "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets.",
     fullTagline:
       "Top On-Tech is a multi-sector import, export, and trading enterprise that connects global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
-    href: "/trading-topontech",
+    href: "/divisions/trading-topontech",
     image: "/images/topontech_hero.jpg",
     iconName: "Building2",
+    logo: "/images/logo/topon-tech.png",
     order: 0,
     status: "published",
   },
@@ -81,9 +92,10 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Licensed C&F Brokerage, Port Clearance & NBR Tariff Advisory",
     fullTagline:
       "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
-    href: "/express-topexpress",
+    href: "/divisions/express-topexpress",
     image: "/images/topexpress_hero.jpg",
     iconName: "FileCheck2",
+    logo: "/images/logo/tel.png",
     order: 1,
     status: "published",
   },
@@ -96,9 +108,10 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Ocean FCL/LCL, Expedited Air Cargo & Multimodal Logistics",
     fullTagline:
       "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
-    href: "/logistics-dailyshipping",
+    href: "/divisions/logistics-dailyshipping",
     image: "/images/dailyshipping_hero.jpg",
     iconName: "Ship",
+    logo: "/images/logo/dsl.png",
     order: 2,
     status: "published",
   },
@@ -111,24 +124,68 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Sustainable Fish Farming, Hatcheries & Nationwide Cold Chain",
     fullTagline:
       "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
-    href: "/agro-toponagro",
+    href: "/divisions/agro-toponagro",
     image: "/images/toponagro_hero.jpg",
     iconName: "Fish",
+    logo: "/images/logo/topon-agro.png",
     order: 3,
+    status: "published",
+  },
+  {
+    id: "toponsolution",
+    number: "05",
+    name: "Top On-Solution",
+    name_short: "Solution",
+    category: "Corporate Consultancy & Business Advisory",
+    tagline: "Company Setup, Regulatory Compliance, Tax, VAT & Trade Advisory",
+    fullTagline:
+      "Top On-Solution provides consultancy and practical support for company setup, regulatory compliance, tax, VAT, customs, trade, audit, sourcing and other business requirements.",
+    href: "/divisions/consultancy-toponsolution",
+    image: "/images/toponsolution_hero.jpg",
+    iconName: "Briefcase",
+    logo: "/images/logo/topon-solution.png",
+    order: 4,
     status: "published",
   },
 ];
 
 export function resolveBusinessPanel(data: BusinessPanelData): BusinessPanel {
   const icon = ICON_MAP[data.iconName] || Building2;
+  const logo =
+    data.logo ||
+    DEFAULT_BUSINESS_LOGOS[data.id] ||
+    (data.name?.toLowerCase().includes("solution")
+      ? "/images/logo/topon-solution.png"
+      : data.name?.toLowerCase().includes("agro")
+      ? "/images/logo/topon-agro.png"
+      : data.name?.toLowerCase().includes("daily") || data.name?.toLowerCase().includes("shipping")
+      ? "/images/logo/dsl.png"
+      : data.name?.toLowerCase().includes("express")
+      ? "/images/logo/tel.png"
+      : "/images/logo/topon-tech.png");
+
   return {
     ...data,
     icon,
+    logo,
   };
 }
 
 export function resolveBusinessPanels(dataList: BusinessPanelData[]): BusinessPanel[] {
   return dataList.map(resolveBusinessPanel);
+}
+
+function normalizePanels(panels: BusinessPanelData[]): BusinessPanelData[] {
+  const hasSolution = panels.some(
+    (p) => p.id === "toponsolution" || p.name?.toLowerCase().includes("solution")
+  );
+  if (!hasSolution) {
+    const solutionPanel = DEFAULT_BUSINESS_PANELS.find((p) => p.id === "toponsolution");
+    if (solutionPanel) {
+      return [...panels, solutionPanel];
+    }
+  }
+  return panels;
 }
 
 const SETTINGS_COLLECTION = "settings";
@@ -150,8 +207,9 @@ export async function fetchHeroBusinesses(useCache: boolean = true): Promise<Bus
     const snap = await getDoc(docRef);
     if (snap.exists() && Array.isArray(snap.data()?.panels) && snap.data()?.panels.length > 0) {
       const activePanels = (snap.data().panels as BusinessPanelData[]).filter((p) => !p.isDeleted);
-      setCache(CACHE_KEY, activePanels, 120000);
-      return activePanels;
+      const normalized = normalizePanels(activePanels);
+      setCache(CACHE_KEY, normalized, 120000);
+      return normalized;
     }
   } catch (err) {
     console.error("Error fetching hero businesses from Firestore:", err);
@@ -175,8 +233,9 @@ export function subscribeHeroBusinesses(
       (snap) => {
         if (snap.exists() && Array.isArray(snap.data()?.panels) && snap.data()?.panels.length > 0) {
           const activePanels = (snap.data().panels as BusinessPanelData[]).filter((p) => !p.isDeleted);
-          setCache(CACHE_KEY, activePanels, 120000);
-          onUpdate(activePanels);
+          const normalized = normalizePanels(activePanels);
+          setCache(CACHE_KEY, normalized, 120000);
+          onUpdate(normalized);
         } else {
           onUpdate(DEFAULT_BUSINESS_PANELS);
         }

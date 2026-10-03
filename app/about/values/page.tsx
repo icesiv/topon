@@ -97,6 +97,7 @@ export default function MissionVisionValuesPage() {
                 alt="Top On Group Vision - Global Maritime Connectivity"
                 fill
                 priority
+                quality={80}
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -138,6 +139,7 @@ export default function MissionVisionValuesPage() {
                 alt="Top On Group Mission - Quality industrial procurement and logistics execution"
                 fill
                 priority
+                quality={80}
                 sizes="(max-width: 1024px) 100vw, 600px"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />

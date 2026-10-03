@@ -67,6 +67,7 @@ export default function BusinessPartnersSection() {
                     src={partner.image || "/images/partners/walton.png"}
                     alt={partner.name}
                     fill
+                    quality={100}
                     sizes="(max-width: 640px) 200px, 240px"
                     className="object-contain object-center scale-95 group-hover:scale-110 transition-transform duration-300"
                   />
@@ -97,6 +98,7 @@ export default function BusinessPartnersSection() {
                     src={partner.image || "/images/partners/walton.png"}
                     alt={partner.name}
                     fill
+                    quality={100}
                     sizes="(max-width: 640px) 200px, 240px"
                     className="object-contain object-center scale-95 group-hover:scale-110 transition-transform duration-300"
                   />

@@ -38,6 +38,7 @@ export default function AirCargoSection() {
               src="/images/air_cargo.jpg"
               alt="Bangladeshi air cargo handlers and logistics managers at Dhaka Airport tarmac"
               fill
+              quality={80}
               sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />

@@ -17,7 +17,8 @@ export default function JSONLD() {
             "@type": "PostalAddress",
             "addressCountry": "BD",
             "addressLocality": "Dhaka",
-            "streetAddress": "Corporate Headquarters"
+            "postalCode": "1229",
+            "streetAddress": "House: Ka/11 (1st Floor), Matbar Bari Moasjid Road, Jagannathpur, Bashundhara, Vatara"
           }
         },
         "founder": {
@@ -37,7 +38,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-on-tech",
             "name": "Top On-Tech",
             "description": "Diversified import, export and trading house sourcing industrial machinery, spares, chemicals, textiles, and electronics.",
-            "url": "https://www.toponbd.com/trading-topontech",
+            "url": "https://www.toponbd.com/divisions/trading-topontech",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Industrial Machinery & Spares",
@@ -53,7 +54,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#daily-shipping",
             "name": "Daily Shipping & Logistics",
             "description": "Technology-driven freight forwarding and C&F operations built on 20,000+ containers of operational experience.",
-            "url": "https://www.toponbd.com/logistics-dailyshipping",
+            "url": "https://www.toponbd.com/divisions/logistics-dailyshipping",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "International Ocean Freight (FCL/LCL)",
@@ -68,7 +69,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-express",
             "name": "Top Express Limited",
             "description": "Express transit and nationwide courier logistics fleet connecting key commercial hubs.",
-            "url": "https://www.toponbd.com/express-topexpress",
+            "url": "https://www.toponbd.com/divisions/express-topexpress",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Express Courier Services",
@@ -81,13 +82,27 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-on-agro",
             "name": "Top On-Agro Farm",
             "description": "Sustainable commercial fisheries, high-density aquaculture, certified hatchery breeding, and cold-chain fish supply.",
-            "url": "https://www.toponbd.com/agro-toponagro",
+            "url": "https://www.toponbd.com/divisions/agro-toponagro",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Commercial Aquaculture & Fish Farming",
               "Certified Hatchery & Fingerling Breeding",
               "Cold-Chain Fish Preservation & Transit",
               "Bulk Wholesale Fish Supply"
+            ]
+          },
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://www.toponbd.com/#top-on-solution",
+            "name": "Top On-Solution",
+            "description": "Corporate consultancy, company formation, tax and VAT advisory, regulatory compliance, and audit support.",
+            "url": "https://www.toponbd.com/divisions/consultancy-toponsolution",
+            "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
+            "knowsAbout": [
+              "Company Formation & RJSC Incorporation",
+              "Taxation & VAT Advisory",
+              "Customs Regulatory Compliance",
+              "Corporate Audit & Governance"
             ]
           }
         ]

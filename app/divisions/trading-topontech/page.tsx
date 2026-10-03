@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import TopOnTechHeroSlider from "@/components/TopOnTechHeroSlider";
 
 export const metadata: Metadata = {
   title: "Top On-Tech | Import, Export & General Trading Division",
@@ -79,22 +80,8 @@ export default function TopOnTechPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. Hero - Contrasting Dark Navy Segment */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <Building2 className="w-3.5 h-3.5" />
-            <span>Top On Group Trading Division • Est. Jan 2024</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Top On-Tech: <br />
-            <span className="text-gold-light-gradient">Global Sourcing &amp; General Trading</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            &quot;Trust is our most valuable trading asset.&quot; Facilitating seamless international procurement of industrial components, chemicals, fabrics, and tech hardware.
-          </p>
-        </div>
-      </section>
+      {/* 1. Hero - Full Width Image Slider */}
+      <TopOnTechHeroSlider />
 
       {/* 2. On-Ground Engineering Inspection Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,6 +92,7 @@ export default function TopOnTechPage() {
                 src="/images/trading_sourcing.jpg"
                 alt="Top On-Tech Bangladeshi quality engineers checking machinery blueprints and chemicals"
                 fill
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover"
               />
@@ -149,7 +137,7 @@ export default function TopOnTechPage() {
       </section>
 
       {/* 3. Sourcing Categories */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-navy font-bold text-xs uppercase tracking-wider mb-3">
             <span>Product Portfolios</span>

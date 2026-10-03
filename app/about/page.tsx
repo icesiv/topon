@@ -26,9 +26,9 @@ import {
 import ParticleCanvas from "@/components/ParticleCanvas";
 
 export const metadata: Metadata = {
-  title: "About Top On Group | Quality. Service. Nation.",
+  title: "Top On Group | BUILT ON TRUST",
   description:
-    "Top On Group is a diversified, family-owned business group in Bangladesh across Customs C&F, Freight Forwarding & Logistics, International Trade, Agriculture, and Fisheries. Est. 1990.",
+    "Customs Clearing and Forwarding, Freight Forwarding, Import, Trade, Consultancy & Supply",
   keywords: [
     "About Top On Group",
     "Top On Group Bangladesh",
@@ -48,7 +48,7 @@ const FOUR_BUSINESSES = [
     desc: "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
     icon: FileCheck2,
     logo: "/images/logo/tel.png",
-    href: "/express-topexpress",
+    href: "/divisions/express-topexpress",
     heritage: "Evolved from Shahabuddin Enterprise (Est. 1990)",
   },
   {
@@ -57,7 +57,7 @@ const FOUR_BUSINESSES = [
     desc: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
     icon: Building2,
     logo: "/images/logo/topon-tech.png",
-    href: "/trading-topontech",
+    href: "/divisions/trading-topontech",
     heritage: "Cross-Border Industrial Sourcing",
   },
   {
@@ -66,7 +66,7 @@ const FOUR_BUSINESSES = [
     desc: "International freight forwarding, multi-carrier ocean container bookings (FCL/LCL), priority air cargo charters, and integrated multimodal transport.",
     icon: Ship,
     logo: "/images/logo/dsl.png",
-    href: "/logistics-dailyshipping",
+    href: "/divisions/logistics-dailyshipping",
     heritage: "Global Trade Lane Connectivity",
   },
   {
@@ -75,8 +75,17 @@ const FOUR_BUSINESSES = [
     desc: "Sustainable aquaculture, high-density biofloc pond farming, certified pathogen-free hatcheries, and temperature-controlled nationwide cold chain distribution.",
     icon: Fish,
     logo: "/images/logo/topon-agro.png",
-    href: "/agro-toponagro",
+    href: "/divisions/agro-toponagro",
     heritage: "Sustainable Food Security",
+  },
+  {
+    name: "Top On-Solution",
+    role: "Corporate Consultancy & Business Support",
+    desc: "Consultancy and practical support for company setup, regulatory compliance, tax, VAT, customs, trade, audit, sourcing and business requirements.",
+    icon: Briefcase,
+    logo: "/images/logo/topon-solution.png",
+    href: "/divisions/consultancy-toponsolution",
+    heritage: "Regulatory & Commercial Governance",
   },
 ];
 
@@ -146,6 +155,7 @@ export default function AboutPage() {
                 src="/images/logo/topon-group.png"
                 alt="Top On Group corporate headquarters and executive leadership"
                 fill
+                quality={100}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-contain"
               />
@@ -184,6 +194,7 @@ export default function AboutPage() {
                         src={biz.logo}
                         alt={`${biz.name} Logo`}
                         fill
+                        quality={100}
                         sizes="(max-width: 768px) 300px, 400px"
                         className="object-contain p-1 group-hover:scale-105 transition-transform"
                       />

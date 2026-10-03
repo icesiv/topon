@@ -20,6 +20,7 @@ export default function CorporateStrategy() {
                 src="/images/boardroom_team.jpg"
                 alt="Top On Group executive leadership and trade strategy team in Dhaka"
                 fill
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />

@@ -9,6 +9,7 @@ import {
   Ship,
   Truck,
   Fish,
+  Briefcase,
   ArrowRight,
   Facebook,
   Linkedin,
@@ -46,42 +47,48 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 text-xs">
         {/* Col 1: Brand Info */}
-        <div className="lg:col-span-2 space-y-3.5">
+        <div className="lg:col-span-4 space-y-3.5">
           <Link href="/" className="inline-block">
             <Image
               src="/logo-text.png"
               alt="Top On Group"
               width={190}
               height={40}
+              quality={100}
               className="h-8 md:h-9 w-auto object-contain"
             />
           </Link>
 
           <p className="text-slate-500 leading-relaxed max-w-sm">
-            A premier multi-sector conglomerate empowering trade through import/export sourcing, licensed customs clearing, global freight forwarding, and commercial fisheries.
+            A premier multi-sector conglomerate empowering trade through import/export sourcing, licensed customs clearing, global freight forwarding, commercial fisheries, and corporate consultancy.
           </p>
 
-          <div className="pt-1 space-y-1.5 text-slate-600">
+          <div className="pt-1 space-y-2 text-slate-600">
             <div className="flex items-center space-x-2">
-              <MapPin className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-              <span>Dhaka HQ &bull; Chittagong &amp; Mongla Port Desks</span>
-            </div>
-            <div className="flex items-center space-x-4">
+              <Mail className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
               <a
                 href="mailto:info@toponbd.com"
-                className="flex items-center space-x-2 hover:text-brand-navy transition-colors"
+                className="hover:text-brand-navy transition-colors font-medium"
               >
-                <Mail className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-                <span>info@toponbd.com</span>
+                info@toponbd.com
+              </a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <a
+                href="tel:+8801711775280"
+                className="flex items-center space-x-1.5 hover:text-brand-navy transition-colors font-mono"
+              >
+                <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>Dhaka: 01711-775280</span>
               </a>
               <a
                 href="tel:+8801711775281"
-                className="flex items-center space-x-2 hover:text-brand-navy transition-colors"
+                className="flex items-center space-x-1.5 hover:text-brand-navy transition-colors font-mono"
               >
                 <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-                <span>01711-775281</span>
+                <span>CTG: 01711-775281</span>
               </a>
             </div>
           </div>
@@ -110,14 +117,16 @@ export default function Footer() {
         </div>
 
         {/* Col 2: Business Divisions */}
-        <div className="space-y-3">
+        <div className="lg:col-span-2 space-y-3">
           <h3 className="text-brand-navy font-bold text-xs uppercase tracking-wider">
-            Divisions
+            <Link href="/divisions" className="hover:text-brand-goldDark transition-colors">
+              Divisions
+            </Link>
           </h3>
           <ul className="space-y-2 text-slate-600">
             <li>
               <Link
-                href="/trading-topontech"
+                href="/divisions/trading-topontech"
                 className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
               >
                 <Building2 className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
@@ -126,7 +135,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/express-topexpress"
+                href="/divisions/express-topexpress"
                 className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
               >
                 <Truck className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
@@ -135,56 +144,36 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/logistics-dailyshipping"
+                href="/divisions/logistics-dailyshipping"
                 className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
               >
                 <Ship className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-                <span>Daily Shipping &amp; Logistics</span>
+                <span>Daily Shipping</span>
               </Link>
             </li>
             <li>
               <Link
-                href="/agro-toponagro"
+                href="/divisions/agro-toponagro"
                 className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
               >
                 <Fish className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
                 <span>Top On-Agro Farm</span>
               </Link>
             </li>
-          </ul>
-        </div>
-
-        {/* Col 3: Core Services */}
-        <div className="space-y-3">
-          <h3 className="text-brand-navy font-bold text-xs uppercase tracking-wider">
-            Services
-          </h3>
-          <ul className="space-y-2 text-slate-600">
             <li>
-              <Link href="/services#customs" className="hover:text-brand-navy transition-colors">
-                Customs Clearing &amp; C&amp;F
-              </Link>
-            </li>
-            <li>
-              <Link href="/services#freight" className="hover:text-brand-navy transition-colors">
-                Ocean &amp; Air Freight
-              </Link>
-            </li>
-            <li>
-              <Link href="/services#trading" className="hover:text-brand-navy transition-colors">
-                Industrial Trading &amp; Sourcing
-              </Link>
-            </li>
-            <li>
-              <Link href="/services#agro" className="hover:text-brand-navy transition-colors">
-                Commercial Fisheries &amp; Agro
+              <Link
+                href="/divisions/consultancy-toponsolution"
+                className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
+              >
+                <Briefcase className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>Top On-Solution</span>
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* Col 4: Corporate Governance & Quick Links */}
-        <div className="space-y-3">
+        {/* Col 3: Company & Quick Links */}
+        <div className="lg:col-span-2 space-y-3">
           <h3 className="text-brand-navy font-bold text-xs uppercase tracking-wider">
             Company
           </h3>
@@ -201,7 +190,12 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/about/values" className="hover:text-brand-navy transition-colors">
-                Mission, Vision &amp; Values
+                Mission &amp; Values
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-brand-navy transition-colors">
+                Services Catalog
               </Link>
             </li>
             <li>
@@ -210,6 +204,36 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+        </div>
+
+        {/* Col 4: Office Addresses */}
+        <div className="lg:col-span-4 space-y-3.5">
+          <h3 className="text-brand-navy font-bold text-xs uppercase tracking-wider flex items-center space-x-1.5">
+            <MapPin className="w-3.5 h-3.5 text-brand-gold" />
+            <span>Our Offices</span>
+          </h3>
+
+          <div className="space-y-3 text-[11px] text-slate-600 leading-relaxed">
+            {/* Head Office */}
+            <div className="p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs space-y-1">
+              <strong className="text-brand-navy font-bold block text-xs">
+                Head Office (Dhaka)
+              </strong>
+              <p className="text-slate-600">
+                House: Ka/11 (1st Floor), Matbar Bari Moasjid Road, Jagannathpur, Bashundhara, Vatara, Dhaka-1229
+              </p>
+            </div>
+
+            {/* Chattogram Office */}
+            <div className="p-3 rounded-xl bg-white border border-slate-200/90 shadow-2xs space-y-1">
+              <strong className="text-brand-navy font-bold block text-xs">
+                Chattogram Office
+              </strong>
+              <p className="text-slate-600">
+                Suraiya Mansion (6th Floor), 30 Agrabad Commercial Area, Chattogram-4100
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

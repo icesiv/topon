@@ -22,9 +22,12 @@ import {
   Waves,
   Sparkles,
   Plane,
+  Briefcase,
+  Receipt,
+  FileSpreadsheet,
 } from "lucide-react";
 
-type DivisionId = "tech" | "express" | "shipping" | "agro";
+type DivisionId = "tech" | "express" | "shipping" | "agro" | "solution";
 
 interface DivisionInfo {
   id: DivisionId;
@@ -62,7 +65,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Engineers and technical procurement officers verifying OEM machinery specs and chemical grades.",
     icon: Building2,
-    pageHref: "/trading-topontech",
+    pageHref: "/divisions/trading-topontech",
     quoteHref: "/#quote",
     features: [
       {
@@ -101,7 +104,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Authorized customs brokers conducting physical inspections and bill-of-entry verification.",
     icon: FileCheck2,
-    pageHref: "/express-topexpress",
+    pageHref: "/divisions/express-topexpress",
     quoteHref: "/#quote",
     features: [
       {
@@ -140,7 +143,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Direct vessel container slot coordination linking Bangladesh to Southeast Asia, Europe, and the Americas.",
     icon: Ship,
-    pageHref: "/logistics-dailyshipping",
+    pageHref: "/divisions/logistics-dailyshipping",
     quoteHref: "/#quote",
     features: [
       {
@@ -179,7 +182,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "High-density aerated aquaculture ponds maintaining stringent bio-security and antibiotic-free standards.",
     icon: Fish,
-    pageHref: "/agro-toponagro",
+    pageHref: "/divisions/agro-toponagro",
     quoteHref: "/#quote",
     features: [
       {
@@ -204,6 +207,45 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
       },
     ],
   },
+  solution: {
+    id: "solution",
+    name: "Top On-Solution",
+    role: "Corporate Consultancy & Business Advisory",
+    badge: "Company Setup • Compliance • Tax & VAT",
+    logo: "/images/logo/topon-solution.png",
+    headline: "Consultancy & Regulatory Support for Growing Businesses",
+    description:
+      "Top On-Solution provides consultancy and practical support for company setup, regulatory compliance, tax, VAT, customs, trade, audit, sourcing and other business requirements — offering reliable guidance through Bangladesh's complex regulatory and commercial landscape.",
+    image: "/images/toponsolution_wide.jpg",
+    imageCaption: "Dhaka Corporate Advisory",
+    imageSubcaption:
+      "Consultants guiding clients through RJSC, BIDA, NBR and trade licensing requirements.",
+    icon: Briefcase,
+    pageHref: "/divisions/consultancy-toponsolution",
+    quoteHref: "/#quote",
+    features: [
+      {
+        title: "Business Setup & Company Formation",
+        desc: "RJSC incorporation, trade licenses, BIDA registration, and TIN/BIN setup.",
+        icon: Building2,
+      },
+      {
+        title: "Trade & Regulatory Licensing",
+        desc: "IRC/ERC, factory, fire, environmental clearances, and BSTI certification.",
+        icon: FileCheck2,
+      },
+      {
+        title: "NBR, Customs & VAT Advisory",
+        desc: "Tariff classification, VAT return filing, and bonded warehouse compliance.",
+        icon: Receipt,
+      },
+      {
+        title: "Audit, Tax & Special Assignments",
+        desc: "Corporate tax returns, audit coordination, due diligence, and dispute support.",
+        icon: FileSpreadsheet,
+      },
+    ],
+  },
 };
 
 export default function DivisionTabs() {
@@ -216,27 +258,25 @@ export default function DivisionTabs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-navy font-bold text-xs uppercase tracking-wider shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-brand-goldDark" />
-            <span>Four Operating Pillars</span>
-          </div>
+
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[#0B2240] tracking-tight">
             Specialized Arms for <span className="text-gold-gradient">Every Trade Dimension</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Top On Group executes global commerce through four specialized corporate divisions—spanning international trading, licensed customs C&F, maritime freight, and sustainable agro-fisheries.
+            Top On Group executes global commerce through five specialized corporate divisions—spanning international trading, licensed customs C&F, maritime freight, sustainable agro-fisheries, and corporate consultancy.
           </p>
         </div>
 
-        {/* 4 Responsive Tab Switcher Buttons with Division Logos */}
+        {/* 5 Responsive Tab Switcher Buttons with Division Logos */}
         <div className="mb-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 p-2 rounded-3xl bg-white border border-slate-200 shadow-md">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 p-2 rounded-3xl bg-white border border-slate-200 shadow-md">
             {(
               [
                 { id: "tech", label: "Top On-Tech", sub: "Import, Export & Trading", logo: "/images/logo/topon-tech.png" },
                 { id: "express", label: "Top Express Ltd.", sub: "Customs C&F Company", logo: "/images/logo/tel.png" },
                 { id: "shipping", label: "Daily Shipping", sub: "Freight Forwarding", logo: "/images/logo/dsl.png" },
                 { id: "agro", label: "Top On-Agro", sub: "Fisheries & Aquaculture", logo: "/images/logo/topon-agro.png" },
+                { id: "solution", label: "Top On-Solution", sub: "Consultancy & Advisory", logo: "/images/logo/topon-solution.png" },
               ] as const
             ).map((tab) => {
               const isActive = activeTab === tab.id;
@@ -245,7 +285,7 @@ export default function DivisionTabs() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center space-x-3 p-3 sm:p-3.5 rounded-2xl text-left transition-all duration-300 ${isActive
+                  className={`flex items-center space-x-3 p-3 sm:p-3.5 rounded-2xl text-left transition-all duration-300 last:col-span-2 md:last:col-span-1 ${isActive
                     ? "bg-[#0B2240] text-white shadow-lg shadow-navy/20 scale-[1.02]"
                     : "text-slate-700 hover:bg-slate-50 hover:text-[#0B2240]"
                     }`}
@@ -261,6 +301,7 @@ export default function DivisionTabs() {
                       alt={tab.label}
                       width={48}
                       height={48}
+                      quality={100}
                       className="w-full h-full object-contain"
                     />
                   </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import DailyShippingHeroSlider from "@/components/DailyShippingHeroSlider";
 import {
   Ship,
   Anchor,
@@ -80,22 +81,8 @@ export default function DailyShippingPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. Hero - Contrasting Dark Navy Segment */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <Ship className="w-3.5 h-3.5" />
-            <span>Top On Group Logistics Arm • Est. Sep 2025</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Daily Shipping &amp; Logistics: <br />
-            <span className="text-gold-light-gradient">20,000+ Containers of Operational Mastery</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            Delivering technology-driven freight forwarding, precision customs clearing (C&amp;F), and end-to-end multimodal transport across Bangladesh&apos;s maritime corridors.
-          </p>
-        </div>
-      </section>
+      {/* 1. Full-Width Hero Slider */}
+      <DailyShippingHeroSlider />
 
       {/* 2. On-Ground Port C&F Team Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,6 +93,7 @@ export default function DailyShippingPage() {
                 src="/images/customs_cnf.jpg"
                 alt="Daily Shipping Bangladeshi customs clearance officers at Chittagong Port terminal"
                 fill
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover"
               />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import TopOnAgroHeroSlider from "@/components/TopOnAgroHeroSlider";
 import {
   Fish,
   Waves,
@@ -81,22 +82,8 @@ export default function TopOnAgroPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. Hero - Dark Navy Segment */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <Fish className="w-3.5 h-3.5" />
-            <span>Top On Group Fisheries &amp; Aquaculture Division</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Top On-Agro Farm: <br />
-            <span className="text-gold-light-gradient">Commercial Fisheries &amp; Sustainable Aquaculture</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            &quot;Pioneering sustainable aquaculture and premium freshwater fisheries across Bangladesh.&quot; High-tech biofloc ponds, certified hatchery breeding, cold chain integrity, and bulk fish distribution.
-          </p>
-        </div>
-      </section>
+      {/* 1. Full-Width Hero Slider */}
+      <TopOnAgroHeroSlider />
 
       {/* 2. Overview Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,6 +94,7 @@ export default function TopOnAgroPage() {
                 src="/images/agro_farm.jpg"
                 alt="Top On-Agro Farm commercial aquaculture ponds and fish harvest team"
                 fill
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />

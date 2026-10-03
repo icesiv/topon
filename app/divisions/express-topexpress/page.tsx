@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import TopExpressHeroSlider from "@/components/TopExpressHeroSlider";
 import {
   Truck,
   PackageCheck,
@@ -79,22 +80,8 @@ export default function TopExpressPage() {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. Hero - Dark Navy Segment */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <Truck className="w-3.5 h-3.5" />
-            <span>Top On Group Express Division</span>
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Top Express Limited: <br />
-            <span className="text-gold-light-gradient">Rapid Transit &amp; Dedicated Fleet Logistics</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            &quot;Precision in motion.&quot; Connecting urban commerce and industrial manufacturing with resilient covered fleet networks, express courier routing, and zero-compromise timeline adherence.
-          </p>
-        </div>
-      </section>
+      {/* 1. Full-Width Hero Slider */}
+      <TopExpressHeroSlider />
 
       {/* 2. Overview Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,6 +92,7 @@ export default function TopExpressPage() {
                 src="/images/air_cargo.jpg"
                 alt="Top Express Limited fleet and rapid transit logistics operations in Bangladesh"
                 fill
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 600px"
                 className="object-cover"
               />

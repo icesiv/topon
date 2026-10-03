@@ -33,6 +33,7 @@ const PRESET_IMAGES = [
   "/images/topexpress_hero.jpg",
   "/images/dailyshipping_hero.jpg",
   "/images/toponagro_hero.jpg",
+  "/images/toponsolution_hero.jpg",
   "/images/hero_port.jpg",
   "/images/trading_sourcing.jpg",
   "/images/customs_cnf.jpg",
@@ -448,7 +449,7 @@ export default function AdminHeroEditor() {
                     type="text"
                     value={currentPanel.href}
                     onChange={(e) => updateCurrentField("href", e.target.value)}
-                    placeholder="/trading-topontech"
+                    placeholder="/divisions/trading-topontech"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#061324] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none transition-colors"
                   />
                 </div>
@@ -607,6 +608,7 @@ export default function AdminHeroEditor() {
                     src={currentPanel.image || "/images/topontech_hero.jpg"}
                     alt={currentPanel.name}
                     fill
+                    quality={80}
                     sizes="(max-width: 768px) 100vw, 400px"
                     className={`object-cover transition-all duration-500 ${
                       previewExpanded
@@ -625,9 +627,22 @@ export default function AdminHeroEditor() {
 
                 {/* Top Badge */}
                 <div className="relative z-10 p-5 flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-brand-gold">
-                    <SelectedIcon className="w-5 h-5" />
-                  </div>
+                  {previewExpanded && currentPanel.logo ? (
+                    <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/50 shadow-xl ring-1 ring-brand-gold/30 flex items-center justify-center">
+                      <Image
+                        src={currentPanel.logo}
+                        alt={`${currentPanel.name} logo`}
+                        width={180}
+                        height={60}
+                        quality={100}
+                        className="h-10 sm:h-12 w-auto max-w-[180px] object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-brand-gold">
+                      <SelectedIcon className="w-5 h-5" />
+                    </div>
+                  )}
                   <span className="font-mono text-xs font-bold text-white bg-black/40 px-2.5 py-1 rounded-lg border border-white/15">
                     {currentPanel.number}
                   </span>

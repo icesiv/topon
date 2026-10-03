@@ -13,118 +13,90 @@ import {
   Phone,
   ArrowRight,
   Building2,
-  BookOpen,
-  Users,
-  Building,
-  CheckCircle,
   FileText,
   BadgeCheck,
+  ExternalLink,
+  Target,
+  Compass,
+  Lightbulb,
+  HeartHandshake,
 } from "lucide-react";
 import LeadershipGallery from "@/components/LeadershipGallery";
 
 export const metadata: Metadata = {
-  title: "About the Group CEO | Md. Abdullah Al Mamun - Top On Group",
+  title: "Message from the Group CEO | Md. Abdullah Al Mamun - Top On Group",
   description:
-    "Biography, professional profile, executive address, and credentials of Md. Abdullah Al Mamun (CSCM, ITP, CACC), Group Chief Executive Officer of Top On Group.",
+    "Official executive address to clients, partners, and stakeholders from Md. Abdullah Al Mamun, Group Chief Executive Officer of Top On Group.",
 };
 
-const trainings = [
+const STRATEGIC_PILLARS = [
   {
-    title: "How to Read Financial Statement",
-    organizer: "International Finance Corporation (IFC – South Asia Enterprise Development Facility)",
-    location: "Khulna, Bangladesh",
-    date: "July 2008",
+    title: "Quality & Service Excellence",
+    desc: "Delivering reliable, flawless operational execution across clearing, freight, indenting, and agriculture.",
+    icon: Target,
   },
   {
-    title: "How to Construct Financial Statement",
-    organizer: "International Finance Corporation (IFC – South Asia Enterprise Development Facility)",
-    location: "Khulna, Bangladesh",
-    date: "July 2008",
+    title: "Integrity & Compliance",
+    desc: "Unwavering commitment to NBR customs laws, international maritime standards, and ethical trade governance.",
+    icon: ShieldCheck,
   },
   {
-    title: "How Do Banks Assess Your Creditworthiness",
-    organizer: "International Finance Corporation (IFC – South Asia Enterprise Development Facility)",
-    location: "Bangladesh",
-    date: "Certified",
+    title: "Innovation & Technology",
+    desc: "Embracing smart digital systems, data visibility, and modern logistics technology for maximum client value.",
+    icon: Lightbulb,
   },
   {
-    title: "ICT for SMEs",
-    organizer: "SME Foundation in association with Bangladesh Computer Council (BCC)",
-    location: "Dhaka, Bangladesh",
-    date: "Certified",
-  },
-  {
-    title: "Computer Application Packages and Programming",
-    organizer: "Bangladesh Computer Council (BCC)",
-    location: "Dhaka, Bangladesh",
-    date: "Certified",
+    title: "Sustainable Partnerships",
+    desc: "Fostering long-term mutual prosperity with clients, port authorities, overseas partners, and community stakeholders.",
+    icon: HeartHandshake,
   },
 ];
 
-const associations = [
-  {
-    name: "Chittagong Customs Clearing and Forwarding Agents Association (CCAA)",
-    role: "Member Agent",
-    scope: "Port Customs & Clearance Operations",
-  },
-  {
-    name: "Dhaka Customs Clearing and Forwarding Agents Association (DCAA)",
-    role: "Member Agent",
-    scope: "Inland & Air Customs Brokerage",
-  },
-  {
-    name: "Bangladesh Freight Forwarders Association (BAFFA)",
-    role: "Registered Member",
-    scope: "International Logistics & Freight Forwarding",
-  },
-  {
-    name: "Bangladesh Electronics Merchants Association (BEMA)",
-    role: "Corporate Member",
-    scope: "Electronics & Industrial Trade",
-  },
-  {
-    name: "Bangladesh Electrical Motor Pump Importers Association (BEMPIA)",
-    role: "Corporate Member",
-    scope: "Industrial Machinery & Pump Imports",
-  },
-];
-
-export default function MessageFromEntrepreneurPage() {
+export default function MessageFromCEOPage() {
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. Header Hero */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
+    <div className="space-y-16 sm:space-y-24 pb-20 bg-slate-50 text-slate-900 select-none">
+      {/* 1. Executive Hero Section */}
+      <section className="relative py-20 lg:py-24 dark-segment border-b border-brand-gold/20 overflow-hidden">
+        {/* Glow & Backdrop */}
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Executive Leadership Profile &amp; Address</span>
+          {/* Breadcrumb / Category Pill */}
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider shadow-gold">
+            <Quote className="w-3.5 h-3.5 rotate-180" />
+            <span>Official Executive Address</span>
           </div>
+
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight">
-            About the <span className="text-gold-light-gradient">Group CEO</span>
+            Message from the{" "}
+            <span className="text-gold-light-gradient">Group Chief Executive Officer</span>
           </h1>
+
           <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed font-light">
-            Visionary leadership, 15+ years of supply chain governance, regulatory mastery, and institutional stewardship.
+            A personal address to our valued clients, global partners, and stakeholders on our foundational commitments, operational excellence, and shared future.
           </p>
         </div>
       </section>
 
-      {/* 2. Main Executive Profile & Biography */}
+      {/* 2. Main Executive Letter & Profile Layout */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-16 border border-slate-200 shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Column: Portrait & Credentials Box */}
-            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
-              {/* Circular Portrait & Identification */}
-              <div className="flex flex-col items-center text-center space-y-4 mb-4">
-                <div className="relative p-1.5 rounded-full bg-gradient-to-tr from-brand-gold via-amber-200 to-brand-goldLight shadow-2xl shadow-brand-gold/30">
-                  <div className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-full overflow-hidden border-4 border-white shadow-inner group">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          {/* Left Column: Sticky CEO Sidebar */}
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl space-y-6">
+              {/* Leader Photo & Credentials */}
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="relative p-1.5 rounded-full bg-gradient-to-tr from-brand-gold via-amber-200 to-brand-goldLight shadow-2xl shadow-brand-gold/25">
+                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-inner group">
                     <Image
                       src="/images/profile/profile01.jpg"
                       alt="Md. Abdullah Al Mamun - Group Chief Executive Officer, Top On Group"
                       fill
                       priority
-                      sizes="(max-width: 1024px) 240px, 240px"
-                      className="object-cover object-top group-hover:scale-110 transition-transform duration-700"
+                      quality={80}
+                      sizes="(max-width: 1024px) 224px, 224px"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
                   </div>
                 </div>
@@ -133,7 +105,7 @@ export default function MessageFromEntrepreneurPage() {
                   <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest block font-mono">
                     Executive Leadership
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900">
+                  <h2 className="text-2xl font-bold font-serif text-slate-900 tracking-tight">
                     Md. Abdullah Al Mamun
                   </h2>
                   <p className="text-sm font-semibold text-brand-goldDark">
@@ -145,21 +117,22 @@ export default function MessageFromEntrepreneurPage() {
                 </div>
               </div>
 
-              {/* Verified Credentials Grid */}
-              <div className="p-6 rounded-2xl bg-slate-900 text-slate-200 border border-brand-gold/30 space-y-3.5 shadow-lg">
+              {/* Verified Credentials Box */}
+              <div className="p-5 rounded-2xl bg-slate-900 text-slate-200 border border-brand-gold/30 space-y-3 shadow-md">
                 <div className="text-xs font-bold uppercase tracking-wider text-brand-gold border-b border-slate-800 pb-2 flex items-center justify-between">
-                  <span>Executive Credentials</span>
-                  <ShieldCheck className="w-4 h-4 text-brand-gold" />
+                  <span>Leadership Credentials</span>
+                  <BadgeCheck className="w-4 h-4 text-brand-gold" />
                 </div>
 
                 <div className="space-y-2.5 text-xs text-slate-300">
                   <div className="flex items-start space-x-2.5">
                     <Briefcase className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white block font-medium">15+ Years SCM Leadership</strong>
+                      <strong className="text-white block font-medium">15+ Years SCM Mastery</strong>
                       <span className="text-slate-400">Former Executive Director at Walton Group</span>
                     </div>
                   </div>
+
                   <div className="flex items-start space-x-2.5">
                     <Award className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
                     <div>
@@ -167,34 +140,29 @@ export default function MessageFromEntrepreneurPage() {
                       <span className="text-slate-400">Certified Supply Chain Manager (ISCEA, USA)</span>
                     </div>
                   </div>
+
                   <div className="flex items-start space-x-2.5">
                     <GraduationCap className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white block font-medium">Academic Degrees</strong>
-                      <span className="text-slate-400">BBS, MBS &amp; Bachelor of Laws (LLB)</span>
+                      <strong className="text-white block font-medium">Chartered Accountancy &amp; Tax</strong>
+                      <span className="text-slate-400">CACC (ICAB) &amp; Certified ITP (NBR Authorized)</span>
                     </div>
                   </div>
+
                   <div className="flex items-start space-x-2.5">
-                    <Award className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+                    <ShieldCheck className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
                     <div>
-                      <strong className="text-white block font-medium">CACC &amp; Certified ITP</strong>
-                      <span className="text-slate-400">A. Wahab &amp; Co. (ICAB) | NBR Authorized</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-2.5">
-                    <BadgeCheck className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-white block font-medium">CEFR C1 (Advanced)</strong>
-                      <span className="text-slate-400">IET, United Kingdom</span>
+                      <strong className="text-white block font-medium">Trade Governance</strong>
+                      <span className="text-slate-400">NBR Customs Tariff &amp; Port Clearance Advisory</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Direct CEO Desk Contacts */}
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2.5">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
                 <div className="font-bold text-slate-900 flex items-center space-x-1.5">
-                  <Building2 className="w-4 h-4 text-brand-gold" />
+                  <Building2 className="w-3.5 h-3.5 text-brand-gold" />
                   <span>Executive Secretariat</span>
                 </div>
                 <div className="text-slate-600 space-y-1">
@@ -210,135 +178,140 @@ export default function MessageFromEntrepreneurPage() {
                   </p>
                 </div>
               </div>
+
+              {/* Action Link to Full Biography */}
+              <Link
+                href="/about/about-ceo"
+                className="w-full inline-flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-brand-gold/15 text-brand-navy hover:text-brand-navy font-bold text-xs border border-slate-200 hover:border-brand-gold/40 transition-all duration-200"
+              >
+                <FileText className="w-3.5 h-3.5 text-brand-goldDark" />
+                <span>Read Full Biography &amp; Career History</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
+          </div>
 
-            {/* Right Column: Full Narrative & Detailed Biography */}
-            <div className="lg:col-span-7 space-y-8 text-slate-700 leading-relaxed text-sm sm:text-base">
-              {/* Biography Narrative */}
-              <div className="space-y-4">
-                <p>
-                  Mr. Md. Abdullah Al Mamun is a visionary business leader with more than 15 years of professional experience in supply chain management, trade policy, customs operations-C&amp;F, freight forwarding, logistics, vat with taxation, compliance audit and corporate administration. Known for his strategic mindset, ethical leadership, and commitment to excellence, he has played a significant role in strengthening operational standards within Bangladesh&apos;s SCM industry.
-                </p>
+          {/* Right Column: Full Formal Executive Letter */}
+          <div className="lg:col-span-7 space-y-8">
+            <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200 shadow-xl space-y-8 relative overflow-hidden">
+              {/* Top Accent Ribbon */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-gold via-amber-200 to-brand-goldDark" />
 
-                <p>
-                  He holds a <strong>Bachelor of Business Studies (BBS)</strong>, a <strong>Master of Business Studies (MBS)</strong>, and a <strong>Bachelor of Laws (LLB)</strong>. He also completed the <strong>Chartered Accountancy Course Completion (CACC)</strong> at A. Wahab &amp; Co., Chartered Accountants, under the <strong>Institute of Chartered Accountants of Bangladesh (ICAB)</strong>. In addition, he earned the internationally recognized <strong>Certified Supply Chain Manager (CSCM)</strong> certification from <strong>ISCEA, USA</strong>, and <strong>CEFR C1 (Advanced)</strong> certification from <strong>IET, UK</strong>. He is also a certified <strong>Income Tax Practitioner (ITP)</strong>, authorized by the <strong>National Board of Revenue (NBR), Bangladesh</strong>.
-                </p>
-
-                <p>
-                  Mr. Mamun began his professional journey with <strong>Mosharaf Group</strong>, where he developed strong foundations in business operations and corporate management. His dedication, analytical skills, and leadership capabilities later led him to <strong>Walton Group</strong> in 2016. During his tenure, he served as <strong>Executive Director of Supply Chain Management and Head of C&amp;F Operations</strong>, gaining extensive expertise in supply chain, Customs, NBR trade policy, budget, customs excise and vat and audit &amp; compliance.
-                </p>
-
-                <p>
-                  Throughout his professional tenure at Walton, Mr. Mamun received several awards and recognitions for his outstanding performance and professional excellence, particularly during his leadership roles as Executive Director and Head of Customs Clearance &amp; Forwarding (C&amp;F). Among these recognitions, he received the <strong>Best Performer Award in 2018 from the Internal Audit &amp; Compliance (IAC) Department</strong>, reflecting his leadership, highlighting his dedication to operational integrity, compliance excellence, and commitment to organizational success.
-                </p>
-
-                <p>
-                  Driven by more than 15 years of professional experience and expertise, Mr. Mamun brought his extensive knowledge in supply chain management, customs clearance and forwarding, logistics, trading, and business operations to the own business as <strong>Group Chief Executive Officer of Top On Group</strong>.
-                </p>
-
-                <p>
-                  Under his leadership, Top On Group continues to build a strong and diversified business platform across trade, logistics, supply chain, agriculture, and fisheries. Guided by integrity, innovation, and operational excellence, he is focused on sustainable growth, technology-driven solutions, and long-term value creation.
-                </p>
-
-                <p>
-                  An approachable and forward-thinking leader, Mr. Mamun is committed to continuous learning, team development, client satisfaction, and building lasting relationships with partners and stakeholders.
-                </p>
-              </div>
-
-              {/* Professional Training & Development */}
-              <div className="pt-6 border-t border-slate-200 space-y-4">
-                <div className="flex items-center space-x-2 text-[#0B2240] font-serif font-bold text-xl">
-                  <BookOpen className="w-5 h-5 text-brand-gold shrink-0" />
-                  <span>Professional Training &amp; Development</span>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-600">
-                  Mr. Mamun has actively participated in several professional training and development programs, enhancing his expertise in finance, ICT, business operations, and management:
-                </p>
-
-                <div className="grid grid-cols-1 gap-3">
-                  {trainings.map((t, idx) => (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-brand-gold/50 transition-colors flex items-start space-x-3"
-                    >
-                      <CheckCircle className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                      <div className="space-y-0.5 text-xs">
-                        <strong className="text-slate-900 font-semibold block text-sm">
-                          {t.title}
-                        </strong>
-                        <span className="text-slate-600 block">
-                          Organized by {t.organizer}
-                        </span>
-                        <span className="text-slate-400 block font-mono text-[11px]">
-                          {t.location} • {t.date}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Memberships & Professional Associations */}
-              <div className="pt-6 border-t border-slate-200 space-y-4">
-                <div className="flex items-center space-x-2 text-[#0B2240] font-serif font-bold text-xl">
-                  <Users className="w-5 h-5 text-brand-gold shrink-0" />
-                  <span>Memberships &amp; Professional Associations</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {associations.map((a, idx) => (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-brand-gold/50 transition-colors space-y-1 text-xs"
-                    >
-                      <div className="font-bold text-slate-900 leading-snug">
-                        {a.name}
-                      </div>
-                      <div className="text-brand-goldDark font-semibold">
-                        {a.role}
-                      </div>
-                      <div className="text-slate-500 text-[11px]">
-                        {a.scope}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Executive Message / Letter Card */}
-              <div className="pt-6 border-t border-slate-200 space-y-4">
-                <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#071930] to-[#040D1A] text-white border border-brand-gold/40 shadow-xl space-y-4">
-                  <div className="flex items-center space-x-2 text-brand-gold text-xs font-bold uppercase tracking-wider font-mono">
-                    <Quote className="w-4 h-4 rotate-180 text-brand-gold" />
-                    <span>Message from the Group Chief Executive Officer</span>
+              {/* Letterhead Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-100 gap-4">
+                <div className="space-y-1">
+                  <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest font-mono">
+                    Executive Address
+                  </span>
+                  <div className="text-xl sm:text-2xl font-serif font-bold text-brand-navy">
+                    Top On Group
                   </div>
-
-                  <h4 className="text-xl font-serif font-bold text-white">
-                    Dear Valued Clients, Partners and Stakeholders,
-                  </h4>
-
-                  <p className="text-slate-200 text-sm leading-relaxed">
-                    It is my privilege to welcome you to <strong className="text-brand-gold">Top On Group</strong>. Our journey is built on a strong foundation of experience, trust, and commitment. With a heritage rooted in Bangladesh’s customs and trade sector, we have continuously evolved by expanding our capabilities across customs clearance and forwarding, freight forwarding and logistics, international trade, trading and supply, agriculture, and fisheries.
+                  <p className="text-xs text-slate-500">
+                    Dhaka &bull; Chattogram &bull; Mongla, Bangladesh
                   </p>
+                </div>
 
-                  <div className="p-4 rounded-xl bg-brand-gold/15 border border-brand-gold/30 text-xs italic text-slate-100">
-                    &quot;We remain committed to our purpose — to deliver Quality, serve with dedication, and Together, we strive for excellence for our people and sustainable progress for our nation.&quot;
+                <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 text-xs self-start sm:self-auto font-medium">
+                  <span>Official Communiqué</span>
+                </div>
+              </div>
+
+              {/* Salutation */}
+              <div className="space-y-3">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-slate-900 leading-snug">
+                  Dear Valued Clients, Partners and Stakeholders,
+                </h3>
+                <p className="text-base sm:text-lg text-brand-navy font-semibold leading-relaxed">
+                  It is my privilege to welcome you to <span className="text-brand-goldDark">Top On Group</span>.
+                </p>
+              </div>
+
+              {/* Body Paragraphs */}
+              <div className="space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base">
+                <p>
+                  Our journey is built on a strong foundation of experience, trust, and commitment. With a heritage rooted in Bangladesh’s customs and trade sector, we have continuously evolved by expanding our capabilities across customs clearance and forwarding, freight forwarding and logistics, international trade, trading and supply, agriculture, and fisheries.
+                </p>
+
+                <p>
+                  At Top On Group, we believe that sustainable success is built on <strong className="text-slate-900">quality, integrity, innovation, and service excellence</strong>. In an increasingly competitive and rapidly changing business environment, we are committed to embracing modern technology, smart solutions, and professional business practices to create greater value for our clients and business partners.
+                </p>
+
+                <p>
+                  As we move forward, our focus remains on building a stronger, more integrated, and sustainable business platform. We are committed to strengthening our capabilities, empowering our people, maintaining the highest standards of professionalism, and building long-term relationships based on trust and mutual success.
+                </p>
+
+                <p>
+                  I extend my sincere appreciation to our valued clients, partners, employees, and stakeholders for their continued trust and support. Together, we will continue to pursue responsible growth and contribute to the development of Bangladesh&apos;s trade, logistics, agriculture, and commercial sectors.
+                </p>
+              </div>
+
+              {/* Illuminated Purpose Quote Block */}
+              <div className="p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-[#071930] via-[#0B2240] to-[#040D1A] text-white border border-brand-gold/40 shadow-xl space-y-3">
+                <div className="flex items-center space-x-2 text-brand-gold font-mono text-xs font-bold uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-brand-gold" />
+                  <span>Our Unwavering Purpose</span>
+                </div>
+                <p className="text-base sm:text-lg text-slate-100 font-serif italic leading-relaxed">
+                  &quot;We remain committed to our purpose — to deliver Quality, serve with dedication, and Together, we strive for excellence for our people and sustainable progress for our nation.&quot;
+                </p>
+              </div>
+
+              {/* Strategic Pillars Grid */}
+              <div className="pt-4 space-y-4">
+                <h4 className="text-sm font-bold uppercase tracking-wider text-slate-500 font-mono">
+                  Pillars of Our Strategic Execution
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {STRATEGIC_PILLARS.map((pillar, idx) => {
+                    const Icon = pillar.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5"
+                      >
+                        <div className="flex items-center space-x-2 text-brand-navy font-bold text-xs sm:text-sm">
+                          <Icon className="w-4 h-4 text-brand-gold" />
+                          <span>{pillar.title}</span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                          {pillar.desc}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Signature Block */}
+              <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+                <div className="space-y-1.5">
+                  <span className="text-xs text-slate-500 block">Respectfully and sincerely,</span>
+                  <div className="font-serif text-2xl font-bold text-slate-900 tracking-tight">
+                    Md. Abdullah Al Mamun
                   </div>
-
-                  <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-t border-white/10">
-                    <div>
-                      <strong className="text-white block font-serif text-base">Md. Abdullah Al Mamun</strong>
-                      <span className="text-brand-gold">Group Chief Executive Officer, Top On Group</span>
-                    </div>
-
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg bg-brand-gold text-brand-navy font-bold text-xs shadow-gold hover:bg-brand-goldLight transition-colors"
-                    >
-                      <span>Connect with CEO Desk</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                  <div className="text-xs font-bold text-brand-goldDark uppercase tracking-wider">
+                    Group Chief Executive Officer
                   </div>
+                  <div className="text-xs text-slate-500">
+                    Top On Group
+                  </div>
+                </div>
+
+                {/* Direct Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white font-bold text-xs shadow-md border border-brand-gold/30 hover:border-brand-gold transition-all"
+                  >
+                    <span>Connect with CEO Desk</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-brand-gold" />
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors"
+                  >
+                    <span>Explore Divisions</span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -346,9 +319,20 @@ export default function MessageFromEntrepreneurPage() {
         </div>
       </section>
 
-      {/* 3. Interactive Photo Gallery */}
+      {/* 3. Leadership & Field Engagements Gallery */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200 shadow-xl">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200 shadow-xl space-y-6">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest block font-mono">
+              Field Engagements &amp; Industry Presence
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+              Executive Leadership in Action
+            </h3>
+            <p className="text-slate-600 text-xs sm:text-sm">
+              Glimpses of port audits, industrial reviews, corporate discussions, and agro development initiatives across Bangladesh.
+            </p>
+          </div>
           <LeadershipGallery />
         </div>
       </section>

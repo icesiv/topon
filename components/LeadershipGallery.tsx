@@ -86,6 +86,7 @@ function GalleryThumbnail({
         src={src}
         alt={`Top On Group Gallery Photo ${index + 1}`}
         fill
+        quality={80}
         placeholder="blur"
         blurDataURL={shimmerBlur}
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -228,6 +229,7 @@ export default function LeadershipGallery() {
                 alt={`Photo ${activeIdx + 1}`}
                 fill
                 priority
+                quality={80}
                 placeholder="blur"
                 blurDataURL={shimmerBlur}
                 sizes="(max-width: 1280px) 95vw, 1200px"

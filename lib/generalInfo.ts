@@ -9,6 +9,7 @@ export interface GeneralInfoData extends Partial<BaseFirestoreDoc> {
   ctgPhone: string;
   email: string;
   headOfficeAddress: string;
+  chattogramOfficeAddress: string;
   operatingHours: string;
   facebookUrl: string;
   linkedinUrl: string;
@@ -21,7 +22,10 @@ export const DEFAULT_GENERAL_INFO: GeneralInfoData = {
   dhakaPhone: "01711-775280",
   ctgPhone: "01711-775281",
   email: "info@toponbd.com",
-  headOfficeAddress: "Dhaka, Bangladesh",
+  headOfficeAddress:
+    "House: Ka/11 (1st Floor), Matbar Bari Moasjid Road, Jagannathpur, Bashundhara, Vatara, Dhaka-1229",
+  chattogramOfficeAddress:
+    "Suraiya Mansion (6th Floor), 30 Agrabad Commercial Area, Chattogram-4100",
   operatingHours: "Monday – Saturday: 09:00 AM – 06:00 PM (GMT+6)",
   facebookUrl: "https://www.facebook.com/topongroup",
   linkedinUrl: "https://www.linkedin.com/company/topongroup",

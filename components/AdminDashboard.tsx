@@ -80,6 +80,7 @@ const PRESET_HERO_IMAGES = [
   "/images/topexpress_hero.jpg",
   "/images/dailyshipping_hero.jpg",
   "/images/toponagro_hero.jpg",
+  "/images/toponsolution_hero.jpg",
   "/images/hero_port.jpg",
   "/images/trading_sourcing.jpg",
   "/images/customs_cnf.jpg",
@@ -1293,6 +1294,7 @@ export default function AdminDashboard() {
                           src={currentPanel.image || "/images/topontech_hero.jpg"}
                           alt={currentPanel.name}
                           fill
+                          quality={80}
                           sizes="(max-width: 768px) 100vw, 400px"
                           className={`object-cover transition-all duration-500 ${previewExpanded
                             ? "scale-105 brightness-110"
@@ -1395,6 +1397,7 @@ export default function AdminDashboard() {
                           src={p.image || "/images/partners/walton.png"}
                           alt={p.name}
                           fill
+                          quality={100}
                           sizes="64px"
                           className="object-contain p-1"
                         />
@@ -1648,6 +1651,22 @@ export default function AdminDashboard() {
                     value={generalInfo.headOfficeAddress}
                     onChange={(e) =>
                       setGeneralInfo({ ...generalInfo, headOfficeAddress: e.target.value })
+                    }
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+
+                {/* Chattogram Office Address */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-slate-300 flex items-center space-x-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-brand-gold" />
+                    <span>Chattogram Office Address</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={generalInfo.chattogramOfficeAddress || ""}
+                    onChange={(e) =>
+                      setGeneralInfo({ ...generalInfo, chattogramOfficeAddress: e.target.value })
                     }
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#040C18] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none"
                   />

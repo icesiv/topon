@@ -148,6 +148,7 @@ export default function MilestonesAccreditationsPage() {
               src="/images/customs_cnf.jpg"
               alt="Licensed customs clearing at Chittagong Port"
               fill
+              quality={80}
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
@@ -166,6 +167,7 @@ export default function MilestonesAccreditationsPage() {
               src="/images/air_cargo.jpg"
               alt="Air Cargo handling at Dhaka Airport HSIA"
               fill
+              quality={80}
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
@@ -184,6 +186,7 @@ export default function MilestonesAccreditationsPage() {
               src="/images/hero_port.jpg"
               alt="Ocean freight vessel operations"
               fill
+              quality={80}
               sizes="(max-width: 768px) 100vw, 400px"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />

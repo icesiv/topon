@@ -12,6 +12,7 @@ export default function SustainabilitySection() {
           alt="Sustainability and Environmental Stewardship"
           fill
           priority={false}
+          quality={80}
           sizes="100vw"
           className="object-cover object-center scale-105 transform motion-safe:animate-pulse [animation-duration:12s]"
         />

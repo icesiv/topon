@@ -12,11 +12,12 @@ import {
   Clock,
   ShieldCheck,
   FileCheck2,
+  Briefcase,
   ArrowRight,
 } from "lucide-react";
 
 interface QuoteFormProps {
-  defaultDivision?: "topontech" | "dailyshipping" | "topexpress" | "agro" | "both";
+  defaultDivision?: "topontech" | "dailyshipping" | "topexpress" | "agro" | "solution" | "both";
   compact?: boolean;
 }
 
@@ -31,6 +32,8 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
         return "freight";
       case "agro":
         return "agro";
+      case "solution":
+        return "solution";
       default:
         return "trading";
     }
@@ -74,10 +77,17 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
     },
     {
       id: "agro",
-      name: "Top On-Agro",
+      name: "Top On-Agro Farm",
       role: "Fisheries & Aquaculture",
       icon: Fish,
       defaultCategory: "bulk_fish",
+    },
+    {
+      id: "solution",
+      name: "Top On-Solution",
+      role: "Corporate Consultancy & Advisory",
+      icon: Briefcase,
+      defaultCategory: "business_setup",
     },
   ];
 
@@ -167,59 +177,38 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
         </p>
       </div>
 
-      {/* Division Selector: 4 Modern Interactive Cards */}
+      {/* Division Selector: Dropdown */}
       <div className="space-y-2">
-        <label className="block text-xs font-bold text-[#0B2240] uppercase tracking-wider">
+        <label
+          htmlFor="target-division-select"
+          className="block text-xs font-bold text-[#0B2240] uppercase tracking-wider"
+        >
           1. Select Target Operating Division *
         </label>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-          {divisions.map((div) => {
-            const Icon = div.icon;
-            const isSelected = formData.division === div.id;
-            return (
-              <button
-                key={div.id}
-                type="button"
-                onClick={() => handleDivisionChange(div.id, div.defaultCategory)}
-                className={`p-3 rounded-2xl border text-left transition-all duration-200 group relative flex flex-col justify-between ${
-                  isSelected
-                    ? "bg-[#0B2240] text-white border-[#0B2240] shadow-md ring-2 ring-brand-gold/30"
-                    : "bg-slate-50/70 hover:bg-slate-100 text-slate-700 border-slate-200 hover:border-brand-gold/50"
-                }`}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div
-                    className={`p-1.5 rounded-lg ${
-                      isSelected
-                        ? "bg-brand-gold text-brand-navy"
-                        : "bg-white text-[#0B2240] border border-slate-200 group-hover:border-brand-gold/40"
-                    } transition-colors`}
-                  >
-                    <Icon className="w-4 h-4" />
-                  </div>
-                  {isSelected && (
-                    <span className="w-2 h-2 rounded-full bg-brand-gold animate-pulse" />
-                  )}
-                </div>
-                <div>
-                  <div
-                    className={`font-bold text-xs ${
-                      isSelected ? "text-white" : "text-[#0B2240]"
-                    }`}
-                  >
-                    {div.name}
-                  </div>
-                  <div
-                    className={`text-[10px] leading-tight mt-0.5 ${
-                      isSelected ? "text-slate-300" : "text-slate-500"
-                    }`}
-                  >
-                    {div.role}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
+        <div className="relative">
+          <select
+            id="target-division-select"
+            value={formData.division}
+            onChange={(e) => {
+              const selectedId = e.target.value;
+              const selectedDiv = divisions.find((d) => d.id === selectedId);
+              if (selectedDiv) {
+                handleDivisionChange(selectedDiv.id, selectedDiv.defaultCategory);
+              }
+            }}
+            className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 font-semibold text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/20 focus:border-brand-gold focus:bg-white transition-all appearance-none cursor-pointer pr-10"
+          >
+            {divisions.map((div) => (
+              <option key={div.id} value={div.id} className="text-slate-900 font-medium py-1">
+                {div.name} — {div.role}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-goldDark">
+            <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+              <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -335,6 +324,16 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
                   <option value="fingerlings">Certified Hatchery Broodstock &amp; Fingerlings</option>
                   <option value="cold_chain">Cold-Chain Temperature Controlled Transport</option>
                   <option value="biofloc">Commercial Aerated &amp; Biofloc Pond Consulting</option>
+                </>
+              )}
+              {formData.division === "solution" && (
+                <>
+                  <option value="business_setup">Business Setup &amp; RJSC / BIDA Company Formation</option>
+                  <option value="licensing">Trade, IRC / ERC &amp; Regulatory Licensing Support</option>
+                  <option value="tax_vat_nbr">NBR, Customs, Excise &amp; VAT Compliance Advisory</option>
+                  <option value="audit_returns">Corporate Tax Filing, Annual Audit &amp; Return Services</option>
+                  <option value="trade_policy">Budget, Trade Policy &amp; SRO Impact Advisory</option>
+                  <option value="due_diligence">Supplier Due Diligence &amp; Dispute Settlement</option>
                 </>
               )}
             </select>
