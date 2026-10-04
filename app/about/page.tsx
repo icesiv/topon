@@ -172,9 +172,6 @@ export default function AboutPage() {
             <Layers className="w-3.5 h-3.5 text-brand-goldDark" />
             <span>Group Structure</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#0B2240]">
-            Four Complementary Businesses
-          </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
             Together, our businesses combine deep industry knowledge with an integrated approach to trade, logistics, supply chain, commercial operations, agriculture, and fisheries, enabling us to deliver practical, reliable, and efficient solutions to our clients and business partners.
           </p>
