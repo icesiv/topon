@@ -10,7 +10,7 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 export const metadata: Metadata = {
   title: "Top On Group | International Trading & Freight Forwarding Logistics",
   description:
-    "Top On Group is a premier conglomerate in Bangladesh, specializing in general trading, ocean and air freight forwarding, customs clearance, and supply chain logistics.",
+    "Customs Clearing and Forwarding, Freight Forwarding, Import, Trade, Consultancy & Supply",
 };
 
 export default function HomePage() {
