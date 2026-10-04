@@ -314,24 +314,6 @@ export default function MessageFromCEOPage() {
           </div>
         </div>
       </section>
-
-      {/* 3. Leadership & Field Engagements Gallery */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200 shadow-xl space-y-6">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest block font-mono">
-              Field Engagements &amp; Industry Presence
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
-              Executive Leadership in Action
-            </h3>
-            <p className="text-slate-600 text-xs sm:text-sm">
-              Glimpses of port audits, industrial reviews, corporate discussions, and agro development initiatives across Bangladesh.
-            </p>
-          </div>
-          <LeadershipGallery />
-        </div>
-      </section>
     </div>
   );
 }

@@ -357,7 +357,7 @@ export default function Header() {
                   }`}
                 aria-expanded={companyDropdownOpen}
               >
-                <span>Divisions</span>
+                <span>Group Entities</span>
                 <ChevronDown
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${companyDropdownOpen ? "rotate-180 text-brand-gold" : "text-slate-500"
                     }`}
@@ -456,6 +456,35 @@ export default function Header() {
               )}
             </Link>
 
+
+            {/* articles */}
+            <Link
+              href="/articles"
+              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/services")
+                ? "text-brand-navy font-bold bg-slate-100"
+                : "hover:text-brand-navy hover:bg-slate-100/80"
+                }`}
+            >
+              <span>Articles</span>
+              {pathname.startsWith("/articles") && (
+                <span className="absolute bottom-0.5 left-3 right-3 h-[2px] bg-brand-gold rounded-full" />
+              )}
+            </Link>
+
+            {/* Gallery */}
+            <Link
+              href="/gallery"
+              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/services")
+                ? "text-brand-navy font-bold bg-slate-100"
+                : "hover:text-brand-navy hover:bg-slate-100/80"
+                }`}
+            >
+              <span>Gallery</span>
+              {pathname.startsWith("/gallery") && (
+                <span className="absolute bottom-0.5 left-3 right-3 h-[2px] bg-brand-gold rounded-full" />
+              )}
+            </Link>
+
             {/* Contact */}
             <Link
               href="/contact"
@@ -536,15 +565,6 @@ export default function Header() {
                 </div>
               )}
             </div>
-
-            {/* Primary Action Button: "Get a Quote" */}
-            <Link
-              href="/contact"
-              className="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-[#0B2240] hover:bg-[#061324] text-white text-xs font-bold border border-brand-gold/40 hover:border-brand-gold shadow-sm hover:shadow-gold transition-all duration-200 group"
-            >
-              <span>Get a Quote</span>
-              <ArrowRight className="w-3.5 h-3.5 text-brand-gold transition-transform duration-200 group-hover:translate-x-0.5" />
-            </Link>
           </div>
 
           {/* Mobile Right Controls */}
