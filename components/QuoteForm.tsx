@@ -72,7 +72,7 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
     {
       id: "customs",
       name: "Top Express Ltd.",
-      role: "Customs Clearing (C&F)",
+      role: "Customs Clearing & Forwarding (C&F)",
       icon: FileCheck2,
       defaultCategory: "port_customs",
     },
@@ -86,7 +86,7 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
     {
       id: "trading",
       name: "Top On-Tech",
-      role: "Import, Export & Trading",
+      role: "Import, Export, Trading & Sourcing with Supply",
       icon: Building2,
       defaultCategory: "machinery",
     },
@@ -100,7 +100,7 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
     {
       id: "solution",
       name: "Top On-Solution",
-      role: "Corporate Consultancy & Advisory",
+      role: "Business Advisory & Professional Services",
       icon: Briefcase,
       defaultCategory: "business_setup",
     },
@@ -174,9 +174,8 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
   return (
     <form
       onSubmit={handleSubmit}
-      className={`bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xl shadow-slate-900/5 space-y-6 ${
-        compact ? "text-xs" : "text-sm"
-      }`}
+      className={`bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xl shadow-slate-900/5 space-y-6 ${compact ? "text-xs" : "text-sm"
+        }`}
     >
       {/* Header */}
       <div className="border-b border-slate-100 pb-5 space-y-1.5">
@@ -380,22 +379,6 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
             placeholder="Please detail your cargo description, origin/destination ports, target delivery timeline, or technical requirements..."
             className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-gold/20 focus:border-brand-gold focus:bg-white transition-all text-xs leading-relaxed"
           />
-        </div>
-      </div>
-
-      {/* Trust Badges */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 text-[11px] text-slate-600">
-        <div className="flex items-center space-x-2 p-2.5 rounded-xl bg-slate-50 border border-slate-150">
-          <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span className="font-medium">Confidential NDA Protection</span>
-        </div>
-        <div className="flex items-center space-x-2 p-2.5 rounded-xl bg-slate-50 border border-slate-150">
-          <CheckCircle2 className="w-4 h-4 text-brand-goldDark shrink-0" />
-          <span className="font-medium">NBR &amp; Port Compliant</span>
-        </div>
-        <div className="flex items-center space-x-2 p-2.5 rounded-xl bg-slate-50 border border-slate-150">
-          <Clock className="w-4 h-4 text-blue-600 shrink-0" />
-          <span className="font-medium">2–4 Hour Review SLA</span>
         </div>
       </div>
 

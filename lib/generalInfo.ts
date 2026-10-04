@@ -26,7 +26,7 @@ export const DEFAULT_GENERAL_INFO: GeneralInfoData = {
     "House: Ka/11 (1st Floor), Matbar Bari Moasjid Road, Jagannathpur, Bashundhara, Vatara, Dhaka-1229",
   chattogramOfficeAddress:
     "Suraiya Mansion (6th Floor), 30 Agrabad Commercial Area, Chattogram-4100",
-  operatingHours: "Monday – Saturday: 09:00 AM – 06:00 PM (GMT+6)",
+  operatingHours: "Sat – Thu: 10:00 AM – 07:00 PM (GMT+6)",
   facebookUrl: "https://www.facebook.com/topongroup",
   linkedinUrl: "https://www.linkedin.com/company/topongroup",
   whatsappNumber: "+8801700000000",

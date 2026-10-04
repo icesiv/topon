@@ -52,7 +52,7 @@ const DIVISIONS: DivisionItem[] = [
   },
   {
     name: "Top On-Tech",
-    tag: "trading, import, sourcing & distribution",
+    tag: "Import, Export, Trading & Sourcing with Supply",
     href: "/divisions/trading-topontech",
     icon: Building2,
   },
@@ -64,7 +64,7 @@ const DIVISIONS: DivisionItem[] = [
   },
   {
     name: "Top On-Solution",
-    tag: "Corporate Consultancy",
+    tag: "Business Advisory & Professional Services",
     href: "/divisions/consultancy-toponsolution",
     icon: Briefcase,
   },
@@ -138,7 +138,7 @@ const COMPANY_PROFILES = [
   },
   {
     name: "Top On-Solution",
-    badge: "Consultancy & Legal",
+    badge: "Business Advisory & Professional Services",
     pdfUrl: "/profiles/TopOnSolution-profile.pdf",
     filename: "TopOnSolution-profile.pdf",
     icon: Briefcase,

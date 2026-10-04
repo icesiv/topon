@@ -7,23 +7,53 @@ import {
   Building2,
   Ship,
   Headphones,
-  ShieldCheck,
-  Sparkles,
+  Plane,
+  Anchor,
+  Truck,
 } from "lucide-react";
 import QuoteForm from "@/components/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Contact Us & Port Desks | Top On Group",
   description:
-    "Get in touch with Top On Group headquarters in Dhaka and operations desks at Chittagong & Mongla ports. Submit RFQs for Top On-Tech trading and Daily Shipping logistics.",
+    "Get in touch with Top On Group headquarters in Dhaka, Chattogram office, and customs desks at Dhaka Airport, Chattogram, ICD Kamalapur, Pangaon, and Benapole. Submit RFQs for trading and logistics.",
   keywords: [
     "Contact Top On Group",
     "Chittagong Port Office",
     "Dhaka Sourcing Desk",
     "Top On Group Email Phone",
     "Freight Forwarding Quote Dhaka",
+    "Customs House Desks",
   ],
 };
+
+const customsDesks = [
+  {
+    num: "1",
+    name: "Customs House, Airport, Dhaka",
+    icon: Plane,
+  },
+  {
+    num: "2",
+    name: "Customs House, Chattogram",
+    icon: Anchor,
+  },
+  {
+    num: "3",
+    name: "Customs House ICD, Dhaka",
+    icon: Building2,
+  },
+  {
+    num: "4",
+    name: "Customs House, Pangaon, Dhaka",
+    icon: Ship,
+  },
+  {
+    num: "5",
+    name: "Customs House Benapole, Jashore",
+    icon: Truck,
+  },
+];
 
 export default function ContactPage() {
   return (
@@ -113,7 +143,7 @@ export default function ContactPage() {
                     <Clock className="w-4 h-4 text-brand-gold flex-shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-slate-900 block">Operating Hours</strong>
-                      <span className="text-slate-600">Monday – Saturday: 09:00 AM – 06:00 PM (GMT+6)</span>
+                      <span className="text-slate-600">Sat – Thu: 10:00 AM – 07:00 PM (GMT+6)</span>
                     </div>
                   </div>
                 </div>
@@ -122,32 +152,35 @@ export default function ContactPage() {
 
             {/* Port & Airport Desks */}
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xl space-y-4">
-              <h3 className="text-base font-bold font-serif text-[#0B2240] flex items-center space-x-2.5">
-                <Ship className="w-5 h-5 text-brand-navy" />
-                <span>Port &amp; Airport Operations Desks</span>
-              </h3>
+              <div>
+                <span className="text-[11px] font-bold text-brand-gold uppercase tracking-widest block font-mono mb-1">
+                  Customs &amp; Ports
+                </span>
+                <h3 className="text-xl font-bold font-serif text-[#0B2240] flex items-center space-x-2.5">
+                  <Ship className="w-5 h-5 text-brand-navy" />
+                  <span>Port &amp; Airport Operations Desks</span>
+                </h3>
+              </div>
 
-              <div className="space-y-3 text-xs text-slate-700">
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
-                  <strong className="text-[#0B2240] block">Chittagong Port &amp; Custom House Desk</strong>
-                  <p className="text-slate-600 mt-0.5">
-                    Agrabad Commercial Area, Chattogram. Handling ocean vessel manifests, container unstuffing, and customs release.
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
-                  <strong className="text-[#0B2240] block">Mongla Port &amp; Khulna Liaison Desk</strong>
-                  <p className="text-slate-600 mt-0.5">
-                    Specialized bulk cargo, project equipment, and south-western corridor transshipment coordination.
-                  </p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
-                  <strong className="text-[#0B2240] block">Air Freight Desk - DAC Cargo Village</strong>
-                  <p className="text-slate-600 mt-0.5">
-                    Hazrat Shahjalal International Airport, Kurmitola, Dhaka. Expedited customs clearing and bonded warehouse handling.
-                  </p>
-                </div>
+              <div className="space-y-2.5 text-xs text-slate-700">
+                {customsDesks.map((desk) => {
+                  const Icon = desk.icon;
+                  return (
+                    <div
+                      key={desk.num}
+                      className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-brand-gold/50 transition-colors flex items-center gap-3"
+                    >
+                      <div className="w-8 h-8 rounded-xl bg-brand-navy/5 text-brand-navy border border-brand-navy/10 flex items-center justify-center shrink-0">
+                        <Icon className="w-4 h-4 text-brand-navy" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="text-[#0B2240] text-sm font-semibold block leading-tight">
+                          {desk.num}. {desk.name}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
