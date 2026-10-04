@@ -16,27 +16,10 @@ import {
 export const metadata: Metadata = {
   title: "Operating Divisions | Top On Group",
   description:
-    "Explore the 5 core operating divisions of Top On Group: Top On-Tech (Trading & Sourcing), Top Express Limited (Customs C&F), Daily Shipping & Logistics (Freight Forwarding), Top On-Agro Farm (Fisheries & Aquaculture), and Top On-Solution (Corporate Consultancy).",
+    "Explore the 5 core operating divisions of Top On Group: Top Express Limited (Customs C&F), Daily Shipping & Logistics (Freight Forwarding), Top On-Tech (Trading & Sourcing), Top On-Agro Farm (Fisheries & Aquaculture), and Top On-Solution (Corporate Consultancy).",
 };
 
 const DIVISIONS = [
-  {
-    id: "tech",
-    name: "Top On-Tech",
-    role: "Import, Export & General Trading",
-    badge: "Industrial Sourcing • B2B Procurement",
-    desc: "Connecting international manufacturers with Bangladesh's core industries. Specializing in heavy machinery procurement, industrial chemicals, RMG production inputs, and turnkey commercial supply.",
-    image: "/images/topontech_hero.jpg",
-    logo: "/images/logo/topon-tech.png",
-    href: "/divisions/trading-topontech",
-    icon: Building2,
-    highlights: [
-      "Heavy Industrial Machinery & Spares",
-      "Chemical Reagents & Raw Processing Additives",
-      "RMG Yarns, Fabrics & Garment Accessories",
-      "Direct OEM Import Contracts & B2B Supply",
-    ],
-  },
   {
     id: "express",
     name: "Top Express Limited",
@@ -69,6 +52,23 @@ const DIVISIONS = [
       "Priority HSIA Dhaka Air Cargo Charters",
       "Nationwide GPS-Monitored Container Haulage",
       "20,000+ Containers Managed with Zero Loss",
+    ],
+  },
+  {
+    id: "tech",
+    name: "Top On-Tech",
+    role: "Import, Export & General Trading",
+    badge: "Industrial Sourcing • B2B Procurement",
+    desc: "Connecting international manufacturers with Bangladesh's core industries. Specializing in heavy machinery procurement, industrial chemicals, RMG production inputs, and turnkey commercial supply.",
+    image: "/images/topontech_hero.jpg",
+    logo: "/images/logo/topon-tech.png",
+    href: "/divisions/trading-topontech",
+    icon: Building2,
+    highlights: [
+      "Heavy Industrial Machinery & Spares",
+      "Chemical Reagents & Raw Processing Additives",
+      "RMG Yarns, Fabrics & Garment Accessories",
+      "Direct OEM Import Contracts & B2B Supply",
     ],
   },
   {

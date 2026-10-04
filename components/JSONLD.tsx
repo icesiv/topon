@@ -10,7 +10,7 @@ export default function JSONLD() {
         "logo": "https://www.toponbd.com/logo.png",
         "email": "info@toponbd.com",
         "description": "Premier international conglomerate in Bangladesh delivering excellence in general trading, global sourcing, and multimodal freight forwarding.",
-        "slogan": "On Time. Every Time.",
+        "slogan": "BUILT ON TRUST",
         "foundingLocation": {
           "@type": "Place",
           "address": {
@@ -35,18 +35,15 @@ export default function JSONLD() {
         "subOrganization": [
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.toponbd.com/#top-on-tech",
-            "name": "Top On-Tech",
-            "description": "Diversified import, export and trading house sourcing industrial machinery, spares, chemicals, textiles, and electronics.",
-            "url": "https://www.toponbd.com/divisions/trading-topontech",
+            "@id": "https://www.toponbd.com/#top-express",
+            "name": "Top Express Limited",
+            "description": "Express transit and nationwide courier logistics fleet connecting key commercial hubs.",
+            "url": "https://www.toponbd.com/divisions/express-topexpress",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
-              "Industrial Machinery & Spares",
-              "Chemical Supply & Procurement",
-              "Textile Fabrics",
-              "Electronics & Consumer Goods",
-              "International Sourcing",
-              "Global Trade Management"
+              "Express Courier Services",
+              "B2B Linehaul Transit",
+              "Nationwide Logistics Fleet"
             ]
           },
           {
@@ -66,15 +63,18 @@ export default function JSONLD() {
           },
           {
             "@type": "LocalBusiness",
-            "@id": "https://www.toponbd.com/#top-express",
-            "name": "Top Express Limited",
-            "description": "Express transit and nationwide courier logistics fleet connecting key commercial hubs.",
-            "url": "https://www.toponbd.com/divisions/express-topexpress",
+            "@id": "https://www.toponbd.com/#top-on-tech",
+            "name": "Top On-Tech",
+            "description": "Diversified import, export and trading house sourcing industrial machinery, spares, chemicals, textiles, and electronics.",
+            "url": "https://www.toponbd.com/divisions/trading-topontech",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
-              "Express Courier Services",
-              "B2B Linehaul Transit",
-              "Nationwide Logistics Fleet"
+              "Industrial Machinery & Spares",
+              "Chemical Supply & Procurement",
+              "Textile Fabrics",
+              "Electronics & Consumer Goods",
+              "International Sourcing",
+              "Global Trade Management"
             ]
           },
           {

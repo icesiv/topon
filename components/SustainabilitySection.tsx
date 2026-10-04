@@ -36,7 +36,7 @@ export default function SustainabilitySection() {
           </h2>
 
           {/* Subtitle / Paragraph */}
-          <p className="text-base sm:text-xl text-emerald-50/90 font-normal leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-xl text-emerald-50/90 font-normal leading-relaxed max-w-3xl text-justify">
             We prioritize sustainability and help major conglomerates adopt sustainable practices to benefit people and the environment.
           </p>
 

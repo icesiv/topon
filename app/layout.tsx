@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Top On Group | International Trading & Logistics",
     description:
-      "On Time. Every Time. Premier import/export and multimodal logistics conglomerate in Bangladesh.",
+      "BUILT ON TRUST Premier import/export and multimodal logistics conglomerate in Bangladesh.",
     images: ["/images/hero_port.jpg"],
   },
   robots: {

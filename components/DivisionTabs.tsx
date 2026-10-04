@@ -249,7 +249,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
 };
 
 export default function DivisionTabs() {
-  const [activeTab, setActiveTab] = useState<DivisionId>("tech");
+  const [activeTab, setActiveTab] = useState<DivisionId>("express");
   const current = divisionsData[activeTab];
   const CurrentIcon = current.icon;
 
@@ -262,8 +262,8 @@ export default function DivisionTabs() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-[#0B2240] tracking-tight">
             Specialized Arms for <span className="text-gold-gradient">Every Trade Dimension</span>
           </h2>
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Top On Group executes global commerce through five specialized corporate divisions—spanning international trading, licensed customs C&F, maritime freight, sustainable agro-fisheries, and corporate consultancy.
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed text-justify">
+            Top On Group executes global commerce through five specialized corporate divisions—spanning licensed customs C&amp;F, maritime freight, international trading, sustainable agro-fisheries, and corporate consultancy.
           </p>
         </div>
 
@@ -272,9 +272,9 @@ export default function DivisionTabs() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 p-2 rounded-3xl bg-white border border-slate-200 shadow-md">
             {(
               [
-                { id: "tech", label: "Top On-Tech", sub: "Import, Export & Trading", logo: "/images/logo/topon-tech.png" },
                 { id: "express", label: "Top Express Ltd.", sub: "Customs C&F Company", logo: "/images/logo/tel.png" },
                 { id: "shipping", label: "Daily Shipping", sub: "Freight Forwarding", logo: "/images/logo/dsl.png" },
+                { id: "tech", label: "Top On-Tech", sub: "Import, Export & Trading", logo: "/images/logo/topon-tech.png" },
                 { id: "agro", label: "Top On-Agro", sub: "Fisheries & Aquaculture", logo: "/images/logo/topon-agro.png" },
                 { id: "solution", label: "Top On-Solution", sub: "Consultancy & Advisory", logo: "/images/logo/topon-solution.png" },
               ] as const
@@ -351,7 +351,7 @@ export default function DivisionTabs() {
                 <span className="text-gold-gradient">{current.headline}</span>
               </h3>
 
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed text-justify">
                 {current.description}
               </p>
 
@@ -369,7 +369,7 @@ export default function DivisionTabs() {
                       </div>
                       <div>
                         <h4 className="text-xs font-bold text-slate-900">{feat.title}</h4>
-                        <p className="text-[11px] text-slate-600 leading-normal mt-0.5">
+                        <p className="text-[11px] text-slate-600 leading-normal mt-0.5 text-justify">
                           {feat.desc}
                         </p>
                       </div>

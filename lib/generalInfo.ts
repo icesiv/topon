@@ -18,7 +18,7 @@ export interface GeneralInfoData extends Partial<BaseFirestoreDoc> {
 
 export const DEFAULT_GENERAL_INFO: GeneralInfoData = {
   companyName: "Top On Group",
-  tagline: "On Time. Every Time.",
+  tagline: "BUILT ON TRUST",
   dhakaPhone: "01711-775280",
   ctgPhone: "01711-775281",
   email: "info@toponbd.com",

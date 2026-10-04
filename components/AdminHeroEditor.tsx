@@ -137,7 +137,7 @@ export default function AdminHeroEditor() {
   const handleResetToDefaults = () => {
     if (
       confirm(
-        "Reset all panels back to standard default divisions (Top On-Tech, Top Express, Daily Shipping, Top On-Agro)?"
+        "Reset all panels back to standard default divisions (Top Express, Daily Shipping, Top On-Tech, Top On-Agro)?"
       )
     ) {
       setPanels(DEFAULT_BUSINESS_PANELS);

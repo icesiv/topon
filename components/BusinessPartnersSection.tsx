@@ -41,7 +41,7 @@ export default function BusinessPartnersSection() {
             Business Partners
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-justify">
             Trusted by premier conglomerates, national industrial powerhouses, and multinational leaders across electronics, healthcare, manufacturing, and global supply chains.
           </p>
         </div>

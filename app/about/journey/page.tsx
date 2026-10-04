@@ -25,16 +25,6 @@ export const metadata: Metadata = {
 
 const pillars = [
   {
-    name: "Top On-Tech",
-    year: "Est. Jan 2024",
-    role: "Import, Export, and Trading Enterprise",
-    image: "/images/trading_sourcing.jpg",
-    desc: "Launched to eliminate procurement friction for Bangladeshi manufacturing plants. Top On-Tech imports precision industrial machinery, specialty chemicals, and raw production inputs directly from verified overseas manufacturers.",
-    icon: Building2,
-    href: "/divisions/trading-topontech",
-    stats: "OEM Certified • Direct Sourcing",
-  },
-  {
     name: "Top Express Limited",
     year: "Est. 2024",
     role: "Customs Clearing and Forwarding (C&F) Company",
@@ -53,6 +43,16 @@ const pillars = [
     icon: Ship,
     href: "/divisions/logistics-dailyshipping",
     stats: "20,000+ Containers Managed",
+  },
+  {
+    name: "Top On-Tech",
+    year: "Est. Jan 2024",
+    role: "Import, Export, and Trading Enterprise",
+    image: "/images/trading_sourcing.jpg",
+    desc: "Launched to eliminate procurement friction for Bangladeshi manufacturing plants. Top On-Tech imports precision industrial machinery, specialty chemicals, and raw production inputs directly from verified overseas manufacturers.",
+    icon: Building2,
+    href: "/divisions/trading-topontech",
+    stats: "OEM Certified • Direct Sourcing",
   },
   {
     name: "Top On-Agro Farm",
@@ -105,11 +105,11 @@ export default function JourneyStoryPage() {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-serif text-[#0B2240] leading-snug">
               Born from Two Decades of <span className="text-gold-gradient">Enterprise Mastery</span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed text-justify">
               Top On Group was not conceived overnight. It was forged through more than 15 years of executive-tier supply chain governance by founder <strong>Md. Abdullah Al Mamun (CSCM, ITP, CACC)</strong>, who previously served as Executive Director at Walton Group, managing multi-million-dollar import/export operations and over 20,000+ shipping containers.
             </p>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Observing the chronic pain points facing Bangladeshi industrialists—unpredictable lead times, opaque customs duties, demurrage penalties, and fragmented freight forwarders—Mr. Mamun set out to build an integrated conglomerate built around one core promise: <strong>On Time. Every Time.</strong>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed text-justify">
+              Observing the chronic pain points facing Bangladeshi industrialists—unpredictable lead times, opaque customs duties, demurrage penalties, and fragmented freight forwarders—Mr. Mamun set out to build an integrated conglomerate built around one core promise: <strong>BUILT ON TRUST</strong>
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -202,7 +202,7 @@ export default function JourneyStoryPage() {
                 </div>
 
                 <div className="p-6 sm:p-8 space-y-4 flex-grow flex flex-col justify-between">
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify">
                     {p.desc}
                   </p>
 

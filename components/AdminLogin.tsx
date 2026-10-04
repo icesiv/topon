@@ -84,26 +84,21 @@ export default function AdminLogin() {
       />
 
       <div className="relative z-10 w-full max-w-md space-y-6">
-        {/* Brand Header */}
-        <div className="text-center space-y-3">
-          <Link href="/" className="inline-flex items-center space-x-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-gold via-brand-goldLight to-brand-goldDark p-0.5 shadow-gold">
-              <div className="w-full h-full bg-[#040C18] rounded-[14px] flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-brand-gold group-hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-            <div className="text-left">
-              <span className="block font-serif text-xl font-bold tracking-tight text-white">
-                TOP ON GROUP
-              </span>
-              <span className="block text-[10px] tracking-widest text-brand-gold uppercase font-bold">
-                Admin Secure Portal
-              </span>
+        {/* Brand Header with Group Logo */}
+        <div className="text-center space-y-4">
+          <Link href="/" className="inline-block group focus:outline-none">
+            <div className="mx-auto w-48 sm:w-56 h-20 sm:h-24 bg-white/95 rounded-2xl p-3 shadow-xl border border-brand-gold/40 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:shadow-brand-gold/20 group-hover:shadow-2xl">
+              <Image
+                src="/images/logo/topon-group.png"
+                alt="Top On Group Logo"
+                width={220}
+                height={80}
+                priority
+                quality={100}
+                className="w-auto h-full max-h-16 sm:max-h-20 object-contain"
+              />
             </div>
           </Link>
-          <p className="text-xs text-slate-400">
-            Sign in to manage company divisions, strategic partners, and global settings.
-          </p>
         </div>
 
         {/* Login Card */}
@@ -139,7 +134,7 @@ export default function AdminLogin() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@toponbd.com"
+                  placeholder="Your User ID / e-mail"
                   className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#040C18] border border-white/15 text-white placeholder-slate-500 focus:border-brand-gold focus:outline-none transition-all font-mono text-xs"
                 />
               </div>
@@ -149,9 +144,6 @@ export default function AdminLogin() {
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="font-semibold text-slate-300 block text-xs">Password</label>
-                <span className="text-[11px] text-brand-gold/80 hover:text-brand-gold cursor-pointer" onClick={fillDemoCredentials}>
-                  Use Demo Login
-                </span>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -162,7 +154,7 @@ export default function AdminLogin() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="your Password"
                   className="w-full pl-10 pr-10 py-3 rounded-xl bg-[#040C18] border border-white/15 text-white placeholder-slate-500 focus:border-brand-gold focus:outline-none transition-all font-mono text-xs"
                 />
                 <button

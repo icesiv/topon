@@ -39,14 +39,8 @@ interface DivisionItem {
 
 const DIVISIONS: DivisionItem[] = [
   {
-    name: "Top On-Tech",
-    tag: "Trading & Indenting",
-    href: "/divisions/trading-topontech",
-    icon: Building2,
-  },
-  {
     name: "Top Express Limited",
-    tag: "Customs Clearing (C&F)",
+    tag: "Customs Clearing & Forwarding (C&F)",
     href: "/divisions/express-topexpress",
     icon: Truck,
   },
@@ -55,6 +49,12 @@ const DIVISIONS: DivisionItem[] = [
     tag: "Freight Forwarding",
     href: "/divisions/logistics-dailyshipping",
     icon: Ship,
+  },
+  {
+    name: "Top On-Tech",
+    tag: "trading, import, sourcing & distribution",
+    href: "/divisions/trading-topontech",
+    icon: Building2,
   },
   {
     name: "Top On-Agro Farm",
@@ -113,20 +113,20 @@ const COMPANY_PROFILES = [
     size: "4.9 MB",
   },
   {
-    name: "Top On-Tech",
-    badge: "Trading House",
-    pdfUrl: "/profiles/TopOnTech-profile.pdf",
-    filename: "TopOnTech-profile.pdf",
-    icon: Building2,
-    size: "738 KB",
-  },
-  {
     name: "Daily Shipping & Logistics",
     badge: "Freight Forwarding",
     pdfUrl: "/profiles/DSL-profile.pdf",
     filename: "DSL-profile.pdf",
     icon: Ship,
     size: "933 KB",
+  },
+  {
+    name: "Top On-Tech",
+    badge: "Trading House",
+    pdfUrl: "/profiles/TopOnTech-profile.pdf",
+    filename: "TopOnTech-profile.pdf",
+    icon: Building2,
+    size: "738 KB",
   },
   {
     name: "Top On-Agro Farm",
@@ -180,7 +180,7 @@ export default function Header() {
     pathname.includes("toponsolution");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white">
       {/* 1. Top Utility Bar - Dark Corporate Theme */}
       <div className="bg-[#051120] text-slate-300 text-xs border-b border-white/[0.08] hidden lg:block select-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex justify-between items-center">
@@ -191,20 +191,14 @@ export default function Header() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-[11px] font-medium text-slate-300 tracking-wide">
-                Trade &amp; Port Desks Active
-              </span>
+              <a
+                href="tel:+8801711775280"
+                className="flex items-center space-x-1.5 text-slate-300 hover:text-brand-gold transition-colors font-medium text-[11.5px]"
+              >
+                <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>+880 1711-775280 - 81</span>
+              </a>
             </div>
-
-            <span className="text-white/20">|</span>
-
-            <a
-              href="tel:+8801711775280"
-              className="flex items-center space-x-1.5 text-slate-300 hover:text-brand-gold transition-colors font-medium text-[11.5px]"
-            >
-              <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-              <span>+880 1711-775280</span>
-            </a>
 
             <span className="text-white/20">|</span>
 
@@ -221,7 +215,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1.5 text-[11px] text-slate-300 font-medium">
               <MapPin className="w-3 h-3 text-brand-gold flex-shrink-0" />
-              <span>Dhaka &bull; Chattogram &bull; Mongla</span>
+              <span>Dhaka &bull; Chattogram &bull; Benapole</span>
             </div>
 
             <span className="text-white/20">|</span>
@@ -250,11 +244,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* 2. Main Desktop & Mobile Navigation Bar */}
+      {/* 2. Main Desktop & Mobile Navigation Bar - 100% Solid Opaque White */}
       <nav
-        className={`transition-all duration-300 ${isScrolled
-          ? "bg-white/98 backdrop-blur-xl shadow-lg shadow-slate-900/[0.04] border-b border-slate-200/90 py-2.5"
-          : "bg-white/95 backdrop-blur-xl shadow-xs border-b border-slate-200/80 py-3.5"
+        className={`transition-all duration-300 bg-white border-b border-slate-200/90 ${isScrolled
+          ? "shadow-md shadow-slate-900/10 py-2.5"
+          : "shadow-sm shadow-slate-900/5 py-3.5"
           }`}
         aria-label="Main Navigation"
       >
@@ -276,13 +270,13 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-[13px] font-semibold text-slate-700">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 text-[13px] font-semibold text-slate-800">
             {/* Home */}
             <Link
               href="/"
               className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${isActive("/") || isActive("/home")
-                ? "text-brand-navy font-bold bg-slate-100/80"
-                : "hover:text-brand-navy hover:bg-slate-50"
+                ? "text-brand-navy font-bold bg-slate-100"
+                : "hover:text-brand-navy hover:bg-slate-100/80"
                 }`}
             >
               <span>Home</span>
@@ -300,14 +294,14 @@ export default function Header() {
               <Link
                 href="/about"
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/about")
-                  ? "text-brand-navy font-bold bg-slate-100/80"
-                  : "hover:text-brand-navy hover:bg-slate-50"
+                  ? "text-brand-navy font-bold bg-slate-100"
+                  : "hover:text-brand-navy hover:bg-slate-100/80"
                   }`}
                 aria-expanded={aboutDropdownOpen}
               >
                 <span>About</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutDropdownOpen ? "rotate-180 text-brand-gold" : "text-slate-400"
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutDropdownOpen ? "rotate-180 text-brand-gold" : "text-slate-500"
                     }`}
                 />
                 {pathname.startsWith("/about") && (
@@ -358,14 +352,14 @@ export default function Header() {
             >
               <button
                 className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-all duration-200 relative ${isCompanyActive
-                  ? "text-brand-navy font-bold bg-slate-100/80"
-                  : "hover:text-brand-navy hover:bg-slate-50"
+                  ? "text-brand-navy font-bold bg-slate-100"
+                  : "hover:text-brand-navy hover:bg-slate-100/80"
                   }`}
                 aria-expanded={companyDropdownOpen}
               >
                 <span>Divisions</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${companyDropdownOpen ? "rotate-180 text-brand-gold" : "text-slate-400"
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${companyDropdownOpen ? "rotate-180 text-brand-gold" : "text-slate-500"
                     }`}
                 />
                 {isCompanyActive && (
@@ -452,8 +446,8 @@ export default function Header() {
             <Link
               href="/services"
               className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/services")
-                ? "text-brand-navy font-bold bg-slate-100/80"
-                : "hover:text-brand-navy hover:bg-slate-50"
+                ? "text-brand-navy font-bold bg-slate-100"
+                : "hover:text-brand-navy hover:bg-slate-100/80"
                 }`}
             >
               <span>Services</span>
@@ -466,8 +460,8 @@ export default function Header() {
             <Link
               href="/contact"
               className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${isActive("/contact")
-                ? "text-brand-navy font-bold bg-slate-100/80"
-                : "hover:text-brand-navy hover:bg-slate-50"
+                ? "text-brand-navy font-bold bg-slate-100"
+                : "hover:text-brand-navy hover:bg-slate-100/80"
                 }`}
             >
               <span>Contact</span>
@@ -488,14 +482,14 @@ export default function Header() {
               <button
                 className={`inline-flex items-center space-x-1.5 px-3 py-2 rounded-xl border text-xs font-semibold transition-all duration-200 ${profilesDropdownOpen
                   ? "bg-brand-gold/20 text-brand-navy border-brand-gold shadow-xs"
-                  : "bg-slate-50 hover:bg-brand-gold/10 text-slate-700 hover:text-brand-navy border-slate-200 hover:border-brand-gold/40"
+                  : "bg-slate-100/80 hover:bg-brand-gold/15 text-slate-800 hover:text-brand-navy border-slate-300 hover:border-brand-gold/40"
                   }`}
                 aria-expanded={profilesDropdownOpen}
               >
                 <FileDown className="w-3.5 h-3.5 text-brand-goldDark" />
                 <span>Profiles</span>
                 <ChevronDown
-                  className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${profilesDropdownOpen ? "rotate-180 text-brand-navy" : ""
+                  className={`w-3 h-3 text-slate-500 transition-transform duration-200 ${profilesDropdownOpen ? "rotate-180 text-brand-navy" : ""
                     }`}
                 />
               </button>
@@ -563,7 +557,7 @@ export default function Header() {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:text-brand-navy hover:bg-slate-100 focus:outline-none"
+              className="p-2 rounded-lg text-slate-800 hover:text-brand-navy hover:bg-slate-100 focus:outline-none"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -573,7 +567,7 @@ export default function Header() {
 
         {/* 3. Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-5 space-y-3 mt-2 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 text-sm">
+          <div className="lg:hidden bg-white border-t border-b border-slate-200 px-4 pt-3 pb-5 space-y-3 mt-2 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 text-sm">
             <div className="space-y-1">
               <Link
                 href="/"

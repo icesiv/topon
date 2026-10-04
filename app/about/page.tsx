@@ -34,8 +34,8 @@ export const metadata: Metadata = {
     "Top On Group Bangladesh",
     "Shahabuddin Enterprise 1990",
     "Top Express Limited",
-    "Top On-Tech",
     "Daily Shipping and Logistics",
+    "Top On-Tech",
     "Top On-Agro Farm",
     "Md. Abdullah Al Mamun",
   ],
@@ -52,15 +52,6 @@ const FOUR_BUSINESSES = [
     heritage: "Evolved from Shahabuddin Enterprise (Est. 1990)",
   },
   {
-    name: "Top On-Tech",
-    role: "Import, Export, Trading & Supply",
-    desc: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
-    icon: Building2,
-    logo: "/images/logo/topon-tech.png",
-    href: "/divisions/trading-topontech",
-    heritage: "Cross-Border Industrial Sourcing",
-  },
-  {
     name: "Daily Shipping & Logistics",
     role: "Freight Forwarding Agency & Logistics",
     desc: "International freight forwarding, multi-carrier ocean container bookings (FCL/LCL), priority air cargo charters, and integrated multimodal transport.",
@@ -68,6 +59,15 @@ const FOUR_BUSINESSES = [
     logo: "/images/logo/dsl.png",
     href: "/divisions/logistics-dailyshipping",
     heritage: "Global Trade Lane Connectivity",
+  },
+  {
+    name: "Top On-Tech",
+    role: "Import, Export, Trading & Supply",
+    desc: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
+    icon: Building2,
+    logo: "/images/logo/topon-tech.png",
+    href: "/divisions/trading-topontech",
+    heritage: "Cross-Border Industrial Sourcing",
   },
   {
     name: "Top On-Agro Farm",
@@ -121,7 +121,7 @@ export default function AboutPage() {
       {/* 2. Core Corporate Narrative Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-3xl p-8 sm:p-14 border border-slate-200 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          <div className="lg:col-span-7 space-y-6 text-slate-700 leading-relaxed text-sm sm:text-base">
+          <div className="lg:col-span-7 space-y-6 text-slate-700 leading-relaxed text-sm sm:text-base text-justify">
             <div className="inline-flex items-center space-x-2 text-xs font-bold text-[#0B2240] uppercase tracking-wider bg-slate-100 px-3.5 py-1.5 rounded-full border border-slate-200">
               <Building2 className="w-3.5 h-3.5 text-brand-gold" />
               <span>Corporate Heritage &amp; Evolution</span>
@@ -209,7 +209,7 @@ export default function AboutPage() {
                     </p>
                   </div>
 
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
                     {biz.desc}
                   </p>
                 </div>
@@ -245,11 +245,11 @@ export default function AboutPage() {
                 Looking Toward the Future
               </h2>
 
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed text-justify">
                 As we look toward the future, Top On Group remains committed to responsible growth, operational excellence, innovation, and creating sustainable value for our clients, partners, employees, and the wider economy.
               </p>
 
-              <p className="text-brand-goldLight text-sm sm:text-base font-medium leading-relaxed">
+              <p className="text-brand-goldLight text-sm sm:text-base font-medium leading-relaxed text-justify">
                 At Top On Group, we combine modern technology, <span className="underline decoration-brand-gold underline-offset-4">AI-enabled solutions</span>, strong governance, and a service-first approach to create lasting value.
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function AboutPage() {
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>Service</span>
                 </div>
-                <p className="text-xs text-slate-300">Client-centric execution with precision speed: On Time. Every Time.</p>
+                <p className="text-xs text-slate-300">Client-centric execution with precision speed: BUILT ON TRUST</p>
               </div>
 
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">

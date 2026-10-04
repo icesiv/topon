@@ -1,0 +1,107 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Helper Functions ---
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.admin == true ||
+        request.auth.token.role == 'admin' ||
+        (request.auth.token.email != null && request.auth.token.email.matches('.*@toponbd\\.com$'))
+      );
+    }
+
+    function isPublished(docData) {
+      return (
+        (!('status' in docData) || docData.status == 'published') &&
+        (!('isDeleted' in docData) || docData.isDeleted == false)
+      );
+    }
+
+    function hasValidMetadata() {
+      return (
+        request.resource.data.updatedAt is string &&
+        (!('status' in request.resource.data) || request.resource.data.status in ['draft', 'published', 'archived']) &&
+        (!('isDeleted' in request.resource.data) || request.resource.data.isDeleted is bool)
+      );
+    }
+
+    // --- Settings & Global Configurations ---
+    match /settings/{settingId} {
+      allow read: if true;
+      allow create, update: if (isAdmin() || isAuthenticated()) && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    match /site_settings/{settingId} {
+      allow read: if true;
+      allow create, update: if (isAdmin() || isAuthenticated()) && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    match /hero_businesses/{panelId} {
+      allow read: if true;
+      allow create, update, delete: if (isAdmin() || isAuthenticated());
+    }
+
+    match /division_sliders/{sliderId} {
+      allow read: if true;
+      allow create, update, delete: if (isAdmin() || isAuthenticated());
+    }
+
+    match /partners/{partnerId} {
+      allow read: if true;
+      allow create, update, delete: if (isAdmin() || isAuthenticated());
+    }
+
+    // --- Products Catalogue ---
+    match /products/{productId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Services Catalogue ---
+    match /services/{serviceId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Media Registry ---
+    match /media/{mediaId} {
+      allow read: if true;
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- User Profiles & Permissions ---
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+
+    // --- Modular Page Content & Sections ---
+    match /siteContent/{page}/sections/{sectionId} {
+      allow read: if isPublished(resource.data) || isAdmin();
+      allow create, update: if isAdmin() && hasValidMetadata();
+      allow delete: if isAdmin();
+    }
+
+    // --- Audit & System Logs (Protected) ---
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated() || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Default deny all other unspecified collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

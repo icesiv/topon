@@ -205,10 +205,6 @@ export default function MessageFromEntrepreneurPage() {
                       mamun@toponbd.com
                     </a>
                   </p>
-                  <p className="flex items-center space-x-2">
-                    <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-                    <span>+880 1713 060 970</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -216,7 +212,7 @@ export default function MessageFromEntrepreneurPage() {
             {/* Right Column: Full Narrative & Detailed Biography */}
             <div className="lg:col-span-7 space-y-8 text-slate-700 leading-relaxed text-sm sm:text-base">
               {/* Biography Narrative */}
-              <div className="space-y-4">
+              <div className="space-y-4 text-justify">
                 <p>
                   Mr. Md. Abdullah Al Mamun is a visionary business leader with more than 15 years of professional experience in supply chain management, trade policy, customs operations-C&amp;F, freight forwarding, logistics, vat with taxation, compliance audit and corporate administration. Known for his strategic mindset, ethical leadership, and commitment to excellence, he has played a significant role in strengthening operational standards within Bangladesh&apos;s SCM industry.
                 </p>
@@ -252,7 +248,7 @@ export default function MessageFromEntrepreneurPage() {
                   <BookOpen className="w-5 h-5 text-brand-gold shrink-0" />
                   <span>Professional Training &amp; Development</span>
                 </div>
-                <p className="text-xs sm:text-sm text-slate-600">
+                <p className="text-xs sm:text-sm text-slate-600 text-justify">
                   Mr. Mamun has actively participated in several professional training and development programs, enhancing his expertise in finance, ICT, business operations, and management:
                 </p>
 
@@ -318,7 +314,7 @@ export default function MessageFromEntrepreneurPage() {
                     Dear Valued Clients, Partners and Stakeholders,
                   </h4>
 
-                  <p className="text-slate-200 text-sm leading-relaxed">
+                  <p className="text-slate-200 text-sm leading-relaxed text-justify">
                     It is my privilege to welcome you to <strong className="text-brand-gold">Top On Group</strong>. Our journey is built on a strong foundation of experience, trust, and commitment. With a heritage rooted in Bangladesh’s customs and trade sector, we have continuously evolved by expanding our capabilities across customs clearance and forwarding, freight forwarding and logistics, international trade, trading and supply, agriculture, and fisheries.
                   </p>
 

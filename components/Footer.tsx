@@ -126,15 +126,6 @@ export default function Footer() {
           <ul className="space-y-2 text-slate-600">
             <li>
               <Link
-                href="/divisions/trading-topontech"
-                className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
-              >
-                <Building2 className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-                <span>Top On-Tech</span>
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/divisions/express-topexpress"
                 className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
               >
@@ -149,6 +140,15 @@ export default function Footer() {
               >
                 <Ship className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
                 <span>Daily Shipping</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/divisions/trading-topontech"
+                className="hover:text-brand-navy transition-colors flex items-center space-x-1.5"
+              >
+                <Building2 className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
+                <span>Top On-Tech</span>
               </Link>
             </li>
             <li>
@@ -245,7 +245,7 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center space-x-4 text-[11px] text-slate-500">
-            <span className="text-brand-goldDark font-semibold">On Time. Every Time.</span>
+            <span className="text-brand-goldDark font-semibold">BUILT ON TRUST</span>
             <span>&bull;</span>
             <Link href="/contact" className="hover:text-brand-navy transition-colors">
               Privacy &amp; Terms

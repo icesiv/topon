@@ -36,10 +36,10 @@ export default function HomeQuoteSection({
             <span className="text-gold-gradient block mt-1">{titleHighlight}</span>
           </h2>
 
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light text-justify">
             {description || (
               <>
-                Whether you need industrial plant equipment sourcing (<strong className="text-[#0B2240]">Top On-Tech</strong>), licensed Chittagong &amp; Dhaka customs clearance (<strong className="text-[#0B2240]">Top Express Limited</strong>), international ocean/air freight slots (<strong className="text-[#0B2240]">Daily Shipping &amp; Logistics</strong>), or bulk commercial fisheries supply (<strong className="text-[#0B2240]">Top On-Agro Farm</strong>), our specialized operations desks provide immediate quotes with zero obligation.
+                Whether you need licensed Chittagong &amp; Dhaka customs clearance (<strong className="text-[#0B2240]">Top Express Limited</strong>), international ocean/air freight slots (<strong className="text-[#0B2240]">Daily Shipping &amp; Logistics</strong>), industrial plant equipment sourcing (<strong className="text-[#0B2240]">Top On-Tech</strong>), or bulk commercial fisheries supply (<strong className="text-[#0B2240]">Top On-Agro Farm</strong>), our specialized operations desks provide immediate quotes with zero obligation.
               </>
             )}
           </p>

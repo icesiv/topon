@@ -42,7 +42,7 @@ export default function LeadershipSpotlight() {
             Leadership of{" "}
             <span className="text-brand-gold">Top On Group</span>
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed text-justify">
             Guided by visionary stewardship, ethical governance, and over 15 years of industry-defining supply chain mastery.
           </p>
         </div>
@@ -89,14 +89,6 @@ export default function LeadershipSpotlight() {
                 >
                   <Mail className="w-3.5 h-3.5 text-brand-gold" />
                   <span>mamun@toponbd.com</span>
-                </a>
-                <span className="text-white/20">|</span>
-                <a
-                  href="tel:+8801713060970"
-                  className="flex items-center space-x-1.5 hover:text-brand-gold transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5 text-brand-gold" />
-                  <span>+880 1713 060 970</span>
                 </a>
               </div>
             </div>
@@ -172,7 +164,7 @@ export default function LeadershipSpotlight() {
               {/* Concise Executive Statement */}
               <div className="p-4 rounded-2xl bg-brand-gold/10 border border-brand-gold/30 flex items-start space-x-3 text-slate-200">
                 <Quote className="w-5 h-5 text-brand-gold rotate-180 shrink-0 mt-0.5" />
-                <p className="text-xs sm:text-sm italic leading-relaxed text-slate-100">
+                <p className="text-xs sm:text-sm italic leading-relaxed text-slate-100 text-justify">
                   &quot;At Top On Group, our purpose is clear: to deliver quality, serve with dedication, and drive sustainable progress for our people, our partners, and our nation.&quot;
                 </p>
               </div>

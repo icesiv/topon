@@ -20,7 +20,7 @@ export default function LayoutWrapper({
   return (
     <>
       <Header />
-      <main className="flex-grow pt-24">{children}</main>
+      <main className="flex-grow pt-[64px] lg:pt-[104px]">{children}</main>
       <Footer />
     </>
   );

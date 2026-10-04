@@ -115,8 +115,8 @@ const milestones = [
     phase: "Conglomerate Synergy",
     title: "Integrated Conglomerate Expansion",
     description:
-      "Unifying international trade, port customs clearance, ocean shipping, and commercial agro-fisheries under the Top On Group central governance framework with a relentless commitment to reliability: On Time. Every Time.",
-    metric: "On Time. Every Time.",
+      "Unifying international trade, port customs clearance, ocean shipping, and commercial agro-fisheries under the Top On Group central governance framework with a relentless commitment to reliability: BUILT ON TRUST",
+    metric: "BUILT ON TRUST",
     icon: Globe2,
   },
 ];
@@ -241,7 +241,7 @@ export default function MilestonesAccreditationsPage() {
                     {acc.authority}
                   </div>
 
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal text-justify">
                     {acc.desc}
                   </p>
                 </div>
@@ -295,11 +295,10 @@ export default function MilestonesAccreditationsPage() {
                 >
                   {/* Left Side (Desktop) */}
                   <div
-                    className={`w-full md:w-1/2 pl-14 md:pl-0 ${
-                      isEven
-                        ? "md:pr-12 md:text-right"
-                        : "md:order-2 md:pl-12 md:text-left"
-                    }`}
+                    className={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven
+                      ? "md:pr-12 md:text-right"
+                      : "md:order-2 md:pl-12 md:text-left"
+                      }`}
                   >
                     <div className="group relative p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-xl shadow-slate-900/5 hover:border-brand-gold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden text-left">
                       {/* Top Accent Gold Bar */}
@@ -320,7 +319,7 @@ export default function MilestonesAccreditationsPage() {
                       <h3 className="text-lg sm:text-xl font-bold font-serif text-[#0B2240] group-hover:text-brand-goldDark transition-colors leading-snug">
                         {m.title}
                       </h3>
-                      <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                      <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify">
                         {m.description}
                       </p>
 
@@ -341,11 +340,10 @@ export default function MilestonesAccreditationsPage() {
 
                   {/* Opposing Side (Desktop: Large Year & Key Highlight) */}
                   <div
-                    className={`hidden md:flex md:w-1/2 flex-col justify-center ${
-                      isEven
-                        ? "md:pl-12 md:text-left"
-                        : "md:order-1 md:pr-12 md:text-right"
-                    }`}
+                    className={`hidden md:flex md:w-1/2 flex-col justify-center ${isEven
+                      ? "md:pl-12 md:text-left"
+                      : "md:order-1 md:pr-12 md:text-right"
+                      }`}
                   >
                     <div className="space-y-1">
                       <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold shadow-xs">

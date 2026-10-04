@@ -24,18 +24,33 @@ interface QuoteFormProps {
 export default function QuoteForm({ defaultDivision = "both", compact = false }: QuoteFormProps) {
   const getInitialDivision = () => {
     switch (defaultDivision) {
-      case "topontech":
-        return "trading";
       case "topexpress":
         return "customs";
       case "dailyshipping":
         return "freight";
+      case "topontech":
+        return "trading";
       case "agro":
         return "agro";
       case "solution":
         return "solution";
       default:
-        return "trading";
+        return "customs";
+    }
+  };
+
+  const getInitialServiceType = () => {
+    switch (defaultDivision) {
+      case "topontech":
+        return "machinery";
+      case "dailyshipping":
+        return "ocean_fcl";
+      case "agro":
+        return "bulk_fish";
+      case "solution":
+        return "business_setup";
+      default:
+        return "port_customs";
     }
   };
 
@@ -45,7 +60,7 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
     email: "",
     phone: "",
     division: getInitialDivision(),
-    serviceType: "machinery",
+    serviceType: getInitialServiceType(),
     estimatedVolume: "",
     message: "",
   });
@@ -54,13 +69,6 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
   const [loading, setLoading] = useState(false);
 
   const divisions = [
-    {
-      id: "trading",
-      name: "Top On-Tech",
-      role: "Import, Export & Trading",
-      icon: Building2,
-      defaultCategory: "machinery",
-    },
     {
       id: "customs",
       name: "Top Express Ltd.",
@@ -74,6 +82,13 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
       role: "Freight Forwarding",
       icon: Ship,
       defaultCategory: "ocean_fcl",
+    },
+    {
+      id: "trading",
+      name: "Top On-Tech",
+      role: "Import, Export & Trading",
+      icon: Building2,
+      defaultCategory: "machinery",
     },
     {
       id: "agro",

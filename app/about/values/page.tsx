@@ -33,7 +33,7 @@ const values = [
   {
     number: "02",
     title: "Clockwork Precision & Timeliness",
-    desc: "In global trade, timing dictates profitability. Our operations are engineered around zero demurrage, same-day electronic bill-of-entry submissions, and punctuality: On Time. Every Time.",
+    desc: "In global trade, timing dictates profitability. Our operations are engineered around zero demurrage, same-day electronic bill-of-entry submissions, and punctuality: BUILT ON TRUST",
     icon: Clock,
     tag: "Execution Discipline",
   },
@@ -114,7 +114,7 @@ export default function MissionVisionValuesPage() {
             </div>
 
             <div className="p-7 sm:p-9 space-y-4 flex-grow flex flex-col justify-between">
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed text-justify">
                 To be South Asia&apos;s most trusted, legally compliant, and technologically integrated trading, logistics, and agro-fisheries conglomerate—renowned for transforming complex cross-border supply chains into seamless, clockwork execution.
               </p>
 
@@ -156,14 +156,14 @@ export default function MissionVisionValuesPage() {
             </div>
 
             <div className="p-7 sm:p-9 space-y-4 flex-grow flex flex-col justify-between">
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed text-justify">
                 To empower industrial progress and national prosperity across Bangladesh through dependable international sourcing, verified factory procurement, compliant customs brokerage, clockwork freight forwarding, and wholesome sustainable aquaculture.
               </p>
 
               <div className="pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-700">
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-brand-goldDark shrink-0" />
-                  <span>Uncompromising adherence to our operational motto: <strong>On Time. Every Time.</strong></span>
+                  <span>Uncompromising adherence to our operational motto: <strong>BUILT ON TRUST</strong></span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-brand-goldDark shrink-0" />
@@ -219,7 +219,7 @@ export default function MissionVisionValuesPage() {
                     {val.title}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal text-justify">
                     {val.desc}
                   </p>
                 </div>

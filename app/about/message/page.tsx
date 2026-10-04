@@ -172,10 +172,6 @@ export default function MessageFromCEOPage() {
                       mamun@toponbd.com
                     </a>
                   </p>
-                  <p className="flex items-center space-x-2">
-                    <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0" />
-                    <span>+880 1713 060 970</span>
-                  </p>
                 </div>
               </div>
 
@@ -227,7 +223,7 @@ export default function MessageFromCEOPage() {
               </div>
 
               {/* Body Paragraphs */}
-              <div className="space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base">
+              <div className="space-y-5 text-slate-700 leading-relaxed text-sm sm:text-base text-justify">
                 <p>
                   Our journey is built on a strong foundation of experience, trust, and commitment. With a heritage rooted in Bangladesh’s customs and trade sector, we have continuously evolved by expanding our capabilities across customs clearance and forwarding, freight forwarding and logistics, international trade, trading and supply, agriculture, and fisheries.
                 </p>

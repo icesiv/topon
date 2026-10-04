@@ -78,7 +78,7 @@ export default function AboutSection() {
               </span>
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed text-justify">
               <strong className="text-brand-navy font-semibold">Top On Group</strong> is a
               diversified, family-owned business group in Bangladesh with an expanding presence
               across six core sectors — combining decades of practical expertise with modern
@@ -143,7 +143,7 @@ export default function AboutSection() {
                       <ArrowRight className="hidden md:block h-4 w-4 text-brand-gold/70 transition-transform duration-300 group-hover:translate-x-1" />
                     )}
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed">{m.text}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed text-justify">{m.text}</p>
                 </div>
               </div>
             ))}
@@ -167,7 +167,7 @@ export default function AboutSection() {
                 that last.&rdquo;
               </p>
             </div>
-            <p className="lg:col-span-5 text-sm sm:text-base text-slate-300 leading-relaxed lg:border-l lg:border-white/10 lg:pl-10">
+            <p className="lg:col-span-5 text-sm sm:text-base text-slate-300 leading-relaxed lg:border-l lg:border-white/10 lg:pl-10 text-justify">
               As we look toward the future, Top On Group remains committed to responsible growth,
               operational excellence, innovation, and creating sustainable value for our clients,
               partners, employees, and the wider economy. We combine modern technology,{" "}

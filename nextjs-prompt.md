@@ -29,7 +29,7 @@ To ensure the highest search engine visibility, follow these architectural patte
 - **Primary Colors**: Deep Navy Blue (`#0B2240` / `bg-slate-900`) and Brushed Metallic Gold/Bronze (`#C5A85C` / `text-amber-500` or `text-yellow-600`) as seen in the brand logos.
 - **Accents**: Clean whites, slate gray text for legibility, and gold borders to convey premium trust.
 - **Style**: Professional, corporate, globally connected, clean borders, minimal layouts, subtle hover transitions (using Tailwind's `transition-all duration-300`).
-- **Brand Tagline**: "On Time. Every Time."
+- **Brand Tagline**: "BUILT ON TRUST"
 
 ---
 
@@ -122,6 +122,7 @@ export default function RootLayout({
 ```
 
 #### Component 2: SEO JSON-LD Structured Data Schema (`components/JSONLD.tsx`)
+
 ```tsx
 export default function JSONLD() {
   const schema = {
@@ -166,6 +167,7 @@ export default function JSONLD() {
 ```
 
 #### Component 3: Dynamic Sitemap Generator (`app/sitemap.ts`)
+
 ```typescript
 import { MetadataRoute } from "next";
 
@@ -191,12 +193,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ```
 
 #### Component 4: Fully SEO-Ground, Interactive Header Navigation Component (`components/Header.tsx`)
+
 - Write a fully responsive navigation bar including the Top Social Bar and Main Nav Dropdowns. Implement mobile navigation toggle. Must use standard Tailwind CSS styles and hover states (deep navy `#0B2240` backgrounds, golden `#C5A85C` accents on active and hover states).
 
 #### Component 5: High-Converting SEO Home Page Layout (`app/page.tsx`)
+
 - Create the main page layout featuring the Hero Section, Group Overview, Division Tabs (Top On-Tech vs. Daily Shipping & Logistics), Core Values, and the Owner's Leadership Bio with exact credential representation.
 
 Generate the code modules sequentially, prioritizing clean styling, TypeScript typing correctness, accessibility (ARIA attributes), and extreme SEO readability (including keyword-rich heading tags). Keep layout and styling pixel-perfect to a modern, high-trust corporate portal.
+
 ```
 ***
 

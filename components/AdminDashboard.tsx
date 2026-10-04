@@ -33,6 +33,8 @@ import {
 import { isFirebaseConfigured, firebaseConfig } from "@/lib/firebase";
 import { uploadOptimizedMedia } from "@/lib/image-optimizer";
 import { useAuth } from "@/lib/auth-context";
+import AdminDivisionSlidersEditor from "./AdminDivisionSlidersEditor";
+import { seedFirestoreDatabase } from "@/lib/seeder";
 import {
   LayoutDashboard,
   Layers,
@@ -71,9 +73,17 @@ import {
   Lock,
   UserCheck,
   ShieldCheck,
+  Image as ImageIcon,
 } from "lucide-react";
 
-type AdminTab = "panels" | "partners" | "general" | "users" | "security" | "system";
+type AdminTab =
+  | "panels"
+  | "division-sliders"
+  | "partners"
+  | "general"
+  | "users"
+  | "security"
+  | "system";
 
 const PRESET_HERO_IMAGES = [
   "/images/topontech_hero.jpg",
@@ -171,6 +181,11 @@ export default function AdminDashboard() {
   const [compressionFeedback, setCompressionFeedback] = useState<string | null>(null);
   const [isPurging, setIsPurging] = useState(false);
   const [purgeResult, setPurgeResult] = useState<string | null>(null);
+  const [isSeeding, setIsSeeding] = useState(false);
+  const [seedResult, setSeedResult] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
 
   // Session guard: Redirect logged out users to /admin/login
   useEffect(() => {
@@ -374,6 +389,41 @@ export default function AdminDashboard() {
       setPurgeResult(`Purge failed: ${err?.message}`);
     } finally {
       setIsPurging(false);
+    }
+  };
+
+  // Run full database seeder
+  const handleSeedDatabase = async () => {
+    if (
+      !confirm(
+        "Push all current default structured content (Hero Panels, 5 Division Sliders, 25 Partners, General Info, and Admin Users) to Firebase Firestore? This will populate the live database with initial data."
+      )
+    ) {
+      return;
+    }
+
+    setIsSeeding(true);
+    setSeedResult({ type: null, message: "" });
+    try {
+      const res = await seedFirestoreDatabase(user?.email || "admin@toponbd.com");
+      if (res.success) {
+        setSeedResult({
+          type: "success",
+          message: res.message,
+        });
+      } else {
+        setSeedResult({
+          type: "error",
+          message: res.message,
+        });
+      }
+    } catch (err: any) {
+      setSeedResult({
+        type: "error",
+        message: err?.message || "An unexpected error occurred while seeding.",
+      });
+    } finally {
+      setIsSeeding(false);
     }
   };
 
@@ -678,6 +728,29 @@ export default function AdminDashboard() {
               </span>
             </button>
 
+            {/* Tab: Division Hero Sliders */}
+            <button
+              onClick={() => {
+                setActiveTab("division-sliders");
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "division-sliders"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
+            >
+              <div className="flex items-center space-x-2.5">
+                <ImageIcon className="w-4 h-4" />
+                <span>Division Sliders</span>
+              </div>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "division-sliders" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
+              >
+                5
+              </span>
+            </button>
+
             {/* Tab: Business Partners */}
             <button
               onClick={() => {
@@ -842,6 +915,7 @@ export default function AdminDashboard() {
             <h2 className="text-base sm:text-lg font-bold text-white capitalize font-serif flex items-center space-x-2">
               <span>
                 {activeTab === "panels" && "Hero Business Panels Manager"}
+                {activeTab === "division-sliders" && "Division Hero Sliders Manager"}
                 {activeTab === "partners" && "Business Partners & Client Logos"}
                 {activeTab === "general" && "General Company & Contact Information"}
                 {activeTab === "users" && "Admin Team & Role Management"}
@@ -851,6 +925,7 @@ export default function AdminDashboard() {
             </h2>
             <p className="text-xs text-slate-400">
               {activeTab === "panels" && "Configure the vertical expanding cards on the homepage"}
+              {activeTab === "division-sliders" && "Edit background images, categories, and headlines for each division hero slider"}
               {activeTab === "partners" && "Add, reorder, or edit enterprise client logos and partner names"}
               {activeTab === "general" && "Manage phone numbers, emails, addresses and social links"}
               {activeTab === "users" && "Manage authorized admin users and permissions"}
@@ -1341,6 +1416,11 @@ export default function AdminDashboard() {
                 </div>
               )}
             </div>
+          )}
+
+          {/* TAB: DIVISION HERO SLIDERS */}
+          {activeTab === "division-sliders" && (
+            <AdminDivisionSlidersEditor />
           )}
 
           {/* TAB 2: BUSINESS PARTNERS */}
@@ -1960,6 +2040,79 @@ export default function AdminDashboard() {
                       {purgeResult}
                     </div>
                   )}
+                </div>
+
+                {/* Database Seeder: Push Current Content to Firebase */}
+                <div className="p-5 rounded-2xl bg-[#040C18] border border-brand-gold/30 space-y-4 shadow-xl">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                      <h4 className="text-sm font-bold text-white flex items-center space-x-2">
+                        <Database className="w-4 h-4 text-brand-gold" />
+                        <span>Database Seeder: Push Current Content to Firebase</span>
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1 max-w-xl">
+                        Push all baseline structured content (5 Hero Panels, 5 Division Sliders, 25 Strategic Partners, Corporate Info &amp; Admin Credentials) to Firebase Firestore and IndexedDB offline cache.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={handleSeedDatabase}
+                      disabled={isSeeding}
+                      className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-gold to-brand-goldDark text-stone-950 font-bold text-xs shadow-gold hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 shrink-0 flex items-center space-x-2"
+                    >
+                      {isSeeding ? (
+                        <>
+                          <RefreshCw className="w-3.5 h-3.5 animate-spin text-stone-950" />
+                          <span>Seeding to Firebase...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-3.5 h-3.5 text-stone-950" />
+                          <span>Seed Firestore Database</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {seedResult.type && (
+                    <div
+                      className={`text-xs p-3.5 rounded-xl border flex items-center space-x-2.5 animate-in fade-in ${
+                        seedResult.type === "success"
+                          ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+                          : "bg-red-500/10 border-red-500/30 text-red-300"
+                      }`}
+                    >
+                      {seedResult.type === "success" ? (
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      ) : (
+                        <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+                      )}
+                      <span>{seedResult.message}</span>
+                    </div>
+                  )}
+
+                  <div className="pt-2 border-t border-white/5 grid grid-cols-2 sm:grid-cols-5 gap-2 text-[11px] text-slate-400">
+                    <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                      <span className="text-slate-500 block">Hero Panels:</span>
+                      <strong className="text-white">5 Divisions</strong>
+                    </div>
+                    <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                      <span className="text-slate-500 block">Division Sliders:</span>
+                      <strong className="text-white">5 Pages (17 Slides)</strong>
+                    </div>
+                    <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                      <span className="text-slate-500 block">Partners:</span>
+                      <strong className="text-white">25 Companies</strong>
+                    </div>
+                    <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                      <span className="text-slate-500 block">General Info:</span>
+                      <strong className="text-white">Full Profile</strong>
+                    </div>
+                    <div className="p-2 rounded-lg bg-white/5 border border-white/5">
+                      <span className="text-slate-500 block">Admin Users:</span>
+                      <strong className="text-white">2 Accounts</strong>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

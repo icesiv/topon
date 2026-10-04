@@ -138,7 +138,7 @@ export default function HeroSection() {
 
                 {/* Short Tagline */}
                 <p
-                  className={`text-slate-200 transition-all duration-500 font-sans leading-relaxed ${
+                  className={`text-slate-200 transition-all duration-500 font-sans leading-relaxed text-justify ${
                     isExpanded
                       ? "text-xs sm:text-sm lg:text-base opacity-100 max-h-28"
                       : "text-xs sm:text-sm opacity-90 line-clamp-2 max-h-12"

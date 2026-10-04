@@ -74,7 +74,7 @@ export default function WhyChooseUsSection() {
             Why Choose Top On Group?
           </h2>
 
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
             Have a glimpse of how we manage our work process, ensuring seamless cross-border trade, customs clearance, and logistics operations.
           </p>
         </div>

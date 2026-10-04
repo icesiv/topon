@@ -3,60 +3,51 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-interface SlideData {
-  id: number;
-  image: string;
-  category: string;
-  headline: string;
-}
-
-const SLIDES: SlideData[] = [
-  {
-    id: 1,
-    image: "/images/topexpress_slide_1.jpg",
-    category: "Express Road Logistics & Linehaul Fleet",
-    headline: "Modern covered van and linehaul fleet operating 24/7 across Bangladesh.",
-  },
-  {
-    id: 2,
-    image: "/images/topexpress_slide_2.jpg",
-    category: "Customs Clearing & Forwarding (C&F)",
-    headline: "Expert customs brokerage with zero demurrage across Chittagong, Mongla & Benapole.",
-  },
-  {
-    id: 3,
-    image: "/images/topexpress_slide_3.jpg",
-    category: "Air Cargo & Rapid Parcel Dispatch",
-    headline: "Guaranteed time-critical courier and international air express connectivity.",
-  },
-  {
-    id: 4,
-    image: "/images/topexpress_slide_4.jpg",
-    category: "Heavy Project Cargo & Terminal Transit",
-    headline: "Specialized oversized transport, bonded transit, and secure industrial logistics.",
-  },
-];
+import {
+  subscribeDivisionSlides,
+  DEFAULT_DIVISION_SLIDES,
+  DivisionSlideData,
+} from "@/lib/divisionSliders";
 
 export default function TopExpressHeroSlider() {
+  const [slides, setSlides] = useState<DivisionSlideData[]>(
+    DEFAULT_DIVISION_SLIDES.topexpress
+  );
   const [current, setCurrent] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  useEffect(() => {
+    const unsub = subscribeDivisionSlides("topexpress", (data) => {
+      if (data && data.length > 0) {
+        setSlides(data);
+      }
+    });
+    return () => unsub();
+  }, []);
+
   const nextSlide = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % SLIDES.length);
+    setSlides((currSlides) => {
+      if (currSlides.length === 0) return currSlides;
+      setCurrent((prev) => (prev + 1) % currSlides.length);
+      return currSlides;
+    });
   }, []);
 
   const prevSlide = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+    setSlides((currSlides) => {
+      if (currSlides.length === 0) return currSlides;
+      setCurrent((prev) => (prev - 1 + currSlides.length) % currSlides.length);
+      return currSlides;
+    });
   }, []);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || slides.length === 0) return;
     const timer = setInterval(() => {
-      nextSlide();
+      setCurrent((prev) => (prev + 1) % slides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+  }, [isPaused, slides.length]);
 
   return (
     <div
@@ -66,7 +57,7 @@ export default function TopExpressHeroSlider() {
       aria-label="Top Express Limited Hero Image Slider"
     >
       {/* 1. Full-Width Background Slides */}
-      {SLIDES.map((slide, idx) => {
+      {slides.map((slide, idx) => {
         const isActive = idx === current;
         return (
           <div
@@ -95,7 +86,7 @@ export default function TopExpressHeroSlider() {
       })}
 
       {/* 2. Repositioned Text Overlay (Container Aligned) */}
-      <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+      <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pb-20 sm:pb-0">
         <div className="max-w-3xl space-y-5 text-left">
           {/* Top Express Limited Logo */}
           <div className="inline-block p-2 sm:p-2.5 rounded-2xl bg-white/95 backdrop-blur-md shadow-2xl border border-white/40">
@@ -117,16 +108,16 @@ export default function TopExpressHeroSlider() {
           </h1>
 
           {/* Core Tagline / Quote */}
-          <p className="max-w-2xl text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-light">
+          <p className="max-w-2xl text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-light text-justify">
             &quot;Precision in motion.&quot; Connecting urban commerce and industrial manufacturing with resilient covered fleet networks, express courier routing, and zero-compromise timeline adherence.
           </p>
         </div>
       </div>
 
-      {/* 3. Slider Controls: Arrows */}
+      {/* 3. Slider Controls: Arrows (Bottom-anchored on mobile, side-aligned on desktop) */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200"
+        className="absolute bottom-5 sm:bottom-auto left-4 sm:left-6 sm:top-1/2 sm:-translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/50 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
         aria-label="Previous image"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -134,29 +125,31 @@ export default function TopExpressHeroSlider() {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-black/40 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200"
+        className="absolute bottom-5 sm:bottom-auto right-4 sm:right-6 sm:top-1/2 sm:-translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/50 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
         aria-label="Next image"
       >
         <ChevronRight className="w-5 h-5" />
       </button>
 
       {/* 4. Bottom Slide Navigation Indicators */}
-      <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center items-center space-x-2.5">
-        {SLIDES.map((slide, idx) => {
-          const isActive = idx === current;
-          return (
-            <button
-              key={idx}
-              onClick={() => setCurrent(idx)}
-              className={`group transition-all duration-300 flex items-center ${
-                isActive
-                  ? "w-10 sm:w-12 h-2.5 bg-brand-gold rounded-full"
-                  : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70 rounded-full"
-              }`}
-              aria-label={`Go to slide ${idx + 1}: ${slide.category}`}
-            />
-          );
-        })}
+      <div className="absolute bottom-7 sm:bottom-6 left-0 right-0 z-30 flex justify-center items-center pointer-events-none">
+        <div className="pointer-events-auto flex items-center space-x-2 sm:space-x-2.5">
+          {slides.map((slide, idx) => {
+            const isActive = idx === current;
+            return (
+              <button
+                key={idx}
+                onClick={() => setCurrent(idx)}
+                className={`group transition-all duration-300 flex items-center ${
+                  isActive
+                    ? "w-8 sm:w-12 h-2 sm:h-2.5 bg-brand-gold rounded-full"
+                    : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/70 rounded-full"
+                }`}
+                aria-label={`Go to slide ${idx + 1}: ${slide.category}`}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
