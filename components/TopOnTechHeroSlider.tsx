@@ -112,13 +112,13 @@ export default function TopOnTechHeroSlider() {
           </div>
 
           {/* Main Hero Headings */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight leading-tight sm:leading-none">
-            Top On-Tech: <br />
-            <span className="text-gold-light-gradient">Global Sourcing &amp; General Trading</span>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-relaxed sm:leading-relaxed lg:leading-[1.4]">
+            <span className="block mb-2.5 sm:mb-3.5">Top On-Tech:</span>
+            <span className="text-gold-light-gradient block leading-snug sm:leading-normal">Global Sourcing &amp; General Trading</span>
           </h1>
 
           {/* Core Tagline / Quote */}
-          <p className="max-w-2xl text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-light text-justify">
+          <p className="max-w-2xl text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-loose font-light text-justify">
             &quot;Trust is our most valuable trading asset.&quot; Facilitating seamless international procurement of industrial components, chemicals, fabrics, and tech hardware.
           </p>
 

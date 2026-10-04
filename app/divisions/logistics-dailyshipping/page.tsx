@@ -15,6 +15,9 @@ import {
   ArrowRight,
   Plane,
   Sparkles,
+  Phone,
+  Mail,
+  Building2,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -178,36 +181,181 @@ export default function DailyShippingPage() {
         </div>
       </section>
 
-      {/* 4. Port Desks & RFQ */}
+      {/* 4. Strategic Customs Houses & Freight Quotation */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-5 space-y-6">
-            <span className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-navy font-bold text-xs uppercase tracking-wider">
-              Freight Quotation
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold font-serif text-[#0B2240]">
-              Instant Container &amp; Customs Inquiries
-            </h2>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              Contact our port coordination desks for ocean freight slot bookings, import clearing checklists, or export forwarding documentation.
-            </p>
+        <div className="bg-[#040D1A] rounded-3xl p-8 sm:p-12 lg:p-14 text-white border border-brand-gold/30 shadow-2xl relative overflow-hidden">
+          {/* Subtle Ambient Backdrops */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="space-y-3 text-xs text-slate-700">
-              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-3">
-                <MapPin className="w-4 h-4 text-brand-navy flex-shrink-0" />
-                <span>Chittagong Port Liaison: Agrabad Commercial Area, Chattogram</span>
+          {/* Section Header */}
+          <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-8 border-b border-white/10 mb-8">
+            <div className="space-y-2 max-w-2xl">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-gold/20 border border-brand-gold/40 text-brand-gold font-bold text-xs uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
+                <span>On-Ground Clearance &amp; Freight Quotation</span>
               </div>
-              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-3">
-                <MapPin className="w-4 h-4 text-brand-navy flex-shrink-0" />
-                <span>Mongla Port Desk: Khulna City / Port Complex</span>
-              </div>
-              <div className="p-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center space-x-3">
-                <MapPin className="w-4 h-4 text-brand-navy flex-shrink-0" />
-                <span>Dhaka Airport Air Freight Desk: Cargo Village, HSIA</span>
-              </div>
+              <h2 className="text-2xl sm:text-4xl font-bold font-serif text-white tracking-tight">
+                Our 5 Key Customs House Desks
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm">
+                Direct on-ground customs brokerage, tariff valuation, and expedited container release across Bangladesh.
+              </p>
+            </div>
+
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs font-mono self-start sm:self-auto">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>5 Stations Active 24/7</span>
             </div>
           </div>
 
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left Column: 5 Customs Houses */}
+            <div className="lg:col-span-7 space-y-3">
+              {[
+                {
+                  id: "airport",
+                  number: "1",
+                  name: "Customs House, Airport, Dhaka",
+                  type: "Air Cargo & Express",
+                  hub: "Cargo Village, Hazrat Shahjalal Int'l Airport",
+                  icon: Plane,
+                },
+                {
+                  id: "chattogram",
+                  number: "2",
+                  name: "Customs House, Chattogram",
+                  type: "Ocean Seaport & CFS",
+                  hub: "Chittagong Port Terminal & Off-Docks",
+                  icon: Anchor,
+                },
+                {
+                  id: "icd",
+                  number: "3",
+                  name: "Customs House ICD, Dhaka",
+                  type: "Rail & Dry Port",
+                  hub: "Kamalapur Inland Container Depot",
+                  icon: Building2,
+                },
+                {
+                  id: "pangaon",
+                  number: "4",
+                  name: "Customs House, Pangaon, Dhaka",
+                  type: "River Container Terminal",
+                  hub: "Pangaon Inland Container Terminal (PICT)",
+                  icon: Ship,
+                },
+                {
+                  id: "benapole",
+                  number: "5",
+                  name: "Customs House Benapole, Jashore",
+                  type: "Land Border Port",
+                  hub: "Benapole Land Customs Station",
+                  icon: Truck,
+                },
+              ].map((house) => {
+                const Icon = house.icon;
+                return (
+                  <div
+                    key={house.id}
+                    className="group p-4 sm:p-4.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-gold/50 transition-all duration-200 flex items-center justify-between gap-4"
+                  >
+                    <div className="flex items-center space-x-3.5 min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold border border-brand-gold/30 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center space-x-2 flex-wrap">
+                          <span className="font-mono text-xs font-bold text-brand-gold">
+                            {house.number}.
+                          </span>
+                          <h3 className="font-serif font-bold text-sm sm:text-base text-white truncate">
+                            {house.name}
+                          </h3>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-slate-400 truncate mt-0.5">
+                          {house.hub}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 shrink-0 group-hover:border-brand-gold/40 group-hover:text-brand-gold transition-colors">
+                      {house.type}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right Column: High-Impact Instant Quotation Card */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-white/10 to-white/[0.03] backdrop-blur-xl border border-brand-gold/40 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+              <div className="space-y-2">
+                <span className="text-[11px] font-bold text-brand-gold uppercase tracking-wider block font-mono">
+                  Express Freight Desk
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold font-serif text-white">
+                  Freight Quotation
+                </h3>
+                <p className="text-xs text-slate-300">
+                  Instant FCL/LCL ocean slots, air cargo booking, or customs clearance inquiry.
+                </p>
+              </div>
+
+              {/* Fast Highlights */}
+              <div className="space-y-2 text-xs text-slate-200 border-y border-white/10 py-4">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Zero-Demurrage document pre-check</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>2–4 Hour quote turnaround guarantee</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Direct port liaison at all 5 customs houses</span>
+                </div>
+              </div>
+
+              {/* Instant Call / Email Hotlines */}
+              <div className="space-y-2 text-xs">
+                <a
+                  href="tel:+8801711775280"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-brand-gold/20 border border-white/10 hover:border-brand-gold/40 text-white transition-all group"
+                >
+                  <div className="flex items-center space-x-2.5">
+                    <Phone className="w-4 h-4 text-brand-gold" />
+                    <span className="font-mono text-xs">+880 1711-775280</span>
+                  </div>
+                  <span className="text-[10px] text-brand-gold font-bold uppercase tracking-wider">
+                    Call Direct
+                  </span>
+                </a>
+
+                <a
+                  href="mailto:info@toponbd.com"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-brand-gold/20 border border-white/10 hover:border-brand-gold/40 text-white transition-all group"
+                >
+                  <div className="flex items-center space-x-2.5">
+                    <Mail className="w-4 h-4 text-brand-gold" />
+                    <span className="text-xs">info@toponbd.com</span>
+                  </div>
+                  <span className="text-[10px] text-brand-gold font-bold uppercase tracking-wider">
+                    Email Desk
+                  </span>
+                </a>
+              </div>
+
+              {/* Action Button */}
+              <Link
+                href="/contact#quote"
+                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-brand-navy font-bold text-xs uppercase tracking-wider shadow-gold hover:shadow-xl transition-all flex items-center justify-center space-x-2 group"
+              >
+                <span>Request Quotation</span>
+                <ArrowRight className="w-4 h-4 text-brand-navy group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -102,13 +102,13 @@ export default function TopOnAgroHeroSlider() {
           </div>
 
           {/* Main Hero Headings */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight leading-tight sm:leading-none">
-            Top On-Agro Farm: <br />
-            <span className="text-gold-light-gradient">Commercial Fisheries &amp; Sustainable Aquaculture</span>
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-relaxed sm:leading-relaxed lg:leading-[1.4]">
+            <span className="block mb-2.5 sm:mb-3.5">Top On-Agro Farm:</span>
+            <span className="text-gold-light-gradient block leading-snug sm:leading-normal">Commercial Fisheries &amp; Sustainable Aquaculture</span>
           </h1>
 
           {/* Core Tagline / Quote */}
-          <p className="max-w-2xl text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed font-light text-justify">
+          <p className="max-w-2xl text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-loose font-light text-justify">
             &quot;Pioneering sustainable aquaculture and premium freshwater fisheries across Bangladesh.&quot; High-tech biofloc ponds, certified hatchery breeding, cold chain integrity, and bulk fish distribution.
           </p>
         </div>
