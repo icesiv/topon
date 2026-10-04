@@ -163,9 +163,6 @@ export default function JourneyStoryPage() {
             <TrendingUp className="w-3.5 h-3.5 text-brand-goldDark" />
             <span>Strategic Enterprise Footprint</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold font-serif text-[#0B2240]">
-            The Four Pillars of <span className="text-gold-gradient">Top On Group</span>
-          </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light">
             Each operating company was strategically established to solve a critical link in Bangladesh&apos;s commercial infrastructure.
           </p>

@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 
 const SECTORS = [
-  { label: "Customs Clearance & Forwarding", icon: FileCheck2 },
-  { label: "Freight Forwarding & Logistics", icon: Ship },
-  { label: "International Trade", icon: Globe },
-  { label: "Trading & Supply", icon: PackageCheck },
+  { label: "Customs Clearing & Forwarding (CNG)", icon: FileCheck2 },
+  { label: "Freight Forwarding Logistics", icon: Ship },
+  { label: "Trading, Import, Sourcing & Distribution", icon: Globe },
+  { label: "Business Advisory Professional Services", icon: PackageCheck },
   { label: "Agriculture", icon: Leaf },
   { label: "Fisheries", icon: Fish },
 ];
