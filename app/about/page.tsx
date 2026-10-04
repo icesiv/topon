@@ -109,7 +109,7 @@ export default function AboutPage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold font-serif text-white tracking-tight">
-            Quality. Service. <span className="text-brand-gold">Nation.</span>
+            BUILT ON <span className="text-brand-gold">TRUST</span>
           </h1>
 
           <p className="max-w-3xl mx-auto text-slate-200 text-sm sm:text-lg leading-relaxed">
@@ -229,54 +229,104 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Future Vision & AI-Enabled Technology */}
+      {/* 4. Corporate Motto: BUILT ON TRUST */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-[#0B2240] via-[#071930] to-[#040D1A] rounded-3xl p-8 sm:p-12 text-white border border-brand-gold/30 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-br from-[#0B2240] via-[#071930] to-[#040D1A] rounded-3xl p-8 sm:p-12 lg:p-16 text-white border border-brand-gold/30 shadow-2xl relative overflow-hidden">
+          {/* Ambient background glows */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div
+            className="absolute inset-0 opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `radial-gradient(circle at 1px 1px, #C5A85C 1px, transparent 0)`,
+              backgroundSize: "32px 32px",
+            }}
+          />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30 text-xs font-bold uppercase tracking-wider">
-                <Cpu className="w-3.5 h-3.5" />
-                <span>Next-Generation Governance &amp; Technology</span>
+          <div className="relative z-10 space-y-10 sm:space-y-12">
+            {/* Header Block: Motto Announcement & Links */}
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-white/10">
+              <div className="space-y-4 max-w-3xl">
+                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 text-brand-gold border border-brand-gold/30 text-xs font-bold uppercase tracking-widest shadow-gold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-brand-gold" />
+                  <span>Our Guiding Motto &amp; Operating Philosophy</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight">
+                  BUILT ON <span className="text-gold-light-gradient">TRUST</span>
+                </h2>
               </div>
-
-              <h2 className="text-2xl sm:text-4xl font-bold font-serif text-white tracking-tight">
-                Looking Toward the Future
-              </h2>
-
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed text-justify">
-                As we look toward the future, Top On Group remains committed to responsible growth, operational excellence, innovation, and creating sustainable value for our clients, partners, employees, and the wider economy.
-              </p>
-
-              <p className="text-brand-goldLight text-sm sm:text-base font-medium leading-relaxed text-justify">
-                At Top On Group, we combine modern technology, <span className="underline decoration-brand-gold underline-offset-4">AI-enabled solutions</span>, strong governance, and a service-first approach to create lasting value.
-              </p>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col justify-center space-y-4">
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                <div className="flex items-center space-x-2 text-brand-gold font-bold text-xs uppercase">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>Quality</span>
-                </div>
-                <p className="text-xs text-slate-300">Uncompromising standards in every container, shipment, and agro harvest.</p>
+            {/* Narrative & Trust Pillars Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              {/* Left Column: The Narrative of Trust */}
+              <div className="lg:col-span-6 space-y-5 text-slate-300 text-sm sm:text-base leading-relaxed text-justify">
+                <p>
+                  At <strong className="text-white">Top On Group</strong>, our corporate motto—<strong className="text-brand-gold">BUILT ON TRUST</strong>—is not just an aspirational slogan; it is the non-negotiable benchmark that governs every consignment we clear, every container we book, every trading contract we fulfill, and every harvest we nurture.
+                </p>
+                <p>
+                  Founded in 1990 as Shahabuddin Enterprise and evolved into a multi-sector conglomerate, we know that true commercial trust is forged through unwavering integrity, zero-demurrage discipline, and total regulatory adherence.
+                </p>
+                <p className="text-slate-200">
+                  As we look toward the future, we combine this trusted foundation with <span className="text-brand-goldLight font-medium underline decoration-brand-gold/60 underline-offset-4">AI-enabled solutions</span>, digital cargo transparency, modern aquaculture bio-telemetry, and corporate advisory—delivering predictable, high-value outcomes for our partners and contributing to Bangladesh&apos;s national economic sovereignty.
+                </p>
+
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                <div className="flex items-center space-x-2 text-brand-gold font-bold text-xs uppercase">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>Service</span>
+              {/* Right Column: 4 Pillars of BUILT ON TRUST */}
+              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Pillar 1 */}
+                <div className="p-5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-gold/40 transition-all duration-300 space-y-2.5 group">
+                  <div className="flex items-center space-x-2.5 text-brand-gold font-bold text-xs uppercase tracking-wider">
+                    <div className="p-2 rounded-lg bg-brand-gold/15 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
+                      <ShieldCheck className="w-4 h-4" />
+                    </div>
+                    <span>Integrity &amp; Compliance</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed text-justify">
+                    Uncompromising regulatory adherence, accurate declarations, and transparent fiduciary stewardship with zero hidden costs.
+                  </p>
                 </div>
-                <p className="text-xs text-slate-300">Client-centric execution with precision speed: BUILT ON TRUST</p>
-              </div>
 
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
-                <div className="flex items-center space-x-2 text-brand-gold font-bold text-xs uppercase">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>Nation</span>
+                {/* Pillar 2 */}
+                <div className="p-5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-gold/40 transition-all duration-300 space-y-2.5 group">
+                  <div className="flex items-center space-x-2.5 text-brand-gold font-bold text-xs uppercase tracking-wider">
+                    <div className="p-2 rounded-lg bg-brand-gold/15 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
+                      <Target className="w-4 h-4" />
+                    </div>
+                    <span>Precision &amp; Speed</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed text-justify">
+                    Clockwork logistics execution engineered around rapid electronic bill-of-entry filing and expedited port container dispatch.
+                  </p>
                 </div>
-                <p className="text-xs text-slate-300">Strengthening Bangladesh&apos;s trade infrastructure and industrial sovereignty.</p>
+
+                {/* Pillar 3 */}
+                <div className="p-5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-gold/40 transition-all duration-300 space-y-2.5 group">
+                  <div className="flex items-center space-x-2.5 text-brand-gold font-bold text-xs uppercase tracking-wider">
+                    <div className="p-2 rounded-lg bg-brand-gold/15 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
+                      <Cpu className="w-4 h-4" />
+                    </div>
+                    <span>AI &amp; Smart Tech</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed text-justify">
+                    Integrating AI-enabled solutions, digital cargo tracking, and modern data-driven governance for predictable performance.
+                  </p>
+                </div>
+
+                {/* Pillar 4 */}
+                <div className="p-5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-brand-gold/40 transition-all duration-300 space-y-2.5 group">
+                  <div className="flex items-center space-x-2.5 text-brand-gold font-bold text-xs uppercase tracking-wider">
+                    <div className="p-2 rounded-lg bg-brand-gold/15 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
+                      <HeartHandshake className="w-4 h-4" />
+                    </div>
+                    <span>Enduring Value</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed text-justify">
+                    Cultivating generational client partnerships and driving sustainable national prosperity across trade, industry, and food security.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
