@@ -456,7 +456,7 @@ export default function Header() {
             {/* articles */}
             <Link
               href="/articles"
-              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/services")
+              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/articles")
                 ? "text-brand-navy font-bold bg-slate-100"
                 : "hover:text-brand-navy hover:bg-slate-100/80"
                 }`}
@@ -470,7 +470,7 @@ export default function Header() {
             {/* Gallery */}
             <Link
               href="/gallery"
-              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/services")
+              className={`px-3 py-2 rounded-lg transition-all duration-200 relative ${pathname.startsWith("/gallery")
                 ? "text-brand-navy font-bold bg-slate-100"
                 : "hover:text-brand-navy hover:bg-slate-100/80"
                 }`}
@@ -628,6 +628,24 @@ export default function Header() {
                   }`}
               >
                 Services
+              </Link>
+              <Link
+                href="/articles"
+                className={`block px-3 py-2 rounded-xl font-medium ${pathname.startsWith("/articles")
+                  ? "bg-brand-navy/5 text-brand-navy font-bold"
+                  : "text-slate-800 hover:bg-slate-50"
+                  }`}
+              >
+                Articles
+              </Link>
+              <Link
+                href="/gallery"
+                className={`block px-3 py-2 rounded-xl font-medium ${pathname.startsWith("/gallery")
+                  ? "bg-brand-navy/5 text-brand-navy font-bold"
+                  : "text-slate-800 hover:bg-slate-50"
+                  }`}
+              >
+                Gallery
               </Link>
               <Link
                 href="/contact"

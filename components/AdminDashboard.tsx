@@ -34,6 +34,8 @@ import { isFirebaseConfigured, firebaseConfig } from "@/lib/firebase";
 import { uploadOptimizedMedia } from "@/lib/image-optimizer";
 import { useAuth } from "@/lib/auth-context";
 import AdminDivisionSlidersEditor from "./AdminDivisionSlidersEditor";
+import AdminArticlesEditor from "./AdminArticlesEditor";
+import AdminGalleryEditor from "./AdminGalleryEditor";
 import { seedFirestoreDatabase } from "@/lib/seeder";
 import {
   LayoutDashboard,
@@ -74,12 +76,16 @@ import {
   UserCheck,
   ShieldCheck,
   Image as ImageIcon,
+  FileText,
+  Camera,
 } from "lucide-react";
 
 type AdminTab =
   | "panels"
   | "division-sliders"
   | "partners"
+  | "articles"
+  | "gallery"
   | "general"
   | "users"
   | "security"
@@ -774,6 +780,52 @@ export default function AdminDashboard() {
               </span>
             </button>
 
+            {/* Tab: Articles */}
+            <button
+              onClick={() => {
+                setActiveTab("articles");
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "articles"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
+            >
+              <div className="flex items-center space-x-2.5">
+                <FileText className="w-4 h-4" />
+                <span>Articles &amp; Insights</span>
+              </div>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "articles" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
+              >
+                News
+              </span>
+            </button>
+
+            {/* Tab: Photo Gallery */}
+            <button
+              onClick={() => {
+                setActiveTab("gallery");
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${activeTab === "gallery"
+                ? "bg-brand-gold text-brand-navy font-bold shadow-gold"
+                : "text-slate-300 hover:bg-white/5 hover:text-white"
+                }`}
+            >
+              <div className="flex items-center space-x-2.5">
+                <Camera className="w-4 h-4" />
+                <span>Photo Gallery</span>
+              </div>
+              <span
+                className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${activeTab === "gallery" ? "bg-black/20 text-brand-navy" : "bg-white/10 text-slate-300"
+                  }`}
+              >
+                Media
+              </span>
+            </button>
+
             {/* Tab: General Info */}
             <button
               onClick={() => {
@@ -917,6 +969,8 @@ export default function AdminDashboard() {
                 {activeTab === "panels" && "Hero Business Panels Manager"}
                 {activeTab === "division-sliders" && "Division Hero Sliders Manager"}
                 {activeTab === "partners" && "Business Partners & Client Logos"}
+                {activeTab === "articles" && "Articles & Industry Insights Manager"}
+                {activeTab === "gallery" && "Corporate Photo Gallery & Media Manager"}
                 {activeTab === "general" && "General Company & Contact Information"}
                 {activeTab === "users" && "Admin Team & Role Management"}
                 {activeTab === "system" && "Firebase Configuration & Status"}
@@ -927,6 +981,8 @@ export default function AdminDashboard() {
               {activeTab === "panels" && "Configure the vertical expanding cards on the homepage"}
               {activeTab === "division-sliders" && "Edit background images, categories, and headlines for each division hero slider"}
               {activeTab === "partners" && "Add, reorder, or edit enterprise client logos and partner names"}
+              {activeTab === "articles" && "Publish, edit, add, or delete freight forwarding and trade articles"}
+              {activeTab === "gallery" && "Add, edit, reorder, or publish corporate photos and popup lightbox captions"}
               {activeTab === "general" && "Manage phone numbers, emails, addresses and social links"}
               {activeTab === "users" && "Manage authorized admin users and permissions"}
               {activeTab === "system" && "Verify Firestore project connections and sync health"}
@@ -1421,6 +1477,16 @@ export default function AdminDashboard() {
           {/* TAB: DIVISION HERO SLIDERS */}
           {activeTab === "division-sliders" && (
             <AdminDivisionSlidersEditor />
+          )}
+
+          {/* TAB: ARTICLES */}
+          {activeTab === "articles" && (
+            <AdminArticlesEditor />
+          )}
+
+          {/* TAB: GALLERY */}
+          {activeTab === "gallery" && (
+            <AdminGalleryEditor />
           )}
 
           {/* TAB 2: BUSINESS PARTNERS */}

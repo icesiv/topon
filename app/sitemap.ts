@@ -1,8 +1,16 @@
 import { MetadataRoute } from "next";
+import { DEFAULT_ARTICLES } from "@/lib/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.toponbd.com";
   const now = new Date();
+
+  const articleRoutes: MetadataRoute.Sitemap = DEFAULT_ARTICLES.map((article) => ({
+    url: `${baseUrl}/articles/${article.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
 
   return [
     // 1. Primary Homepage
@@ -58,6 +66,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.85,
     },
+    {
+      url: `${baseUrl}/articles`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/gallery`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    ...articleRoutes,
     {
       url: `${baseUrl}/contact`,
       lastModified: now,

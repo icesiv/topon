@@ -266,7 +266,7 @@ export default function AboutPage() {
                   Founded in 1990 as Shahabuddin Enterprise and evolved into a multi-sector conglomerate, we know that true commercial trust is forged through unwavering integrity, zero-demurrage discipline, and total regulatory adherence.
                 </p>
                 <p className="text-slate-200">
-                  As we look toward the future, we combine this trusted foundation with <span className="text-brand-goldLight font-medium underline decoration-brand-gold/60 underline-offset-4">AI-enabled solutions</span>, digital cargo transparency, modern aquaculture bio-telemetry, and corporate advisory—delivering predictable, high-value outcomes for our partners and contributing to Bangladesh&apos;s national economic sovereignty.
+                  As we look toward the future, we combine this trusted foundation with digital cargo transparency, modern supply chain technology, sustainable practices, and corporate advisory—delivering predictable, high-value outcomes for our partners and contributing to Bangladesh&apos;s national economic sovereignty.
                 </p>
 
               </div>
@@ -305,10 +305,10 @@ export default function AboutPage() {
                     <div className="p-2 rounded-lg bg-brand-gold/15 text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-navy transition-colors shrink-0">
                       <Cpu className="w-4 h-4" />
                     </div>
-                    <span>AI &amp; Smart Tech</span>
+                    <span>Innovation &amp; Technology</span>
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed text-justify">
-                    Integrating AI-enabled solutions, digital cargo tracking, and modern data-driven governance for predictable performance.
+                    Integrating digital cargo tracking, streamlined electronic customs workflows, and modern data-driven governance for predictable performance.
                   </p>
                 </div>
 

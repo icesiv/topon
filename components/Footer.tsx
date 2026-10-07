@@ -199,6 +199,16 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/articles" className="hover:text-brand-navy transition-colors">
+                Articles &amp; Industry Insights
+              </Link>
+            </li>
+            <li>
+              <Link href="/gallery" className="hover:text-brand-navy transition-colors">
+                Photo Gallery &amp; Media
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="hover:text-brand-navy transition-colors">
                 Contact &amp; Port Desks
               </Link>

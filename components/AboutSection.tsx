@@ -170,9 +170,8 @@ export default function AboutSection() {
             <p className="lg:col-span-5 text-sm sm:text-base text-slate-300 leading-relaxed lg:border-l lg:border-white/10 lg:pl-10 text-justify">
               As we look toward the future, Top On Group remains committed to responsible growth,
               operational excellence, innovation, and creating sustainable value for our clients,
-              partners, employees, and the wider economy. We combine modern technology,{" "}
-              <strong className="text-brand-goldLight font-semibold">AI-enabled solutions</strong>,
-              strong governance, and a service-first approach to create lasting value.
+              partners, employees, and the wider economy. We combine modern technology, strong
+              governance, and a service-first approach to create lasting value.
             </p>
           </div>
         </div>
