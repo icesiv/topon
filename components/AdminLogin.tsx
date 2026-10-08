@@ -68,63 +68,60 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020813] text-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden selection:bg-brand-gold selection:text-brand-navy">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden selection:bg-brand-gold selection:text-brand-navy">
       {/* Dynamic Background Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-brand-gold/10 via-brand-navyLight/20 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 right-10 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-10 left-10 w-72 h-72 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-brand-gold/15 via-amber-100/30 to-blue-50/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 right-10 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 left-10 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Grid Pattern Texture Overlay */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, #0B2240 1px, transparent 0)`,
           backgroundSize: "32px 32px",
         }}
       />
 
       <div className="relative z-10 w-full max-w-md space-y-6">
-        {/* Brand Header with Group Logo */}
-        <div className="text-center space-y-4">
-          <Link href="/" className="inline-block group focus:outline-none">
-            <div className="mx-auto w-48 sm:w-56 h-20 sm:h-24 bg-white/95 rounded-2xl p-3 shadow-xl border border-brand-gold/40 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-white group-hover:shadow-brand-gold/20 group-hover:shadow-2xl">
-              <Image
-                src="/images/logo/topon-group.png"
-                alt="Top On Group Logo"
-                width={220}
-                height={80}
-                priority
-                quality={100}
-                className="w-auto h-full max-h-16 sm:max-h-20 object-contain"
-              />
-            </div>
-          </Link>
+        {/* Brand Header */}
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-goldDark text-xs font-bold uppercase tracking-wider shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-brand-goldDark" />
+            <span>Top On Group</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold font-serif text-brand-navy tracking-tight">
+            Admin <span className="text-gold-gradient">Control Panel</span>
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Sign in with authorized corporate credentials
+          </p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-[#071930]/90 backdrop-blur-xl border border-white/10 p-7 sm:p-8 rounded-3xl shadow-2xl shadow-black/80 relative space-y-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 p-7 sm:p-8 rounded-3xl shadow-2xl shadow-slate-900/10 relative space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div className="flex items-center space-x-2">
               <ShieldCheck className="w-5 h-5 text-brand-gold" />
-              <h2 className="text-base font-bold text-white">Administrator Access</h2>
+              <h2 className="text-base font-bold text-brand-navy">Administrator Access</h2>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-brand-gold/15 text-brand-gold border border-brand-gold/30 font-bold">
+            <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-brand-gold/15 text-brand-goldDark border border-brand-gold/30 font-bold">
               v2.4 Live Sync
             </span>
           </div>
 
           {/* Error Alert */}
           {errorMessage && (
-            <div className="p-3.5 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs flex items-start space-x-2.5 animate-in fade-in zoom-in-95 duration-150">
-              <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-              <div className="flex-1">{errorMessage}</div>
+            <div className="p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start space-x-2.5 animate-in fade-in zoom-in-95 duration-150">
+              <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+              <div className="flex-1 font-medium">{errorMessage}</div>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
             {/* Email Field */}
             <div className="space-y-1.5">
-              <label className="font-semibold text-slate-300 block text-xs">Email Address</label>
+              <label className="font-semibold text-slate-700 block text-xs">Email Address</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                   <Mail className="w-4 h-4" />
@@ -135,7 +132,7 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your User ID / e-mail"
-                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-[#040C18] border border-white/15 text-white placeholder-slate-500 focus:border-brand-gold focus:outline-none transition-all font-mono text-xs"
+                  className="w-full pl-10 pr-3.5 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold focus:bg-white focus:outline-none transition-all font-mono text-xs"
                 />
               </div>
             </div>
@@ -143,7 +140,7 @@ export default function AdminLogin() {
             {/* Password Field */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="font-semibold text-slate-300 block text-xs">Password</label>
+                <label className="font-semibold text-slate-700 block text-xs">Password</label>
               </div>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -154,13 +151,13 @@ export default function AdminLogin() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="your Password"
-                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-[#040C18] border border-white/15 text-white placeholder-slate-500 focus:border-brand-gold focus:outline-none transition-all font-mono text-xs"
+                  placeholder="Your Password"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold focus:bg-white focus:outline-none transition-all font-mono text-xs"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white"
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-700"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -174,9 +171,9 @@ export default function AdminLogin() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded border-white/20 bg-[#040C18] text-brand-gold focus:ring-brand-gold"
+                  className="rounded border-slate-300 bg-slate-50 text-brand-navy focus:ring-brand-gold"
                 />
-                <span className="text-xs text-slate-400">Remember session</span>
+                <span className="text-xs text-slate-600">Remember session</span>
               </label>
             </div>
 
@@ -184,41 +181,49 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-brand-navy font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-gold hover:shadow-lg transition-all disabled:opacity-50"
+              className="w-full mt-2 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-navyDark text-white font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-lg shadow-brand-navy/25 hover:shadow-brand-gold/30 border border-brand-gold/40 hover:border-brand-gold transition-all disabled:opacity-50 cursor-pointer"
             >
               {isSubmitting ? (
-                <div className="w-5 h-5 border-2 border-brand-navy border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>Sign In to Admin Panel</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-brand-gold" />
                 </>
               )}
             </button>
           </form>
-
-          {/* Quick Demo Helper Pill */}
-          <div className="pt-2 border-t border-white/10 text-center">
-            <button
-              type="button"
-              onClick={fillDemoCredentials}
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-slate-300 transition-colors cursor-pointer"
-            >
-              <KeyRound className="w-3.5 h-3.5 text-brand-gold" />
-              <span>Fill Authorized Admin (mamun@toponbd.com)</span>
-            </button>
-          </div>
         </div>
 
         {/* Back Link */}
         <div className="text-center">
           <Link
             href="/"
-            className="text-xs text-slate-400 hover:text-brand-gold transition-colors inline-flex items-center space-x-1"
+            className="text-xs text-slate-500 hover:text-brand-navy transition-colors inline-flex items-center space-x-1 font-medium"
           >
             <span>← Return to Top On Group Homepage</span>
           </Link>
         </div>
+      </div>
+
+      {/* Bottom Right Very Big Logo Overlay */}
+      <div className="fixed bottom-0 right-0 sm:bottom-2 sm:right-2 md:bottom-4 md:right-6 lg:bottom-6 lg:right-8 z-0 pointer-events-none select-none">
+        <Link
+          href="/"
+          className="pointer-events-auto block transition-transform duration-500 hover:scale-105"
+          title="Return to Top On Group Homepage"
+        >
+          <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[440px] lg:h-[440px] xl:w-[480px] xl:h-[480px] opacity-60 hover:opacity-90 transition-opacity duration-300 drop-shadow-md">
+            <Image
+              src="/images/logo/topon-group.png"
+              alt="Top On Group Logo"
+              fill
+              quality={100}
+              priority
+              className="object-contain object-bottom-right"
+            />
+          </div>
+        </Link>
       </div>
     </div>
   );
