@@ -130,7 +130,7 @@ export default function AdminDivisionSlidersEditor() {
 
   const handleDeleteSlide = (idx: number) => {
     if (currentDivisionSlides.length <= 1) {
-      alert("Each division must maintain at least one hero slide.");
+      alert("Each group entity must maintain at least one hero slide.");
       return;
     }
     if (confirm("Are you sure you want to delete this slide?")) {
@@ -210,11 +210,11 @@ export default function AdminDivisionSlidersEditor() {
     setSaveStatus({ type: null, message: "" });
 
     try {
-      const res = await saveAllDivisionSlides(allSlides, user?.email);
+      const res = await saveAllDivisionSlides(allSlides, user?.email || undefined);
       if (res.success) {
         setSaveStatus({
           type: "success",
-          message: "All division hero slides saved successfully! Public pages are now updated.",
+          message: "All group entity hero slides saved successfully! Public pages are now updated.",
         });
       } else {
         setSaveStatus({
@@ -236,17 +236,130 @@ export default function AdminDivisionSlidersEditor() {
     <div className="space-y-8 select-none">
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-        <div>
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-gold/15 border border-brand-gold/30 text-brand-gold text-xs font-mono uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Division Hero Sliders</span>
+        {/* Division Selection Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          <div className="flex items-center justify-between mb-2">
+            <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
+              <span>Select Group Entity to Edit</span>
+              <span className="text-[11px] text-slate-500 font-normal lowercase">(5 entities available)</span>
+            </label>
+            <span className="text-xs text-brand-gold font-mono font-medium">
+              {(allSlides[selectedDivision] || []).length} slides configured
+            </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold font-serif text-white tracking-tight">
-            Manage Division Slide Images
-          </h2>
-          <p className="text-slate-400 text-xs sm:text-sm mt-1">
-            Customize the background hero slides, category tags, and headlines for each of Top On Group’s 5 core divisions.
-          </p>
+
+          {/* Dropdown Trigger Button */}
+          <button
+            type="button"
+            onClick={() => setIsDivisionDropdownOpen((prev) => !prev)}
+            className="w-full p-3.5 sm:p-4 rounded-2xl bg-[#0B2240] hover:bg-[#0E2A50] border border-brand-gold/30 hover:border-brand-gold/60 text-white shadow-xl transition-all duration-200 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
+            aria-haspopup="listbox"
+            aria-expanded={isDivisionDropdownOpen}
+          >
+            <div className="flex items-center space-x-3.5 min-w-0">
+              <div className="w-12 h-12 rounded-xl bg-white/10 p-1.5 flex items-center justify-center shrink-0 border border-white/20 group-hover:scale-105 transition-transform">
+                <Image
+                  src={currentMeta.logo}
+                  alt={currentMeta.name}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="text-left min-w-0">
+                <div className="flex items-center space-x-2">
+                  <span className="text-base sm:text-lg font-bold text-white font-serif tracking-tight truncate">
+                    {currentMeta.name}
+                  </span>
+                  <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-brand-gold/15 border border-brand-gold/30 text-brand-gold text-[10px] font-mono font-medium">
+                    {currentMeta.badge}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 truncate mt-0.5">
+                  Target Route: <span className="font-mono text-slate-300">{currentMeta.route}</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3 shrink-0 ml-3">
+              <span className="hidden sm:inline-block text-xs font-semibold text-brand-gold group-hover:text-brand-goldLight transition-colors">
+                Change Group Entity
+              </span>
+              <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-brand-gold group-hover:border-brand-gold/40 transition-all">
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-300 ${isDivisionDropdownOpen ? "rotate-180 text-brand-gold" : ""
+                    }`}
+                />
+              </div>
+            </div>
+          </button>
+
+          {/* Dropdown Menu List */}
+          {isDivisionDropdownOpen && (
+            <div className="absolute top-full left-0 right-0 mt-2 z-50 bg-[#071930] border border-brand-gold/40 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="p-2 space-y-1.5 max-h-[380px] overflow-y-auto divide-y divide-white/5">
+                {DIVISION_META_LIST.map((div) => {
+                  const isSelected = selectedDivision === div.key;
+                  const slideCount = (allSlides[div.key] || []).length;
+
+                  return (
+                    <button
+                      key={div.key}
+                      type="button"
+                      onClick={() => {
+                        setSelectedDivision(div.key);
+                        setSelectedSlideIdx(0);
+                        setIsDivisionDropdownOpen(false);
+                        setSaveStatus({ type: null, message: "" });
+                      }}
+                      className={`w-full p-3 rounded-xl text-left transition-all flex items-center justify-between group ${isSelected
+                        ? "bg-brand-gold/15 border border-brand-gold/50 text-white shadow-md"
+                        : "hover:bg-white/5 text-slate-300 border border-transparent"
+                        }`}
+                    >
+                      <div className="flex items-center space-x-3.5 min-w-0">
+                        <div className="w-10 h-10 rounded-lg bg-white/10 p-1 flex items-center justify-center shrink-0 border border-white/10 group-hover:scale-105 transition-transform">
+                          <Image
+                            src={div.logo}
+                            alt={div.name}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-sm font-bold text-white flex items-center space-x-2">
+                            <span className="truncate">{div.name}</span>
+                            {isSelected && (
+                              <span className="px-2 py-0.5 rounded-full bg-brand-gold text-brand-navy text-[10px] font-bold">
+                                Selected
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-slate-400 mt-0.5 flex items-center space-x-2">
+                            <span>{div.badge}</span>
+                            <span>&bull;</span>
+                            <span className="font-mono text-slate-300">{div.route}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-3 shrink-0 ml-3">
+                        <span className="font-mono text-xs px-2.5 py-1 rounded-lg bg-black/40 text-brand-gold border border-white/10 font-semibold">
+                          {slideCount} {slideCount === 1 ? "slide" : "slides"}
+                        </span>
+                        {isSelected ? (
+                          <Check className="w-5 h-5 text-brand-gold shrink-0" />
+                        ) : (
+                          <div className="w-5 h-5" />
+                        )}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center space-x-3 shrink-0">
@@ -256,7 +369,7 @@ export default function AdminDivisionSlidersEditor() {
             className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 text-xs font-semibold flex items-center space-x-1.5 transition-colors"
           >
             <Eye className="w-3.5 h-3.5 text-brand-gold" />
-            <span>View Live Page</span>
+            <span>Live</span>
             <ExternalLink className="w-3 h-3 text-slate-400" />
           </Link>
 
@@ -279,11 +392,10 @@ export default function AdminDivisionSlidersEditor() {
       {/* Save Notification */}
       {saveStatus.type && (
         <div
-          className={`p-4 rounded-2xl flex items-center space-x-3 text-xs sm:text-sm font-medium border animate-in fade-in slide-in-from-top-2 ${
-            saveStatus.type === "success"
-              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-              : "bg-red-500/10 border-red-500/30 text-red-300"
-          }`}
+          className={`p-4 rounded-2xl flex items-center space-x-3 text-xs sm:text-sm font-medium border animate-in fade-in slide-in-from-top-2 ${saveStatus.type === "success"
+            ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+            : "bg-red-500/10 border-red-500/30 text-red-300"
+            }`}
         >
           {saveStatus.type === "success" ? (
             <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -294,133 +406,7 @@ export default function AdminDivisionSlidersEditor() {
         </div>
       )}
 
-      {/* Division Selection Dropdown */}
-      <div className="relative" ref={dropdownRef}>
-        <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center space-x-2">
-            <span>Select Business Division to Edit</span>
-            <span className="text-[11px] text-slate-500 font-normal lowercase">(5 divisions available)</span>
-          </label>
-          <span className="text-xs text-brand-gold font-mono font-medium">
-            {(allSlides[selectedDivision] || []).length} slides configured
-          </span>
-        </div>
 
-        {/* Dropdown Trigger Button */}
-        <button
-          type="button"
-          onClick={() => setIsDivisionDropdownOpen((prev) => !prev)}
-          className="w-full p-3.5 sm:p-4 rounded-2xl bg-[#0B2240] hover:bg-[#0E2A50] border border-brand-gold/30 hover:border-brand-gold/60 text-white shadow-xl transition-all duration-200 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
-          aria-haspopup="listbox"
-          aria-expanded={isDivisionDropdownOpen}
-        >
-          <div className="flex items-center space-x-3.5 min-w-0">
-            <div className="w-12 h-12 rounded-xl bg-white/10 p-1.5 flex items-center justify-center shrink-0 border border-white/20 group-hover:scale-105 transition-transform">
-              <Image
-                src={currentMeta.logo}
-                alt={currentMeta.name}
-                width={48}
-                height={48}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="text-left min-w-0">
-              <div className="flex items-center space-x-2">
-                <span className="text-base sm:text-lg font-bold text-white font-serif tracking-tight truncate">
-                  {currentMeta.name}
-                </span>
-                <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-brand-gold/15 border border-brand-gold/30 text-brand-gold text-[10px] font-mono font-medium">
-                  {currentMeta.badge}
-                </span>
-              </div>
-              <p className="text-xs text-slate-400 truncate mt-0.5">
-                Target Route: <span className="font-mono text-slate-300">{currentMeta.route}</span>
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-3 shrink-0 ml-3">
-            <span className="hidden sm:inline-block text-xs font-semibold text-brand-gold group-hover:text-brand-goldLight transition-colors">
-              Change Division
-            </span>
-            <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-brand-gold group-hover:border-brand-gold/40 transition-all">
-              <ChevronDown
-                className={`w-5 h-5 transition-transform duration-300 ${
-                  isDivisionDropdownOpen ? "rotate-180 text-brand-gold" : ""
-                }`}
-              />
-            </div>
-          </div>
-        </button>
-
-        {/* Dropdown Menu List */}
-        {isDivisionDropdownOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 z-50 bg-[#071930] border border-brand-gold/40 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="p-2 space-y-1.5 max-h-[380px] overflow-y-auto divide-y divide-white/5">
-              {DIVISION_META_LIST.map((div) => {
-                const isSelected = selectedDivision === div.key;
-                const slideCount = (allSlides[div.key] || []).length;
-
-                return (
-                  <button
-                    key={div.key}
-                    type="button"
-                    onClick={() => {
-                      setSelectedDivision(div.key);
-                      setSelectedSlideIdx(0);
-                      setIsDivisionDropdownOpen(false);
-                      setSaveStatus({ type: null, message: "" });
-                    }}
-                    className={`w-full p-3 rounded-xl text-left transition-all flex items-center justify-between group ${
-                      isSelected
-                        ? "bg-brand-gold/15 border border-brand-gold/50 text-white shadow-md"
-                        : "hover:bg-white/5 text-slate-300 border border-transparent"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-3.5 min-w-0">
-                      <div className="w-10 h-10 rounded-lg bg-white/10 p-1 flex items-center justify-center shrink-0 border border-white/10 group-hover:scale-105 transition-transform">
-                        <Image
-                          src={div.logo}
-                          alt={div.name}
-                          width={40}
-                          height={40}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-bold text-white flex items-center space-x-2">
-                          <span className="truncate">{div.name}</span>
-                          {isSelected && (
-                            <span className="px-2 py-0.5 rounded-full bg-brand-gold text-brand-navy text-[10px] font-bold">
-                              Selected
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-xs text-slate-400 mt-0.5 flex items-center space-x-2">
-                          <span>{div.badge}</span>
-                          <span>&bull;</span>
-                          <span className="font-mono text-slate-300">{div.route}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-3 shrink-0 ml-3">
-                      <span className="font-mono text-xs px-2.5 py-1 rounded-lg bg-black/40 text-brand-gold border border-white/10 font-semibold">
-                        {slideCount} {slideCount === 1 ? "slide" : "slides"}
-                      </span>
-                      {isSelected ? (
-                        <Check className="w-5 h-5 text-brand-gold shrink-0" />
-                      ) : (
-                        <div className="w-5 h-5" />
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
 
       {/* Main Slide Editor Split View */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -462,11 +448,10 @@ export default function AdminDivisionSlidersEditor() {
                 <div
                   key={slide.id || idx}
                   onClick={() => setSelectedSlideIdx(idx)}
-                  className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center space-x-3.5 group ${
-                    isActive
-                      ? "bg-white/10 border-brand-gold shadow-md ring-1 ring-brand-gold/30"
-                      : "bg-white/5 border-white/10 hover:border-white/20"
-                  }`}
+                  className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center space-x-3.5 group ${isActive
+                    ? "bg-white/10 border-brand-gold shadow-md ring-1 ring-brand-gold/30"
+                    : "bg-white/5 border-white/10 hover:border-white/20"
+                    }`}
                 >
                   {/* Thumbnail */}
                   <div className="w-20 h-14 rounded-xl overflow-hidden relative shrink-0 border border-white/15 bg-black/40">
@@ -567,7 +552,7 @@ export default function AdminDivisionSlidersEditor() {
                 {/* Simulated Content Overlay */}
                 <div className="absolute bottom-4 left-4 right-4 z-10 space-y-2">
                   <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-black/70 border border-brand-gold/50 backdrop-blur-md text-brand-gold text-[10px] font-mono font-semibold uppercase tracking-wider">
-                    <span>{currentSlide.category || "Division Category"}</span>
+                    <span>{currentSlide.category || "Entity Category"}</span>
                   </div>
                   <h4 className="text-white font-serif font-bold text-sm sm:text-base leading-snug line-clamp-2 drop-shadow-md">
                     {currentSlide.headline || "Headline text preview will appear here..."}
@@ -661,11 +646,10 @@ export default function AdminDivisionSlidersEditor() {
                         key={p.url}
                         type="button"
                         onClick={() => updateCurrentSlide("image", p.url)}
-                        className={`relative h-14 rounded-lg overflow-hidden border transition-all text-left group ${
-                          isSelected
-                            ? "border-brand-gold ring-2 ring-brand-gold shadow-md"
-                            : "border-white/10 hover:border-brand-gold/60 opacity-80 hover:opacity-100"
-                        }`}
+                        className={`relative h-14 rounded-lg overflow-hidden border transition-all text-left group ${isSelected
+                          ? "border-brand-gold ring-2 ring-brand-gold shadow-md"
+                          : "border-white/10 hover:border-brand-gold/60 opacity-80 hover:opacity-100"
+                          }`}
                         title={p.name}
                       >
                         <Image

@@ -17,7 +17,7 @@ import {
 import TopOnTechHeroSlider from "@/components/TopOnTechHeroSlider";
 
 export const metadata: Metadata = {
-  title: "Top On-Tech | Import, Export & General Trading Division",
+  title: "Top On-Tech | Import, Export & General Trading Entity",
   description:
     "Top On-Tech is the international trading and sourcing arm of Top On Group in Bangladesh. Specializing in industrial machinery, chemical supplies, textile fabrics, and electronics.",
   keywords: [

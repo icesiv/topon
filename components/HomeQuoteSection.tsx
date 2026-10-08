@@ -1,4 +1,12 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { ShieldCheck, CheckCircle2, Clock, Mail, MapPin, Sparkles } from "lucide-react";
+import {
+  subscribeGeneralInfo,
+  DEFAULT_GENERAL_INFO,
+  GeneralInfoData,
+} from "@/lib/generalInfo";
 
 interface HomeQuoteSectionProps {
   id?: string;
@@ -17,6 +25,14 @@ export default function HomeQuoteSection({
   description,
   defaultDivision = "both",
 }: HomeQuoteSectionProps) {
+  const [generalInfo, setGeneralInfo] = useState<GeneralInfoData>(DEFAULT_GENERAL_INFO);
+
+  useEffect(() => {
+    const unsub = subscribeGeneralInfo((data) => setGeneralInfo(data));
+    return () => {
+      if (unsub) unsub();
+    };
+  }, []);
   return (
     <section id={id} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
       {/* Background Ambient Glow */}
@@ -87,7 +103,7 @@ export default function HomeQuoteSection({
           <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-100 to-white border border-slate-200 text-xs text-slate-600 space-y-1.5">
             <div className="flex items-center space-x-2 text-[#0B2240] font-semibold">
               <Mail className="w-4 h-4 text-brand-goldDark" />
-              <span>Direct Commercial Desk: <a href="mailto:info@toponbd.com" className="text-brand-goldDark hover:underline">info@toponbd.com</a></span>
+              <span>Direct Commercial Desk: <a href={`mailto:${generalInfo.email || "info@toponbd.com"}`} className="text-brand-goldDark hover:underline">{generalInfo.email || "info@toponbd.com"}</a></span>
             </div>
             <div className="flex items-center space-x-2 text-slate-500">
               <MapPin className="w-4 h-4 text-slate-400" />

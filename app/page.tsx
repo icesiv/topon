@@ -13,9 +13,26 @@ export const metadata: Metadata = {
     "Customs Clearing and Forwarding, Freight Forwarding, Import, Trade, Consultancy & Supply",
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Top On Group",
+  "url": "https://toponbd.com",
+  "sameAs": [
+    "https://www.facebook.com/topongroup",
+    "https://www.linkedin.com/company/top-on-group",
+  ],
+};
+
 export default function HomePage() {
   return (
     <div className=" bg-slate-50 text-slate-900">
+      {/* Schema.org Organization Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+
       {/* 1. HERO SEGMENT */}
       <HeroSection />
 

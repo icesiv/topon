@@ -261,11 +261,10 @@ export default function AdminHeroEditor() {
         {/* Save Status Toast/Banner */}
         {saveStatus.type && (
           <div
-            className={`p-4 rounded-xl text-xs sm:text-sm flex items-center justify-between animate-in fade-in duration-200 ${
-              saveStatus.type === "success"
+            className={`p-4 rounded-xl text-xs sm:text-sm flex items-center justify-between animate-in fade-in duration-200 ${saveStatus.type === "success"
                 ? "bg-emerald-500/20 border border-emerald-500/50 text-emerald-200"
                 : "bg-red-500/20 border border-red-500/50 text-red-200"
-            }`}
+              }`}
           >
             <div className="flex items-center space-x-2.5">
               {saveStatus.type === "success" ? (
@@ -289,10 +288,10 @@ export default function AdminHeroEditor() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
             <div>
               <h2 className="text-base font-bold text-white flex items-center space-x-2">
-                <span>Business Divisions Panels ({panels.length})</span>
+                <span>Group Entities Panels ({panels.length})</span>
               </h2>
               <p className="text-xs text-slate-400">
-                Select a tab below to edit division details or reorder the columns.
+                Select a tab below to edit entity details or reorder the columns.
               </p>
             </div>
 
@@ -313,7 +312,7 @@ export default function AdminHeroEditor() {
                 className="px-3 py-1.5 rounded-lg bg-brand-gold/20 hover:bg-brand-gold/30 text-brand-gold hover:text-brand-goldLight text-xs font-semibold flex items-center space-x-1.5 border border-brand-gold/30 transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>Add Division</span>
+                <span>Add Entity</span>
               </button>
             </div>
           </div>
@@ -327,11 +326,10 @@ export default function AdminHeroEditor() {
                 <button
                   key={p.id || idx}
                   onClick={() => setSelectedIdx(idx)}
-                  className={`p-3 rounded-xl text-left transition-all duration-200 border flex flex-col justify-between ${
-                    isSelected
+                  className={`p-3 rounded-xl text-left transition-all duration-200 border flex flex-col justify-between ${isSelected
                       ? "bg-brand-gold/15 border-brand-gold text-white shadow-lg ring-1 ring-brand-gold"
                       : "bg-[#061324]/80 border-white/10 hover:border-white/20 text-slate-400 hover:text-slate-200"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-brand-gold font-bold">
@@ -390,7 +388,7 @@ export default function AdminHeroEditor() {
                     type="button"
                     onClick={() => handleDeletePanel(selectedIdx)}
                     className="p-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/20 ml-2"
-                    title="Delete Division"
+                    title="Delete Entity"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -449,7 +447,7 @@ export default function AdminHeroEditor() {
                     type="text"
                     value={currentPanel.href}
                     onChange={(e) => updateCurrentField("href", e.target.value)}
-                    placeholder="/divisions/trading-topontech"
+                    placeholder="/entities/trading-topontech"
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#061324] border border-white/15 text-white text-sm focus:border-brand-gold focus:outline-none transition-colors"
                   />
                 </div>
@@ -519,11 +517,10 @@ export default function AdminHeroEditor() {
                         key={img}
                         type="button"
                         onClick={() => updateCurrentField("image", img)}
-                        className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${
-                          currentPanel.image === img
+                        className={`text-[10px] px-2.5 py-1 rounded-lg border transition-colors ${currentPanel.image === img
                             ? "bg-brand-gold text-brand-navy font-bold border-brand-gold"
                             : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                        }`}
+                          }`}
                       >
                         {img.replace("/images/", "").replace(".jpg", "")}
                       </button>
@@ -546,11 +543,10 @@ export default function AdminHeroEditor() {
                         key={iconKey}
                         type="button"
                         onClick={() => updateCurrentField("iconName", iconKey)}
-                        className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition-all ${
-                          isIconSelected
+                        className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-1 transition-all ${isIconSelected
                             ? "bg-brand-gold/20 border-brand-gold text-brand-gold shadow-md"
                             : "bg-[#061324] border-white/10 text-slate-400 hover:text-slate-200 hover:border-white/20"
-                        }`}
+                          }`}
                       >
                         <IconComp className="w-5 h-5" />
                         <span className="text-[10px] truncate max-w-full font-sans">{iconKey}</span>
@@ -572,22 +568,20 @@ export default function AdminHeroEditor() {
                   <button
                     type="button"
                     onClick={() => setPreviewExpanded(false)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
-                      !previewExpanded
+                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${!previewExpanded
                         ? "bg-brand-gold text-brand-navy"
                         : "text-slate-400 hover:text-slate-200"
-                    }`}
+                      }`}
                   >
                     Collapsed
                   </button>
                   <button
                     type="button"
                     onClick={() => setPreviewExpanded(true)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
-                      previewExpanded
+                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${previewExpanded
                         ? "bg-brand-gold text-brand-navy"
                         : "text-slate-400 hover:text-slate-200"
-                    }`}
+                      }`}
                   >
                     Expanded
                   </button>
@@ -596,11 +590,10 @@ export default function AdminHeroEditor() {
 
               {/* Preview Container mimicking Hero Section Column */}
               <div
-                className={`relative rounded-3xl overflow-hidden border transition-all duration-500 min-h-[480px] flex flex-col justify-between shadow-2xl ${
-                  previewExpanded
+                className={`relative rounded-3xl overflow-hidden border transition-all duration-500 min-h-[480px] flex flex-col justify-between shadow-2xl ${previewExpanded
                     ? "border-brand-gold/60 ring-2 ring-brand-gold/20"
                     : "border-white/15 opacity-90"
-                }`}
+                  }`}
               >
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
@@ -610,18 +603,16 @@ export default function AdminHeroEditor() {
                     fill
                     quality={80}
                     sizes="(max-width: 768px) 100vw, 400px"
-                    className={`object-cover transition-all duration-500 ${
-                      previewExpanded
+                    className={`object-cover transition-all duration-500 ${previewExpanded
                         ? "scale-105 brightness-110"
                         : "scale-100 brightness-[0.7]"
-                    }`}
+                      }`}
                   />
                   <div
-                    className={`absolute inset-0 transition-all duration-500 ${
-                      previewExpanded
+                    className={`absolute inset-0 transition-all duration-500 ${previewExpanded
                         ? "bg-gradient-to-t from-[#040C18] via-[#040C18]/50 to-transparent"
                         : "bg-gradient-to-t from-[#040C18] via-[#040C18]/70 to-black/40"
-                    }`}
+                      }`}
                   />
                 </div>
 

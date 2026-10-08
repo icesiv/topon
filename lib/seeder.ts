@@ -6,7 +6,8 @@ import { DEFAULT_PARTNERS, Partner } from "./partners";
 import { DEFAULT_GENERAL_INFO, GeneralInfoData } from "./generalInfo";
 import { DEFAULT_ADMIN_USERS, AdminUser } from "./adminUsers";
 import { DEFAULT_ARTICLES, Article } from "./articles";
-import { DEFAULT_GALLERY, GalleryItem } from "./gallery";
+import { DEFAULT_GALLERY, GalleryItem, cleanFirestoreData, normalizeGalleryItem } from "./gallery";
+import { DEFAULT_COMPANY_PROFILES, CompanyProfile } from "./companyProfiles";
 
 export interface SeedResult {
   success: boolean;
@@ -14,6 +15,7 @@ export interface SeedResult {
   details?: {
     heroBusinesses: number;
     divisionSliders: number;
+    companyProfiles: number;
     partners: number;
     generalInfo: boolean;
     adminUsers: number;
@@ -23,7 +25,7 @@ export interface SeedResult {
   error?: string;
 }
 
-const SETTINGS_COLLECTION = "site_settings";
+const SETTINGS_COLLECTION = "settings";
 
 /**
  * Seeds all core website data into Firebase Firestore and synchronizes
@@ -81,8 +83,20 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
     updatedBy: userEmail,
   };
 
-  const galleryData = {
-    items: DEFAULT_GALLERY,
+  const galleryData = cleanFirestoreData({
+    items: DEFAULT_GALLERY.map((g, idx) => ({
+      ...normalizeGalleryItem(g, idx),
+      updatedAt: timestamp,
+      updatedBy: userEmail,
+    })),
+    status: "published" as const,
+    isDeleted: false,
+    updatedAt: timestamp,
+    updatedBy: userEmail,
+  });
+
+  const profilesData = {
+    profiles: DEFAULT_COMPANY_PROFILES,
     status: "published" as const,
     isDeleted: false,
     updatedAt: timestamp,
@@ -94,6 +108,7 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
     try {
       localStorage.setItem("topon_hero_businesses", JSON.stringify(DEFAULT_BUSINESS_PANELS));
       localStorage.setItem("topon_division_sliders", JSON.stringify(DEFAULT_DIVISION_SLIDES));
+      localStorage.setItem("topon_company_profiles", JSON.stringify(DEFAULT_COMPANY_PROFILES));
       localStorage.setItem("topon_partners", JSON.stringify(DEFAULT_PARTNERS));
       localStorage.setItem("topon_general_info", JSON.stringify(DEFAULT_GENERAL_INFO));
       localStorage.setItem("topon_admin_users", JSON.stringify(DEFAULT_ADMIN_USERS));
@@ -103,6 +118,7 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
       // Dispatch change notification events across windows and components
       window.dispatchEvent(new CustomEvent("topon_hero_businesses_changed", { detail: DEFAULT_BUSINESS_PANELS }));
       window.dispatchEvent(new CustomEvent("topon_division_sliders_changed", { detail: DEFAULT_DIVISION_SLIDES }));
+      window.dispatchEvent(new CustomEvent("topon_company_profiles_changed", { detail: DEFAULT_COMPANY_PROFILES }));
       window.dispatchEvent(new CustomEvent("topon_partners_changed", { detail: DEFAULT_PARTNERS }));
       window.dispatchEvent(new CustomEvent("topon_general_info_changed", { detail: DEFAULT_GENERAL_INFO }));
       window.dispatchEvent(new CustomEvent("topon_admin_users_changed", { detail: DEFAULT_ADMIN_USERS }));
@@ -121,6 +137,7 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
       details: {
         heroBusinesses: DEFAULT_BUSINESS_PANELS.length,
         divisionSliders: Object.keys(DEFAULT_DIVISION_SLIDES).length,
+        companyProfiles: DEFAULT_COMPANY_PROFILES.length,
         partners: DEFAULT_PARTNERS.length,
         generalInfo: true,
         adminUsers: DEFAULT_ADMIN_USERS.length,
@@ -131,70 +148,17 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
   }
 
   try {
-    // Write site_settings & settings docs
+    // Write unified settings singleton documents
     await Promise.all([
-      setDoc(doc(db, SETTINGS_COLLECTION, "hero_businesses"), heroData, { merge: true }),
-      setDoc(doc(db, SETTINGS_COLLECTION, "division_sliders"), slidersData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "heroBusinesses"), heroData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "divisionSliders"), slidersData, { merge: true }),
       setDoc(doc(db, SETTINGS_COLLECTION, "partners"), partnersData, { merge: true }),
-      setDoc(doc(db, SETTINGS_COLLECTION, "general_info"), generalData, { merge: true }),
-      setDoc(doc(db, SETTINGS_COLLECTION, "admin_users"), adminData, { merge: true }),
-      setDoc(doc(db, "settings", "articles"), articlesData, { merge: true }),
-      setDoc(doc(db, "settings", "gallery"), galleryData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "generalInfo"), generalData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "adminUsers"), adminData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "company_profiles"), profilesData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "articles"), articlesData, { merge: true }),
+      setDoc(doc(db, SETTINGS_COLLECTION, "gallery"), galleryData, { merge: true }),
     ]);
-
-    // Also write dedicated root collection documents for flexible querying in Firebase console
-    const individualPromises: Promise<any>[] = [];
-
-    // Partners collection
-    DEFAULT_PARTNERS.forEach((partner, idx) => {
-      const partnerId = partner.id || `partner_${idx + 1}`;
-      individualPromises.push(
-        setDoc(
-          doc(db!, "partners", partnerId),
-          {
-            ...partner,
-            id: partnerId,
-            order: idx,
-            updatedAt: timestamp,
-            updatedBy: userEmail,
-          },
-          { merge: true }
-        )
-      );
-    });
-
-    // Hero businesses collection
-    DEFAULT_BUSINESS_PANELS.forEach((panel) => {
-      individualPromises.push(
-        setDoc(
-          doc(db!, "hero_businesses", panel.id),
-          {
-            ...panel,
-            updatedAt: timestamp,
-            updatedBy: userEmail,
-          },
-          { merge: true }
-        )
-      );
-    });
-
-    // Division sliders collection
-    (Object.keys(DEFAULT_DIVISION_SLIDES) as DivisionKey[]).forEach((divKey) => {
-      individualPromises.push(
-        setDoc(
-          doc(db!, "division_sliders", divKey),
-          {
-            division: divKey,
-            slides: DEFAULT_DIVISION_SLIDES[divKey],
-            updatedAt: timestamp,
-            updatedBy: userEmail,
-          },
-          { merge: true }
-        )
-      );
-    });
-
-    await Promise.all(individualPromises);
 
     return {
       success: true,
@@ -202,9 +166,12 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
       details: {
         heroBusinesses: DEFAULT_BUSINESS_PANELS.length,
         divisionSliders: Object.keys(DEFAULT_DIVISION_SLIDES).length,
+        companyProfiles: DEFAULT_COMPANY_PROFILES.length,
         partners: DEFAULT_PARTNERS.length,
         generalInfo: true,
         adminUsers: DEFAULT_ADMIN_USERS.length,
+        articles: DEFAULT_ARTICLES.length,
+        gallery: DEFAULT_GALLERY.length,
       },
     };
   } catch (err: any) {
@@ -216,9 +183,12 @@ export async function seedFirestoreDatabase(userEmail: string = "system-seeder")
       details: {
         heroBusinesses: DEFAULT_BUSINESS_PANELS.length,
         divisionSliders: Object.keys(DEFAULT_DIVISION_SLIDES).length,
+        companyProfiles: DEFAULT_COMPANY_PROFILES.length,
         partners: DEFAULT_PARTNERS.length,
         generalInfo: true,
         adminUsers: DEFAULT_ADMIN_USERS.length,
+        articles: DEFAULT_ARTICLES.length,
+        gallery: DEFAULT_GALLERY.length,
       },
     };
   }

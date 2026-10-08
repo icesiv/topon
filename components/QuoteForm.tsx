@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Send,
   CheckCircle2,
@@ -15,6 +15,11 @@ import {
   Briefcase,
   ArrowRight,
 } from "lucide-react";
+import {
+  subscribeGeneralInfo,
+  DEFAULT_GENERAL_INFO,
+  GeneralInfoData,
+} from "@/lib/generalInfo";
 
 interface QuoteFormProps {
   defaultDivision?: "topontech" | "dailyshipping" | "topexpress" | "agro" | "solution" | "both";
@@ -22,6 +27,14 @@ interface QuoteFormProps {
 }
 
 export default function QuoteForm({ defaultDivision = "both", compact = false }: QuoteFormProps) {
+  const [generalInfo, setGeneralInfo] = useState<GeneralInfoData>(DEFAULT_GENERAL_INFO);
+
+  useEffect(() => {
+    const unsub = subscribeGeneralInfo((data) => setGeneralInfo(data));
+    return () => {
+      if (unsub) unsub();
+    };
+  }, []);
   const getInitialDivision = () => {
     switch (defaultDivision) {
       case "topexpress":
@@ -161,10 +174,10 @@ export default function QuoteForm({ defaultDivision = "both", compact = false }:
             Submit Another Inquiry
           </button>
           <a
-            href="mailto:info@toponbd.com"
+            href={`mailto:${generalInfo.email || "info@toponbd.com"}`}
             className="px-5 py-3 rounded-xl border border-slate-200 hover:border-brand-gold text-slate-700 text-xs font-semibold transition-all"
           >
-            Direct Desk: info@toponbd.com
+            Direct Desk: {generalInfo.email || "info@toponbd.com"}
           </a>
         </div>
       </div>

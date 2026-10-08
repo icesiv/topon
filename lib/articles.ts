@@ -214,15 +214,61 @@ With licensed customs operations spanning **Chittagong, Dhaka Airport, Kamalapur
 const SETTINGS_COLLECTION = "settings";
 const ARTICLES_DOC = "articles";
 const CACHE_KEY = `${SETTINGS_COLLECTION}:${ARTICLES_DOC}`;
+const LOCAL_STORAGE_KEY = "topon_articles";
+const EVENT_NAME = "topon_articles_changed";
+
+function getLocalArticles(): Article[] | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch {
+    // Ignore localStorage read errors
+  }
+  return null;
+}
+
+function setLocalArticles(articles: Article[], broadcast: boolean = false): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(articles));
+    if (broadcast) {
+      window.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: articles }));
+    }
+  } catch {
+    // Ignore localStorage write errors
+  }
+}
+
+export function getArticlesSync(): Article[] {
+  const cached = getCached<Article[]>(CACHE_KEY);
+  if (cached && cached.length > 0) return cached;
+
+  const local = getLocalArticles();
+  if (local && local.length > 0) return local;
+
+  return DEFAULT_ARTICLES;
+}
 
 export async function fetchArticles(useCache: boolean = true): Promise<Article[]> {
   if (useCache) {
     const cached = getCached<Article[]>(CACHE_KEY);
-    if (cached) return cached;
+    if (cached && cached.length > 0) return cached;
+  }
+
+  const local = getLocalArticles();
+  if (local && local.length > 0) {
+    setCache(CACHE_KEY, local, 120000);
+    // If offline or fast render, return local
   }
 
   if (!isFirebaseConfigured() || !db) {
-    return DEFAULT_ARTICLES;
+    return local || DEFAULT_ARTICLES;
   }
 
   try {
@@ -233,13 +279,34 @@ export async function fetchArticles(useCache: boolean = true): Promise<Article[]
         (a) => a.status !== "archived"
       );
       setCache(CACHE_KEY, activeArticles, 120000);
+      setLocalArticles(activeArticles, false);
       return activeArticles;
+    } else {
+      // If doc does not exist yet in Firestore, auto-seed DEFAULT_ARTICLES to Firestore
+      try {
+        await setDoc(
+          docRef,
+          {
+            articles: DEFAULT_ARTICLES,
+            updatedAt: new Date().toISOString(),
+            updatedBy: "system_init",
+            status: "published",
+            isDeleted: false,
+          },
+          { merge: true }
+        );
+        setCache(CACHE_KEY, DEFAULT_ARTICLES, 120000);
+        setLocalArticles(DEFAULT_ARTICLES, false);
+        return DEFAULT_ARTICLES;
+      } catch (seedErr) {
+        console.warn("Could not auto-seed articles in Firestore:", seedErr);
+      }
     }
   } catch (err) {
-    console.error("Error fetching articles from Firestore, using default:", err);
+    console.error("Error fetching articles from Firestore, using fallback:", err);
   }
 
-  return DEFAULT_ARTICLES;
+  return local || DEFAULT_ARTICLES;
 }
 
 export async function fetchArticleBySlug(
@@ -254,50 +321,90 @@ export async function fetchArticleBySlug(
 export function subscribeArticles(
   onUpdate: (articles: Article[]) => void
 ): Unsubscribe | null {
-  if (!isFirebaseConfigured() || !db) {
-    onUpdate(DEFAULT_ARTICLES);
-    return null;
+  // 1. Emit instantaneous local/cached data
+  const initial = getArticlesSync();
+  onUpdate(initial);
+
+  // 2. Cross-component & cross-tab synchronization
+  const handleLocalChange = (e: Event) => {
+    const customEvt = e as CustomEvent<Article[]>;
+    if (customEvt.detail && Array.isArray(customEvt.detail)) {
+      setCache(CACHE_KEY, customEvt.detail, 120000);
+      onUpdate(customEvt.detail);
+    } else {
+      const updated = getArticlesSync();
+      onUpdate(updated);
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener(EVENT_NAME, handleLocalChange);
+    window.addEventListener("storage", handleLocalChange);
   }
 
-  try {
-    const docRef = doc(db, SETTINGS_COLLECTION, ARTICLES_DOC);
-    return onSnapshot(
-      docRef,
-      (snap) => {
-        if (
-          snap.exists() &&
-          Array.isArray(snap.data()?.articles) &&
-          snap.data()?.articles.length > 0
-        ) {
-          const activeArticles = (snap.data().articles as Article[]).filter(
-            (a) => a.status !== "archived"
-          );
-          setCache(CACHE_KEY, activeArticles, 120000);
-          onUpdate(activeArticles);
-        } else {
-          onUpdate(DEFAULT_ARTICLES);
+  let firestoreUnsub: Unsubscribe | null = null;
+
+  if (isFirebaseConfigured() && db) {
+    try {
+      const docRef = doc(db, SETTINGS_COLLECTION, ARTICLES_DOC);
+      firestoreUnsub = onSnapshot(
+        docRef,
+        (snap) => {
+          if (
+            snap.exists() &&
+            Array.isArray(snap.data()?.articles) &&
+            snap.data()?.articles.length > 0
+          ) {
+            const activeArticles = (snap.data().articles as Article[]).filter(
+              (a) => a.status !== "archived"
+            );
+            setCache(CACHE_KEY, activeArticles, 120000);
+            setLocalArticles(activeArticles, false);
+            onUpdate(activeArticles);
+          } else {
+            onUpdate(DEFAULT_ARTICLES);
+          }
+        },
+        (err) => {
+          console.warn("Firestore articles snapshot error, using default:", err);
+          onUpdate(getArticlesSync());
         }
-      },
-      (err) => {
-        console.warn("Firestore articles snapshot error, using default:", err);
-        onUpdate(DEFAULT_ARTICLES);
-      }
-    );
-  } catch (err) {
-    console.error("Failed to subscribe to articles:", err);
-    onUpdate(DEFAULT_ARTICLES);
-    return null;
+      );
+    } catch (err) {
+      console.error("Failed to subscribe to articles in Firestore:", err);
+    }
   }
+
+  return () => {
+    if (typeof window !== "undefined") {
+      window.removeEventListener(EVENT_NAME, handleLocalChange);
+      window.removeEventListener("storage", handleLocalChange);
+    }
+    if (firestoreUnsub) {
+      firestoreUnsub();
+    }
+  };
 }
 
 export async function saveArticles(
   articles: Article[],
   userEmail?: string
 ): Promise<{ success: boolean; error?: string }> {
+  const timestamp = new Date().toISOString();
+  const normalizedArticles = articles.map((a, idx) => ({
+    ...a,
+    order: idx,
+    updatedAt: timestamp,
+    updatedBy: userEmail || "admin",
+  }));
+
+  // 1. Immediately update memory cache and localStorage with broadcast event
+  setCache(CACHE_KEY, normalizedArticles, 120000);
+  setLocalArticles(normalizedArticles, true);
+
   if (!isFirebaseConfigured() || !db) {
     return {
-      success: false,
-      error: "Firebase is not configured in .env.local",
+      success: true,
     };
   }
 
@@ -306,8 +413,8 @@ export async function saveArticles(
     await setDoc(
       docRef,
       {
-        articles,
-        updatedAt: new Date().toISOString(),
+        articles: normalizedArticles,
+        updatedAt: timestamp,
         updatedBy: userEmail || "admin",
         status: "published",
         isDeleted: false,
@@ -320,7 +427,7 @@ export async function saveArticles(
     console.error("Failed to save articles to Firestore:", err);
     return {
       success: false,
-      error: err?.message || "Failed to save articles",
+      error: err?.message || "Failed to save articles to Firebase.",
     };
   }
 }

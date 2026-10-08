@@ -93,7 +93,7 @@ const BUSINESS_PANELS = [
     tagline: "Licensed C&F Brokerage, Port Clearance & NBR Tariff Advisory",
     fullTagline:
       "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     image: "/images/topexpress_hero.jpg",
     iconName: "FileCheck2",
     logo: "/images/logo/tel.png",
@@ -110,7 +110,7 @@ const BUSINESS_PANELS = [
     tagline: "Ocean FCL/LCL, Expedited Air Cargo & Multimodal Logistics",
     fullTagline:
       "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     image: "/images/dailyshipping_hero.jpg",
     iconName: "Ship",
     logo: "/images/logo/dsl.png",
@@ -128,7 +128,7 @@ const BUSINESS_PANELS = [
       "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets.",
     fullTagline:
       "Top On-Tech is a multi-sector import, export, and trading enterprise that connects global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     image: "/images/topontech_hero.jpg",
     iconName: "Building2",
     logo: "/images/logo/topon-tech.png",
@@ -145,7 +145,7 @@ const BUSINESS_PANELS = [
     tagline: "Sustainable Fish Farming, Hatcheries & Nationwide Cold Chain",
     fullTagline:
       "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     image: "/images/toponagro_hero.jpg",
     iconName: "Fish",
     logo: "/images/logo/topon-agro.png",
@@ -162,7 +162,7 @@ const BUSINESS_PANELS = [
     tagline: "Company Setup, Regulatory Compliance, Tax, VAT & Trade Advisory",
     fullTagline:
       "Strategic advisory empowering foreign investors and domestic enterprises with statutory licensing, legal compliance, and operational advisory.",
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     image: "/images/toponsolution_hero.jpg",
     iconName: "Briefcase",
     logo: "/images/logo/topon-solution.png",
@@ -326,25 +326,27 @@ const GENERAL_INFO = {
   benapoleOffice: "Customs Clearing Station, Benapole Land Port, Jashore",
   businessHours: "Sunday - Thursday: 9:00 AM - 6:00 PM (Port desks operate 24/7)",
   facebookUrl: "https://www.facebook.com/topongroup",
-  linkedinUrl: "https://www.linkedin.com/company/topongroup",
+  linkedinUrl: "https://www.linkedin.com/company/top-on-group",
 };
 
 const ADMIN_USERS = [
   {
-    id: "user_1",
+    id: "admin_1",
     name: "Md. Abdullah Al Mamun",
     email: "mamun@toponbd.com",
     role: "Super Admin",
     status: "Active",
-    createdAt: "2024-01-01T00:00:00.000Z",
+    createdAt: "2024-01-01",
+    lastLogin: "Active Now",
   },
   {
-    id: "user_2",
-    name: "System Administrator",
-    email: "admin@toponbd.com",
-    role: "Admin",
+    id: "admin_2",
+    name: "Corporate Communications",
+    email: "info@toponbd.com",
+    role: "Editor",
     status: "Active",
-    createdAt: "2024-01-01T00:00:00.000Z",
+    createdAt: "2024-03-15",
+    lastLogin: "1 day ago",
   },
 ];
 
@@ -369,7 +371,6 @@ async function seed() {
       updatedAt: timestamp,
       updatedBy: userEmail,
     };
-    await setDoc(doc(db, "site_settings", "hero_businesses"), heroPayload, { merge: true });
     await setDoc(doc(db, "settings", "heroBusinesses"), heroPayload, { merge: true });
     console.log(`   ✓ Seeded ${BUSINESS_PANELS.length} hero panels.`);
 
@@ -381,7 +382,6 @@ async function seed() {
       updatedAt: timestamp,
       updatedBy: userEmail,
     };
-    await setDoc(doc(db, "site_settings", "division_sliders"), slidersPayload, { merge: true });
     await setDoc(doc(db, "settings", "divisionSliders"), slidersPayload, { merge: true });
     const totalSlides = Object.values(DIVISION_SLIDES).reduce((acc, curr) => acc + curr.length, 0);
     console.log(`   ✓ Seeded 5 divisions (${totalSlides} total slides).`);
@@ -394,7 +394,6 @@ async function seed() {
       updatedAt: timestamp,
       updatedBy: userEmail,
     };
-    await setDoc(doc(db, "site_settings", "partners"), partnersPayload, { merge: true });
     await setDoc(doc(db, "settings", "partners"), partnersPayload, { merge: true });
     console.log(`   ✓ Seeded ${PARTNERS.length} strategic partners.`);
 
@@ -406,7 +405,6 @@ async function seed() {
       updatedAt: timestamp,
       updatedBy: userEmail,
     };
-    await setDoc(doc(db, "site_settings", "general_info"), generalPayload, { merge: true });
     await setDoc(doc(db, "settings", "generalInfo"), generalPayload, { merge: true });
     console.log("   ✓ Seeded corporate address, contacts, and desks.");
 
@@ -418,23 +416,8 @@ async function seed() {
       updatedAt: timestamp,
       updatedBy: userEmail,
     };
-    await setDoc(doc(db, "site_settings", "admin_users"), usersPayload, { merge: true });
     await setDoc(doc(db, "settings", "adminUsers"), usersPayload, { merge: true });
     console.log(`   ✓ Seeded ${ADMIN_USERS.length} authorized administrator records.`);
-
-    // Dedicated Collections for Easy Inspection in Firebase Console
-    console.log("\n📦 Seeding direct collection records...");
-    for (const panel of BUSINESS_PANELS) {
-      await setDoc(doc(db, "hero_businesses", panel.id), { ...panel, updatedAt: timestamp, updatedBy: userEmail }, { merge: true });
-    }
-    for (const [key, slides] of Object.entries(DIVISION_SLIDES)) {
-      await setDoc(doc(db, "division_sliders", key), { division: key, slides, updatedAt: timestamp, updatedBy: userEmail }, { merge: true });
-    }
-    for (let i = 0; i < PARTNERS.length; i++) {
-      const p = PARTNERS[i];
-      await setDoc(doc(db, "partners", `partner_${i + 1}`), { ...p, id: `partner_${i + 1}`, order: i, updatedAt: timestamp, updatedBy: userEmail }, { merge: true });
-    }
-    console.log("   ✓ Direct collections populated successfully.");
 
     console.log("\n==========================================");
     console.log(" 🎉 ALL DATA SEEDED SUCCESSFULLY TO FIREBASE! ");

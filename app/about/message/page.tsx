@@ -21,7 +21,6 @@ import {
   Lightbulb,
   HeartHandshake,
 } from "lucide-react";
-import LeadershipGallery from "@/components/LeadershipGallery";
 
 export const metadata: Metadata = {
   title: "Message from the Group CEO | Md. Abdullah Al Mamun - Top On Group",
@@ -303,10 +302,10 @@ export default function MessageFromCEOPage() {
                     <ArrowRight className="w-3.5 h-3.5 text-brand-gold" />
                   </Link>
                   <Link
-                    href="/services"
+                    href="/divisions"
                     className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs transition-colors"
                   >
-                    <span>Explore Divisions</span>
+                    <span>Explore Group Entities</span>
                   </Link>
                 </div>
               </div>

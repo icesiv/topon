@@ -79,17 +79,16 @@ export default function TopOnSolutionHeroSlider() {
               }`}
             />
 
-            {/* Gradient Overlays for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#030914]/95 via-[#030914]/75 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A] via-transparent to-[#040D1A]/50" />
+            {/* Exact Live Slide Card Preview Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#040D1A] via-[#040D1A]/50 to-black/30" />
           </div>
         );
       })}
 
-      {/* 2. Repositioned Text Overlay (Container Aligned) */}
-      <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center pb-20 sm:pb-0">
-        <div className="max-w-3xl space-y-5 text-left">
-          {/* Top On-Solution Logo */}
+      {/* 2. Content Overlay matching Live Slide Card Preview */}
+      <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-20 sm:pb-24 pointer-events-none">
+        <div className="max-w-4xl space-y-3 sm:space-y-4 text-left pointer-events-auto">
+          {/* Top On-Solution Logo kept as is */}
           <div className="inline-block p-2 sm:p-2.5 rounded-2xl bg-white/95 backdrop-blur-md shadow-2xl border border-white/40">
             <Image
               src="/images/logo/topon-solution.png"
@@ -102,16 +101,29 @@ export default function TopOnSolutionHeroSlider() {
             />
           </div>
 
-          {/* Main Hero Headings */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-relaxed sm:leading-relaxed lg:leading-[1.4]">
-            <span className="block mb-2.5 sm:mb-3.5">Top On-Solution:</span>
-            <span className="text-gold-light-gradient block leading-snug sm:leading-normal">Corporate Consultancy &amp; Business Advisory</span>
-          </h1>
-
-          {/* Core Tagline / Quote */}
-          <p className="max-w-2xl text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-loose font-light text-justify">
-            &quot;Clear paths through complex regulations.&quot; Empowering national and global enterprises with statutory licensing, corporate governance, RJSC company formation, tax structuring, and compliance.
-          </p>
+          {/* Dynamic Slide Content matching Live Slide Card Preview */}
+          <div className="relative min-h-[90px] sm:min-h-[110px]">
+            {slides.map((slide, idx) => {
+              const isActive = idx === current;
+              return (
+                <div
+                  key={slide.id || idx}
+                  className={`space-y-2 sm:space-y-3 transition-all duration-700 ease-in-out ${
+                    isActive
+                      ? "relative opacity-100 translate-y-0"
+                      : "absolute inset-0 opacity-0 translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  <div className="inline-flex items-center space-x-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/70 border border-brand-gold/50 backdrop-blur-md text-brand-gold text-[10px] sm:text-xs font-mono font-semibold uppercase tracking-wider">
+                    <span>{slide.category || "Entity Category"}</span>
+                  </div>
+                  <h1 className="text-white font-serif font-bold text-2xl sm:text-4xl lg:text-5xl leading-snug sm:leading-tight drop-shadow-md">
+                    {slide.headline}
+                  </h1>
+                </div>
+              );
+            })}
+          </div>
 
           {/* Action CTAs */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -136,41 +148,45 @@ export default function TopOnSolutionHeroSlider() {
         </div>
       </div>
 
-      {/* 3. Slider Controls: Arrows (Bottom-anchored on mobile, side-aligned on desktop) */}
-      <button
-        onClick={prevSlide}
-        className="absolute bottom-5 sm:bottom-auto left-4 sm:left-6 sm:top-1/2 sm:-translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/50 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
-        aria-label="Previous image"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+      {/* 3. Bottom Slider Controls (Prev, Indicators, Next) */}
+      <div className="absolute bottom-5 sm:bottom-6 left-0 right-0 z-30 pointer-events-none">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between pointer-events-auto">
+          {/* Previous Arrow */}
+          <button
+            onClick={prevSlide}
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
 
-      <button
-        onClick={nextSlide}
-        className="absolute bottom-5 sm:bottom-auto right-4 sm:right-6 sm:top-1/2 sm:-translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/50 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
-        aria-label="Next image"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+          {/* Bottom Slide Navigation Indicators */}
+          <div className="flex items-center space-x-2 sm:space-x-2.5 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/15 shadow-md">
+            {slides.map((slide, idx) => {
+              const isActive = idx === current;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setCurrent(idx)}
+                  className={`group transition-all duration-300 flex items-center ${
+                    isActive
+                      ? "w-8 sm:w-12 h-2 sm:h-2.5 bg-brand-gold rounded-full"
+                      : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/70 rounded-full"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}: ${slide.category}`}
+                />
+              );
+            })}
+          </div>
 
-      {/* 4. Bottom Slide Navigation Indicators */}
-      <div className="absolute bottom-7 sm:bottom-6 left-0 right-0 z-30 flex justify-center items-center pointer-events-none">
-        <div className="pointer-events-auto flex items-center space-x-2 sm:space-x-2.5">
-          {slides.map((slide, idx) => {
-            const isActive = idx === current;
-            return (
-              <button
-                key={idx}
-                onClick={() => setCurrent(idx)}
-                className={`group transition-all duration-300 flex items-center ${
-                  isActive
-                    ? "w-8 sm:w-12 h-2 sm:h-2.5 bg-brand-gold rounded-full"
-                    : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 hover:bg-white/70 rounded-full"
-                }`}
-                aria-label={`Go to slide ${idx + 1}: ${slide.category}`}
-              />
-            );
-          })}
+          {/* Next Arrow */}
+          <button
+            onClick={nextSlide}
+            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-brand-gold text-white hover:text-brand-navy backdrop-blur-md border border-white/20 hover:border-brand-gold flex items-center justify-center transition-all duration-200 shadow-lg active:scale-95"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>

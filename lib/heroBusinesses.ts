@@ -75,7 +75,7 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Licensed C&F Brokerage, Port Clearance & NBR Tariff Advisory",
     fullTagline:
       "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     image: "/images/topexpress_hero.jpg",
     iconName: "FileCheck2",
     logo: "/images/logo/tel.png",
@@ -91,7 +91,7 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Ocean FCL/LCL, Expedited Air Cargo & Multimodal Logistics",
     fullTagline:
       "Comprehensive international cargo shipping linking Bangladesh to worldwide trade lanes via global container lines and priority air freight charters.",
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     image: "/images/dailyshipping_hero.jpg",
     iconName: "Ship",
     logo: "/images/logo/dsl.png",
@@ -108,7 +108,7 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
       "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets.",
     fullTagline:
       "Top On-Tech is a multi-sector import, export, and trading enterprise that connects global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     image: "/images/topontech_hero.jpg",
     iconName: "Building2",
     logo: "/images/logo/topon-tech.png",
@@ -124,7 +124,7 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Sustainable Fish Farming, Hatcheries & Nationwide Cold Chain",
     fullTagline:
       "High-density aerated biofloc pond farming, certified pathogen-free fingerling hatcheries, and refrigerated cold-chain distribution to metropolitan wholesale markets.",
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     image: "/images/toponagro_hero.jpg",
     iconName: "Fish",
     logo: "/images/logo/topon-agro.png",
@@ -140,7 +140,7 @@ export const DEFAULT_BUSINESS_PANELS: BusinessPanelData[] = [
     tagline: "Company Setup, Regulatory Compliance, Tax, VAT & Trade Advisory",
     fullTagline:
       "Top On-Solution provides consultancy and practical support for company setup, regulatory compliance, tax, VAT, customs, trade, audit, sourcing and other business requirements.",
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     image: "/images/toponsolution_hero.jpg",
     iconName: "Briefcase",
     logo: "/images/logo/topon-solution.png",
@@ -157,12 +157,12 @@ export function resolveBusinessPanel(data: BusinessPanelData): BusinessPanel {
     (data.name?.toLowerCase().includes("solution")
       ? "/images/logo/topon-solution.png"
       : data.name?.toLowerCase().includes("agro")
-      ? "/images/logo/topon-agro.png"
-      : data.name?.toLowerCase().includes("daily") || data.name?.toLowerCase().includes("shipping")
-      ? "/images/logo/dsl.png"
-      : data.name?.toLowerCase().includes("express")
-      ? "/images/logo/tel.png"
-      : "/images/logo/topon-tech.png");
+        ? "/images/logo/topon-agro.png"
+        : data.name?.toLowerCase().includes("daily") || data.name?.toLowerCase().includes("shipping")
+          ? "/images/logo/dsl.png"
+          : data.name?.toLowerCase().includes("express")
+            ? "/images/logo/tel.png"
+            : "/images/logo/topon-tech.png");
 
   return {
     ...data,

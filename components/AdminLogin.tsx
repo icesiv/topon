@@ -62,7 +62,7 @@ export default function AdminLogin() {
   };
 
   const fillDemoCredentials = () => {
-    setEmail("admin@toponbd.com");
+    setEmail("mamun@toponbd.com");
     setPassword("admin123456");
     setErrorMessage(null);
   };
@@ -202,10 +202,10 @@ export default function AdminLogin() {
             <button
               type="button"
               onClick={fillDemoCredentials}
-              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-slate-300 transition-colors"
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] text-slate-300 transition-colors cursor-pointer"
             >
               <KeyRound className="w-3.5 h-3.5 text-brand-gold" />
-              <span>Fill Default Admin Credentials</span>
+              <span>Fill Authorized Admin (mamun@toponbd.com)</span>
             </button>
           </div>
         </div>

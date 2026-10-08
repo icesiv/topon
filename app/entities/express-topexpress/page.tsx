@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Top Express Limited | Express Courier & Domestic Logistics Division",
+  title: "Top Express Limited | Express Courier & Domestic Logistics Entity",
   description:
     "Top Express Limited is the specialized express delivery, courier network, and multimodal freight fleet arm of Top On Group in Bangladesh. Offering rapid city parcel, regional trucking, and B2B linehaul distribution.",
   keywords: [

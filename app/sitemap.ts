@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
 
-    // 2. Core Division Pages (High Priority)
+    // 2. Core Group Entity Pages (High Priority)
     {
       url: `${baseUrl}/divisions`,
       lastModified: now,
@@ -29,31 +29,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/divisions/trading-topontech`,
+      url: `${baseUrl}/entities/trading-topontech`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/divisions/express-topexpress`,
+      url: `${baseUrl}/entities/express-topexpress`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/divisions/logistics-dailyshipping`,
+      url: `${baseUrl}/entities/logistics-dailyshipping`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/divisions/agro-toponagro`,
+      url: `${baseUrl}/entities/agro-toponagro`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,
     },
     {
-      url: `${baseUrl}/divisions/consultancy-toponsolution`,
+      url: `${baseUrl}/entities/consultancy-toponsolution`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.85,

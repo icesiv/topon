@@ -65,7 +65,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Engineers and technical procurement officers verifying OEM machinery specs and chemical grades.",
     icon: Building2,
-    pageHref: "/divisions/trading-topontech",
+    pageHref: "/entities/trading-topontech",
     quoteHref: "/#quote",
     features: [
       {
@@ -104,7 +104,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Authorized customs brokers conducting physical inspections and bill-of-entry verification.",
     icon: FileCheck2,
-    pageHref: "/divisions/express-topexpress",
+    pageHref: "/entities/express-topexpress",
     quoteHref: "/#quote",
     features: [
       {
@@ -143,7 +143,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Direct vessel container slot coordination linking Bangladesh to Southeast Asia, Europe, and the Americas.",
     icon: Ship,
-    pageHref: "/divisions/logistics-dailyshipping",
+    pageHref: "/entities/logistics-dailyshipping",
     quoteHref: "/#quote",
     features: [
       {
@@ -182,7 +182,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "High-density aerated aquaculture ponds maintaining stringent bio-security and antibiotic-free standards.",
     icon: Fish,
-    pageHref: "/divisions/agro-toponagro",
+    pageHref: "/entities/agro-toponagro",
     quoteHref: "/#quote",
     features: [
       {
@@ -221,7 +221,7 @@ const divisionsData: Record<DivisionId, DivisionInfo> = {
     imageSubcaption:
       "Consultants guiding clients through RJSC, BIDA, NBR and trade licensing requirements.",
     icon: Briefcase,
-    pageHref: "/divisions/consultancy-toponsolution",
+    pageHref: "/entities/consultancy-toponsolution",
     quoteHref: "/#quote",
     features: [
       {
@@ -263,7 +263,7 @@ export default function DivisionTabs() {
             Specialized Arms for <span className="text-gold-gradient">Every Trade Dimension</span>
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed text-justify">
-            Top On Group executes global commerce through five specialized corporate divisions—spanning licensed customs C&amp;F, maritime freight, international trading, sustainable agro-fisheries, and corporate consultancy.
+            Top On Group executes global commerce through five specialized group entities—spanning licensed customs C&amp;F, maritime freight, international trading, sustainable agro-fisheries, and corporate consultancy.
           </p>
         </div>
 

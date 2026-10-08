@@ -31,7 +31,7 @@ const pillars = [
     image: "/images/customs_cnf.jpg",
     desc: "Licensed customs brokerage dedicated to frictionless port clearance. Stationed at Chittagong Port, Mongla, and Dhaka ICD to guarantee error-free tariff assessment, rapid bill-of-entry filing, and zero demurrage.",
     icon: FileCheck2,
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     stats: "Licensed C&F • Zero Demurrage",
   },
   {
@@ -41,7 +41,7 @@ const pillars = [
     image: "/images/hero_port.jpg",
     desc: "An agile, tech-driven multimodal freight forwarder coordinating containerized ocean shipping (FCL/LCL), priority air charters via Dhaka Airport, and nationwide inland road haulage.",
     icon: Ship,
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     stats: "20,000+ Containers Managed",
   },
   {
@@ -51,7 +51,7 @@ const pillars = [
     image: "/images/trading_sourcing.jpg",
     desc: "Launched to eliminate procurement friction for Bangladeshi manufacturing plants. Top On-Tech imports precision industrial machinery, specialty chemicals, and raw production inputs directly from verified overseas manufacturers.",
     icon: Building2,
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     stats: "OEM Certified • Direct Sourcing",
   },
   {
@@ -61,7 +61,7 @@ const pillars = [
     image: "/images/agro_farm.jpg",
     desc: "Commercial sustainable aquaculture leveraging aerated biofloc pond engineering, certified disease-free broodstock hatcheries, and temperature-controlled cold-chain logistics to supply wholesome fish protein nationwide.",
     icon: Fish,
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     stats: "Scientific Hatchery • Cold Chain",
   },
   {
@@ -71,7 +71,7 @@ const pillars = [
     image: "/images/toponsolution_wide.jpg",
     desc: "Full-spectrum corporate consultancy delivering company setup, RJSC filing, NBR tax and VAT advisory, and regulatory compliance support for emerging and multinational enterprises.",
     icon: Briefcase,
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     stats: "RJSC • NBR Tax & Compliance",
   },
 ];

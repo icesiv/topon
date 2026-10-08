@@ -14,9 +14,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Operating Divisions | Top On Group",
+  title: "Group Entities | Top On Group",
   description:
-    "Explore the 5 core operating divisions of Top On Group: Top Express Limited (Customs C&F), Daily Shipping & Logistics (Freight Forwarding), Top On-Tech (Trading & Sourcing), Top On-Agro Farm (Fisheries & Aquaculture), and Top On-Solution (Corporate Consultancy).",
+    "Explore the 5 core group entities of Top On Group: Top Express Limited (Customs C&F), Daily Shipping & Logistics (Freight Forwarding), Top On-Tech (Trading & Sourcing), Top On-Agro Farm (Fisheries & Aquaculture), and Top On-Solution (Corporate Consultancy).",
 };
 
 const DIVISIONS = [
@@ -28,7 +28,7 @@ const DIVISIONS = [
     desc: "A fully licensed customs brokerage operating across Chittagong Port, Mongla, Benapole land port, and Dhaka Airport (HSIA). Built on 30+ years of trade heritage ensuring zero-demurrage cargo release.",
     image: "/images/topexpress_hero.jpg",
     logo: "/images/logo/tel.png",
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     icon: Truck,
     highlights: [
       "Authorized Customs Brokerage at All Key Ports",
@@ -45,7 +45,7 @@ const DIVISIONS = [
     desc: "An agile, tech-driven multimodal freight forwarder coordinating containerized ocean shipping (FCL/LCL), priority air charters via Dhaka Cargo Village, and nationwide inland road haulage.",
     image: "/images/dailyshipping_hero.jpg",
     logo: "/images/logo/dsl.png",
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     icon: Ship,
     highlights: [
       "Global Ocean Container Shipping (FCL & LCL)",
@@ -62,7 +62,7 @@ const DIVISIONS = [
     desc: "Connecting international manufacturers with Bangladesh's core industries. Specializing in heavy machinery procurement, industrial chemicals, RMG production inputs, and turnkey commercial supply.",
     image: "/images/topontech_hero.jpg",
     logo: "/images/logo/topon-tech.png",
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     icon: Building2,
     highlights: [
       "Heavy Industrial Machinery & Spares",
@@ -79,7 +79,7 @@ const DIVISIONS = [
     desc: "Pioneering commercial sustainable aquaculture, scientifically engineered biofloc aeration ponds, certified pathogen-free broodstock hatcheries, and temperature-controlled nationwide distribution.",
     image: "/images/toponagro_hero.jpg",
     logo: "/images/logo/topon-agro.png",
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     icon: Fish,
     highlights: [
       "High-Density Aerated Biofloc Pond Systems",
@@ -96,7 +96,7 @@ const DIVISIONS = [
     desc: "Comprehensive business support guiding startups, growing enterprises, and multinational investors through company formation, RJSC filing, NBR tax and VAT compliance, trade licensing, and corporate audit.",
     image: "/images/toponsolution_wide.jpg",
     logo: "/images/logo/topon-solution.png",
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     icon: Briefcase,
     highlights: [
       "RJSC Incorporation, BIDA & Trade Licensing",
@@ -122,16 +122,16 @@ export default function DivisionsOverviewPage() {
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold font-serif text-white tracking-tight">
-            Our Operating <span className="text-gold-light-gradient">Divisions</span>
+            Our <span className="text-gold-light-gradient">Group Entities</span>
           </h1>
 
           <p className="max-w-3xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed font-light">
-            Top On Group operates 5 specialized operating divisions spanning international trading, customs clearance, freight forwarding, commercial agro, and corporate consultancy.
+            Top On Group operates 5 specialized group entities spanning international trading, customs clearance, freight forwarding, commercial agro, and corporate consultancy.
           </p>
         </div>
       </section>
 
-      {/* 2. Divisions Showcase List */}
+      {/* 2. Group Entities Showcase List */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="space-y-10">
           {DIVISIONS.map((div, idx) => {
@@ -145,9 +145,8 @@ export default function DivisionsOverviewPage() {
               >
                 {/* Image Column */}
                 <div
-                  className={`lg:col-span-5 relative h-72 lg:h-auto min-h-[300px] overflow-hidden ${
-                    isEven ? "lg:order-last" : ""
-                  }`}
+                  className={`lg:col-span-5 relative h-72 lg:h-auto min-h-[300px] overflow-hidden ${isEven ? "lg:order-last" : ""
+                    }`}
                 >
                   <Image
                     src={div.image}
@@ -247,7 +246,7 @@ export default function DivisionsOverviewPage() {
               Unified Enterprise Solutions
             </span>
             <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-              Need Multi-Division Coordination?
+              Need Multi-Entity Coordination?
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
               Top On Group synchronizes international sourcing, customs clearing, air/sea freight forwarding, and corporate tax compliance under one single window.

@@ -37,27 +37,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    match /site_settings/{settingId} {
-      allow read: if true;
-      allow create, update: if (isAdmin() || isAuthenticated()) && hasValidMetadata();
-      allow delete: if isAdmin();
-    }
-
-    match /hero_businesses/{panelId} {
-      allow read: if true;
-      allow create, update, delete: if (isAdmin() || isAuthenticated());
-    }
-
-    match /division_sliders/{sliderId} {
-      allow read: if true;
-      allow create, update, delete: if (isAdmin() || isAuthenticated());
-    }
-
-    match /partners/{partnerId} {
-      allow read: if true;
-      allow create, update, delete: if (isAdmin() || isAuthenticated());
-    }
-
     // --- Products Catalogue ---
     match /products/{productId} {
       allow read: if isPublished(resource.data) || isAdmin();

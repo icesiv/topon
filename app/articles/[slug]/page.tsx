@@ -28,6 +28,9 @@ interface ArticlePageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const articles = await fetchArticles();
   const all = articles.length > 0 ? articles : DEFAULT_ARTICLES;
@@ -310,7 +313,7 @@ export default async function SingleArticlePage({ params }: ArticlePageProps) {
                 Published by Top On Group Trade &amp; Freight Advisory
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Operating specialized divisions including <strong>Daily Shipping &amp; Logistics</strong> (freight forwarding with 20,000+ TEUs handled) and <strong>Top Express Limited</strong> (licensed C&amp;F operations across Chittagong, Dhaka Airport, Kamalapur ICD, Pangaon, and Benapole).
+                Operating specialized group entities including <strong>Daily Shipping &amp; Logistics</strong> (freight forwarding with 20,000+ TEUs handled) and <strong>Top Express Limited</strong> (licensed C&amp;F operations across Chittagong, Dhaka Airport, Kamalapur ICD, Pangaon, and Benapole).
               </p>
             </div>
           </div>

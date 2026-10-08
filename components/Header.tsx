@@ -29,6 +29,17 @@ import {
   MapPin,
   ExternalLink,
 } from "lucide-react";
+import {
+  CompanyProfile,
+  DEFAULT_COMPANY_PROFILES,
+  PROFILE_ICON_MAP,
+  subscribeCompanyProfiles,
+} from "@/lib/companyProfiles";
+import {
+  subscribeGeneralInfo,
+  DEFAULT_GENERAL_INFO,
+  GeneralInfoData,
+} from "@/lib/generalInfo";
 
 interface DivisionItem {
   name: string;
@@ -41,31 +52,31 @@ const DIVISIONS: DivisionItem[] = [
   {
     name: "Top Express Limited",
     tag: "Customs Clearing & Forwarding (C&F)",
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     icon: Truck,
   },
   {
     name: "Daily Shipping & Logistics",
     tag: "Freight Forwarding",
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     icon: Ship,
   },
   {
     name: "Top On-Tech",
     tag: "Import, Export, Trading & Sourcing with Supply",
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     icon: Building2,
   },
   {
     name: "Top On-Agro Farm",
     tag: "Fisheries & Agro",
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     icon: Fish,
   },
   {
     name: "Top On-Solution",
     tag: "Business Advisory & Professional Services",
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     icon: Briefcase,
   },
 ];
@@ -103,56 +114,34 @@ const ABOUT_LINKS = [
   },
 ];
 
-const COMPANY_PROFILES = [
-  {
-    name: "Top Express Limited",
-    badge: "Customs C&F",
-    pdfUrl: "/profiles/TEL-profile.pdf",
-    filename: "TEL-profile.pdf",
-    icon: Truck,
-    size: "4.9 MB",
-  },
-  {
-    name: "Daily Shipping & Logistics",
-    badge: "Freight Forwarding",
-    pdfUrl: "/profiles/DSL-profile.pdf",
-    filename: "DSL-profile.pdf",
-    icon: Ship,
-    size: "933 KB",
-  },
-  {
-    name: "Top On-Tech",
-    badge: "Trading House",
-    pdfUrl: "/profiles/TopOnTech-profile.pdf",
-    filename: "TopOnTech-profile.pdf",
-    icon: Building2,
-    size: "738 KB",
-  },
-  {
-    name: "Top On-Agro Farm",
-    badge: "Fisheries & Agro",
-    pdfUrl: "/profiles/TopOnAgro-profile.pdf",
-    filename: "TopOnAgro-profile.pdf",
-    icon: Fish,
-    size: "1.0 MB",
-  },
-  {
-    name: "Top On-Solution",
-    badge: "Business Advisory & Professional Services",
-    pdfUrl: "/profiles/TopOnSolution-profile.pdf",
-    filename: "TopOnSolution-profile.pdf",
-    icon: Briefcase,
-    size: "529 KB",
-  },
-];
-
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
   const [profilesDropdownOpen, setProfilesDropdownOpen] = useState(false);
+  const [profiles, setProfiles] = useState<CompanyProfile[]>(DEFAULT_COMPANY_PROFILES);
+  const [generalInfo, setGeneralInfo] = useState<GeneralInfoData>(DEFAULT_GENERAL_INFO);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const unsubProfiles = subscribeCompanyProfiles((data) => {
+      if (Array.isArray(data) && data.length > 0) {
+        setProfiles(data);
+      }
+    });
+
+    const unsubGeneral = subscribeGeneralInfo((data) => {
+      setGeneralInfo(data);
+    });
+
+    return () => {
+      if (unsubProfiles) unsubProfiles();
+      if (unsubGeneral) unsubGeneral();
+    };
+  }, []);
+
+  const activeProfiles = profiles.filter((p) => p.status !== "draft" && !p.isDeleted);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -188,22 +177,22 @@ export default function Header() {
           <div className="flex items-center space-x-5">
             <div className="flex items-center space-x-2 text-slate-300">
               <a
-                href="tel:+8801711775280"
+                href={`tel:${generalInfo.dhakaPhone?.replace(/[^0-9+]/g, "") || "+8801711775280"}`}
                 className="flex items-center space-x-1.5 text-slate-300 hover:text-brand-gold transition-colors font-medium text-[11.5px]"
               >
                 <Phone className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-                <span>+880 1711-775280 - 81</span>
+                <span>{generalInfo.dhakaPhone}{generalInfo.ctgPhone ? ` • ${generalInfo.ctgPhone}` : ""}</span>
               </a>
             </div>
 
             <span className="text-white/20">|</span>
 
             <a
-              href="mailto:info@toponbd.com"
+              href={`mailto:${generalInfo.email || "info@toponbd.com"}`}
               className="flex items-center space-x-1.5 text-slate-300 hover:text-brand-gold transition-colors font-medium text-[11.5px]"
             >
               <Mail className="w-3.5 h-3.5 text-brand-gold flex-shrink-0" />
-              <span>info@toponbd.com</span>
+              <span>{generalInfo.email || "info@toponbd.com"}</span>
             </a>
           </div>
 
@@ -217,24 +206,28 @@ export default function Header() {
             <span className="text-white/20">|</span>
 
             <div className="flex items-center space-x-1.5">
-              <a
-                href="https://www.facebook.com/topongroup"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-6 h-6 rounded-full bg-white/5 hover:bg-brand-gold/25 hover:text-brand-gold flex items-center justify-center text-slate-300 transition-all duration-200"
-                aria-label="Top On Group on Facebook"
-              >
-                <Facebook className="w-3.2 h-3.2" />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/topongroup"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-6 h-6 rounded-full bg-white/5 hover:bg-brand-gold/25 hover:text-brand-gold flex items-center justify-center text-slate-300 transition-all duration-200"
-                aria-label="Top On Group on LinkedIn"
-              >
-                <Linkedin className="w-3.2 h-3.2" />
-              </a>
+              {generalInfo.facebookUrl && (
+                <a
+                  href={generalInfo.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-6 h-6 rounded-full bg-white/5 hover:bg-brand-gold/25 hover:text-brand-gold flex items-center justify-center text-slate-300 transition-all duration-200"
+                  aria-label="Top On Group on Facebook"
+                >
+                  <Facebook className="w-3.2 h-3.2" />
+                </a>
+              )}
+              {generalInfo.linkedinUrl && (
+                <a
+                  href={generalInfo.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-6 h-6 rounded-full bg-white/5 hover:bg-brand-gold/25 hover:text-brand-gold flex items-center justify-center text-slate-300 transition-all duration-200"
+                  aria-label="Top On Group on LinkedIn"
+                >
+                  <Linkedin className="w-3.2 h-3.2" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -375,7 +368,7 @@ export default function Header() {
                           </span>
                         </div>
                         <p className="text-[11px] text-slate-300 mt-0.5">
-                          5 Specialized Divisions Driving International Trade &amp; Industry
+                          5 Specialized Entities Driving International Trade &amp; Industry
                         </p>
                       </div>
                       <Link
@@ -420,10 +413,10 @@ export default function Header() {
                       })}
                     </div>
 
-                    {/* Bottom Cross-Division Helper */}
+                    {/* Bottom Cross-Entity Helper */}
                     <div className="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                       <span className="text-[11px] text-slate-600">
-                        Need cross-division sourcing, clearing &amp; shipping?
+                        Need cross-entity sourcing, clearing &amp; shipping?
                       </span>
                       <Link
                         href="/contact"
@@ -526,16 +519,20 @@ export default function Header() {
                       <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                         Official Profiles (PDF)
                       </span>
-                      <span className="text-[10px] text-brand-goldDark font-semibold">5 Documents</span>
+                      <span className="text-[10px] text-brand-goldDark font-semibold">
+                        {activeProfiles.length} Document{activeProfiles.length === 1 ? "" : "s"}
+                      </span>
                     </div>
 
-                    {COMPANY_PROFILES.map((profile, idx) => {
-                      const Icon = profile.icon;
+                    {activeProfiles.map((profile, idx) => {
+                      const Icon = (profile.iconName && PROFILE_ICON_MAP[profile.iconName]) || FileDown;
                       return (
                         <a
-                          key={idx}
+                          key={profile.id || idx}
                           href={profile.pdfUrl}
-                          download={profile.filename}
+                          download={profile.filename || true}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 transition-colors group text-xs"
                         >
                           <div className="flex items-center space-x-2.5 min-w-0">
@@ -547,7 +544,7 @@ export default function Header() {
                                 {profile.name}
                               </div>
                               <span className="text-[10px] text-slate-500">
-                                {profile.badge} &bull; {profile.size}
+                                {profile.badge} {profile.size ? `• ${profile.size}` : ""}
                               </span>
                             </div>
                           </div>
@@ -602,10 +599,10 @@ export default function Header() {
                 About Us
               </Link>
 
-              {/* Mobile Divisions Section */}
+              {/* Mobile Group Entities Section */}
               <div className="pt-1 pb-1">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 block mb-1">
-                  Operating Divisions
+                  Group Entities
                 </span>
                 <div className="pl-3 py-1 space-y-1 border-l-2 border-brand-gold/40 ml-3">
                   {DIVISIONS.map((div, idx) => (
@@ -658,35 +655,44 @@ export default function Header() {
               </Link>
 
               {/* Mobile Company Profile PDFs */}
-              <div className="pt-2 border-t border-slate-200">
-                <div className="px-3 py-1 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                  Company Profiles (PDF)
+              {activeProfiles.length > 0 && (
+                <div className="pt-2 border-t border-slate-200">
+                  <div className="px-3 py-1 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      Company Profiles (PDF)
+                    </span>
+                    <span className="text-[10px] text-brand-goldDark font-semibold">
+                      {activeProfiles.length} Documents
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-1.5 mt-1">
+                    {activeProfiles.map((profile, idx) => (
+                      <a
+                        key={profile.id || idx}
+                        href={profile.pdfUrl}
+                        download={profile.filename || true}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-2 rounded-lg bg-slate-50 text-xs text-brand-navy font-medium hover:bg-brand-gold/15"
+                      >
+                        <span className="truncate">{profile.name}</span>
+                        <Download className="w-3 h-3 text-brand-goldDark flex-shrink-0 ml-1" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-1.5 mt-1">
-                  {COMPANY_PROFILES.map((profile, idx) => (
-                    <a
-                      key={idx}
-                      href={profile.pdfUrl}
-                      download={profile.filename}
-                      className="flex items-center justify-between p-2 rounded-lg bg-slate-50 text-xs text-brand-navy font-medium hover:bg-brand-gold/15"
-                    >
-                      <span className="truncate">{profile.name}</span>
-                      <Download className="w-3 h-3 text-brand-goldDark flex-shrink-0 ml-1" />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              )}
             </div>
 
             {/* Mobile Contact Quick Info */}
             <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600 px-1">
-              <a href="tel:+8801711775280" className="flex items-center space-x-1.5 hover:text-brand-navy">
+              <a href={`tel:${generalInfo.dhakaPhone?.replace(/[^0-9+]/g, "") || "+8801711775280"}`} className="flex items-center space-x-1.5 hover:text-brand-navy">
                 <Phone className="w-3.5 h-3.5 text-brand-gold" />
-                <span>+880 1711-775280</span>
+                <span>{generalInfo.dhakaPhone}</span>
               </a>
-              <a href="mailto:info@toponbd.com" className="flex items-center space-x-1.5 hover:text-brand-navy">
+              <a href={`mailto:${generalInfo.email || "info@toponbd.com"}`} className="flex items-center space-x-1.5 hover:text-brand-navy">
                 <Mail className="w-3.5 h-3.5 text-brand-gold" />
-                <span>info@toponbd.com</span>
+                <span>{generalInfo.email || "info@toponbd.com"}</span>
               </a>
             </div>
           </div>

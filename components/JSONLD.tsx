@@ -1,13 +1,24 @@
 export default function JSONLD() {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Top On Group",
+    "url": "https://toponbd.com",
+    "sameAs": [
+      "https://www.facebook.com/topongroup",
+      "https://www.linkedin.com/company/top-on-group"
+    ]
+  };
+
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://www.toponbd.com/#organization",
+        "@id": "https://toponbd.com/#organization",
         "name": "Top On Group",
-        "url": "https://www.toponbd.com",
-        "logo": "https://www.toponbd.com/logo.png",
+        "url": "https://toponbd.com",
+        "logo": "https://toponbd.com/logo.png",
         "email": "info@toponbd.com",
         "description": "Premier international conglomerate in Bangladesh delivering excellence in general trading, global sourcing, and multimodal freight forwarding.",
         "slogan": "BUILT ON TRUST",
@@ -30,7 +41,7 @@ export default function JSONLD() {
         },
         "sameAs": [
           "https://www.facebook.com/topongroup",
-          "https://www.linkedin.com/company/topongroup"
+          "https://www.linkedin.com/company/top-on-group"
         ],
         "subOrganization": [
           {
@@ -38,7 +49,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-express",
             "name": "Top Express Limited",
             "description": "Express transit and nationwide courier logistics fleet connecting key commercial hubs.",
-            "url": "https://www.toponbd.com/divisions/express-topexpress",
+            "url": "https://www.toponbd.com/entities/express-topexpress",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Express Courier Services",
@@ -51,7 +62,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#daily-shipping",
             "name": "Daily Shipping & Logistics",
             "description": "Technology-driven freight forwarding and C&F operations built on 20,000+ containers of operational experience.",
-            "url": "https://www.toponbd.com/divisions/logistics-dailyshipping",
+            "url": "https://www.toponbd.com/entities/logistics-dailyshipping",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "International Ocean Freight (FCL/LCL)",
@@ -66,7 +77,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-on-tech",
             "name": "Top On-Tech",
             "description": "Diversified import, export and trading house sourcing industrial machinery, spares, chemicals, textiles, and electronics.",
-            "url": "https://www.toponbd.com/divisions/trading-topontech",
+            "url": "https://www.toponbd.com/entities/trading-topontech",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Industrial Machinery & Spares",
@@ -82,7 +93,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-on-agro",
             "name": "Top On-Agro Farm",
             "description": "Sustainable commercial fisheries, high-density aquaculture, certified hatchery breeding, and cold-chain fish supply.",
-            "url": "https://www.toponbd.com/divisions/agro-toponagro",
+            "url": "https://www.toponbd.com/entities/agro-toponagro",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Commercial Aquaculture & Fish Farming",
@@ -96,7 +107,7 @@ export default function JSONLD() {
             "@id": "https://www.toponbd.com/#top-on-solution",
             "name": "Top On-Solution",
             "description": "Corporate consultancy, company formation, tax and VAT advisory, regulatory compliance, and audit support.",
-            "url": "https://www.toponbd.com/divisions/consultancy-toponsolution",
+            "url": "https://www.toponbd.com/entities/consultancy-toponsolution",
             "parentOrganization": { "@id": "https://www.toponbd.com/#organization" },
             "knowsAbout": [
               "Company Formation & RJSC Incorporation",
@@ -111,9 +122,15 @@ export default function JSONLD() {
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+    </>
   );
 }

@@ -88,26 +88,6 @@ export default function ArticlesDirectory({ initialArticles }: ArticlesDirectory
 
   return (
     <div className="space-y-12 sm:space-y-16 pb-20 bg-slate-50 text-slate-900">
-      {/* 1. HERO SECTION */}
-      <section className="relative py-20 dark-segment border-b border-brand-gold/20 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold/40 text-brand-gold text-xs font-bold uppercase tracking-wider">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>Supply Chain Intelligence &amp; Trade Advisory</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Industry Articles &amp; <br />
-            <span className="text-gold-light-gradient">Freight Logistics Knowledge</span>
-          </h1>
-
-          <p className="max-w-2xl mx-auto text-slate-200 text-sm sm:text-base leading-relaxed">
-            In-depth operational analyses, customs compliance guidance, and port navigation strategies authored by Top On Group&apos;s maritime and trade specialists.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. MAIN CONTENT WRAPPER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Search & Categories Bar */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
@@ -117,11 +97,10 @@ export default function ArticlesDirectory({ initialArticles }: ArticlesDirectory
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                  selectedCategory === cat
-                    ? "bg-[#0B2240] text-white shadow-xs"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${selectedCategory === cat
+                  ? "bg-[#0B2240] text-white shadow-xs"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  }`}
               >
                 {cat}
               </button>
@@ -339,7 +318,7 @@ export default function ArticlesDirectory({ initialArticles }: ArticlesDirectory
               Consult Port Desks
             </Link>
             <Link
-              href="/divisions/logistics-dailyshipping"
+              href="/entities/logistics-dailyshipping"
               className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs transition-colors border border-white/20"
             >
               Daily Shipping Division

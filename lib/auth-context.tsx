@@ -6,6 +6,7 @@ import {
   loginAdmin,
   logoutAdmin,
   changeAdminPassword,
+  updateAdminProfile,
   subscribeToAuthState,
 } from "./auth-service";
 
@@ -16,6 +17,7 @@ interface AuthContextType {
   login: (email: string, pass: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   changePassword: (currentPass: string, newPass: string) => Promise<{ success: boolean; error?: string }>;
+  updateProfile: (displayName: string, role?: "Super Admin" | "Editor") => Promise<{ success: boolean; user?: AuthSessionUser; error?: string }>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -25,6 +27,7 @@ const AuthContext = createContext<AuthContextType>({
   login: async () => ({ success: false }),
   logout: async () => {},
   changePassword: async () => ({ success: false }),
+  updateProfile: async () => ({ success: false }),
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -61,6 +64,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return changeAdminPassword(currentPass, newPass);
   };
 
+  const updateProfile = async (displayName: string, role?: "Super Admin" | "Editor") => {
+    const res = await updateAdminProfile(displayName, role);
+    if (res.success && res.user) {
+      setUser(res.user);
+    }
+    return res;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -70,6 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         changePassword,
+        updateProfile,
       }}
     >
       {children}

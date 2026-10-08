@@ -20,7 +20,6 @@ import {
   FileText,
   BadgeCheck,
 } from "lucide-react";
-import LeadershipGallery from "@/components/LeadershipGallery";
 
 export const metadata: Metadata = {
   title: "About the Group CEO | Md. Abdullah Al Mamun - Top On Group",
@@ -340,13 +339,6 @@ export default function MessageFromEntrepreneurPage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 3. Interactive Photo Gallery */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 lg:p-14 border border-slate-200 shadow-xl">
-          <LeadershipGallery />
         </div>
       </section>
     </div>

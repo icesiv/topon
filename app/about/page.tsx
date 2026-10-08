@@ -48,7 +48,7 @@ const FOUR_BUSINESSES = [
     desc: "Licensed customs brokerage delivering precision documentation, tariff classification, and zero-demurrage container release across Chittagong Port and Dhaka ICD.",
     icon: FileCheck2,
     logo: "/images/logo/tel.png",
-    href: "/divisions/express-topexpress",
+    href: "/entities/express-topexpress",
     heritage: "Evolved from Shahabuddin Enterprise (Est. 1990)",
   },
   {
@@ -57,7 +57,7 @@ const FOUR_BUSINESSES = [
     desc: "International freight forwarding, multi-carrier ocean container bookings (FCL/LCL), priority air cargo charters, and integrated multimodal transport.",
     icon: Ship,
     logo: "/images/logo/dsl.png",
-    href: "/divisions/logistics-dailyshipping",
+    href: "/entities/logistics-dailyshipping",
     heritage: "Global Trade Lane Connectivity",
   },
   {
@@ -66,7 +66,7 @@ const FOUR_BUSINESSES = [
     desc: "Multi-sector import, export, and trading enterprise connecting global suppliers with diverse markets through reliable B2B sourcing and delivery coordination.",
     icon: Building2,
     logo: "/images/logo/topon-tech.png",
-    href: "/divisions/trading-topontech",
+    href: "/entities/trading-topontech",
     heritage: "Cross-Border Industrial Sourcing",
   },
   {
@@ -75,7 +75,7 @@ const FOUR_BUSINESSES = [
     desc: "Sustainable aquaculture, high-density biofloc pond farming, certified pathogen-free hatcheries, and temperature-controlled nationwide cold chain distribution.",
     icon: Fish,
     logo: "/images/logo/topon-agro.png",
-    href: "/divisions/agro-toponagro",
+    href: "/entities/agro-toponagro",
     heritage: "Sustainable Food Security",
   },
   {
@@ -84,7 +84,7 @@ const FOUR_BUSINESSES = [
     desc: "Consultancy and practical support for company setup, regulatory compliance, tax, VAT, customs, trade, audit, sourcing and business requirements.",
     icon: Briefcase,
     logo: "/images/logo/topon-solution.png",
-    href: "/divisions/consultancy-toponsolution",
+    href: "/entities/consultancy-toponsolution",
     heritage: "Regulatory & Commercial Governance",
   },
 ];
@@ -216,7 +216,7 @@ export default function AboutPage() {
                     href={biz.href}
                     className="inline-flex items-center space-x-2 text-xs font-bold text-[#0B2240] hover:text-brand-goldDark transition-colors"
                   >
-                    <span>Explore Division Details</span>
+                    <span>Explore Entity Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>

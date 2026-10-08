@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import ArticlesDirectory from "@/components/ArticlesDirectory";
 import { DEFAULT_ARTICLES, fetchArticles } from "@/lib/articles";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Freight Forwarding & Supply Chain Articles | Top On Group",
   description:
